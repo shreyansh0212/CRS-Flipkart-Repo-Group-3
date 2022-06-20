@@ -6,6 +6,7 @@ public class User {
     private String role;
     private String password;
     private String address;
+    // date of creation/ login time
 
     /**
 	 * @param userID
