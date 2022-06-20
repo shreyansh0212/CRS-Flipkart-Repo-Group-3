@@ -9,7 +9,28 @@ public class Student extends User{
     private List<String> coursePreferences;
     private boolean isRegistered;
 
-    public String getBranch() {
+    /**
+	 * @param userID
+	 * @param name
+	 * @param role
+	 * @param password
+	 * @param branch
+	 * @param batch
+	 * @param feePaymentStatus
+	 * @param coursePreferences
+	 * @param isRegistered
+	 */
+	public Student(int userID, String name, String role, String password, String branch, String batch,
+			boolean feePaymentStatus, List<String> coursePreferences, boolean isRegistered) {
+		super(userID, name, role, password);
+		this.branch = branch;
+		this.batch = batch;
+		this.feePaymentStatus = feePaymentStatus;
+		this.coursePreferences = coursePreferences;
+		this.isRegistered = isRegistered;
+	}
+
+	public String getBranch() {
         return branch;
     }
 

@@ -6,7 +6,21 @@ public class Course {
     private boolean isOffered;
     private int professorID;
 
-    public String getCourseID() {
+    /**
+	 * @param courseID
+	 * @param courseName
+	 * @param isOffered
+	 * @param professorID
+	 */
+	public Course(String courseID, String courseName, boolean isOffered, int professorID) {
+		super();
+		CourseID = courseID;
+		CourseName = courseName;
+		this.isOffered = isOffered;
+		this.professorID = professorID;
+	}
+
+	public String getCourseID() {
         return CourseID;
     }
 

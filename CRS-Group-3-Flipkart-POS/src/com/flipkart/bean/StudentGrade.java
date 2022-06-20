@@ -4,7 +4,17 @@ public class StudentGrade {
     private String courseID;
     private String grade;
 
-    public String getCourseID() {
+    /**
+	 * @param courseID
+	 * @param grade
+	 */
+	public StudentGrade(String courseID, String grade) {
+		super();
+		this.courseID = courseID;
+		this.grade = grade;
+	}
+
+	public String getCourseID() {
         return courseID;
     }
 

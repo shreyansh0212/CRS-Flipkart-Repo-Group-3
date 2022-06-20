@@ -5,12 +5,23 @@ public class User {
     private String name;
     private String role;
     private String password;
+    private String address;
 
-    public User() {
+    /**
+	 * @param userID
+	 * @param name
+	 * @param role
+	 * @param password
+	 */
+	public User(int userID, String name, String role, String password) {
+		super();
+		this.userID = userID;
+		this.name = name;
+		this.role = role;
+		this.password = password;
+	}
 
-    }
-
-    public int getUserID() {
+	public int getUserID() {
         return userID;
     }
 
@@ -41,6 +52,20 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	/**
+	 * @return address
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 
 }

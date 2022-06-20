@@ -4,8 +4,21 @@ public class Payment {
     private String referenceID;
     private float amount;
     private boolean isSuccessful;
+    
 
-    public String getReferenceID() {
+    /**
+	 * @param referenceID
+	 * @param amount
+	 * @param isSuccessful
+	 */
+	public Payment(String referenceID, float amount, boolean isSuccessful) {
+		super();
+		this.referenceID = referenceID;
+		this.amount = amount;
+		this.isSuccessful = isSuccessful;
+	}
+
+	public String getReferenceID() {
         return referenceID;
     }
 

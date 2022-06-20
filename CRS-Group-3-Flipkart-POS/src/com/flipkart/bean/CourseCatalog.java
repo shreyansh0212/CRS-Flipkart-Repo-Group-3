@@ -4,7 +4,17 @@ public class CourseCatalog {
     private String CourseID;
     private String CourseName;
 
-    public String getCourseID() {
+    /**
+	 * @param courseID
+	 * @param courseName
+	 */
+	public CourseCatalog(String courseID, String courseName) {
+		super();
+		CourseID = courseID;
+		CourseName = courseName;
+	}
+
+	public String getCourseID() {
         return CourseID;
     }
 

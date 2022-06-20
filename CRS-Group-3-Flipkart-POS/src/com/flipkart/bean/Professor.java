@@ -9,7 +9,26 @@ public class Professor extends User{
     private String designation;
     private List<String> offeredCourses;
 
-    public Date getDateOfJoining() {
+    /**
+	 * @param userID
+	 * @param name
+	 * @param role
+	 * @param password
+	 * @param dateOfJoining
+	 * @param department
+	 * @param designation
+	 * @param offeredCourses
+	 */
+	public Professor(int userID, String name, String role, String password, Date dateOfJoining, String department,
+			String designation, List<String> offeredCourses) {
+		super(userID, name, role, password);
+		this.dateOfJoining = dateOfJoining;
+		this.department = department;
+		this.designation = designation;
+		this.offeredCourses = offeredCourses;
+	}
+
+	public Date getDateOfJoining() {
         return dateOfJoining;
     }
 
