@@ -34,15 +34,29 @@ public class CRSApplication {
 
     public static void main(String[] args) {
         Admin admin0 = new Admin("000","admin0","admin","pass",null);
-        adminDB.put(admin0.getUserID(),admin0);
+        adminDB.put("000",admin0);
 
-        Professor prof0 = new Professor("001","prof0","prof","pass",null,null,null,null);
-        professorDB.put(prof0.getUserID(),prof0);
+        Professor prof0 = new Professor("P001","prof1","prof","pass",null,null,null,null);
+        professorDB.put("P001",prof0);
+        Professor prof1 = new Professor("P002","prof2","prof","pass",null,null,null,null);
+        professorDB.put("P002",prof1);
+        Professor prof2 = new Professor("P003","prof3","prof","pass",null,null,null,null);
+        professorDB.put("P003",prof2);
+        Professor prof3 = new Professor("P004","prof4","prof","pass",null,null,null,null);
+        professorDB.put("P004",prof3);
 
-        Course course1 = new Course("CS0001","Elementary",true,"001");
-        Course course2 = new Course("CS0002","Intermediate",true,"001");
-        courseCatalogDB.put("CS0001",course1);
-        courseCatalogDB.put("CS0002",course2);
+        Course course1 = new Course("C001","Elementary1",true,"P001");
+        Course course2 = new Course("C002","Elementary2",true,"P002");
+        Course course3 = new Course("C003","Elementary3",true,"P001");
+        Course course4 = new Course("C004","Elementary4",true,"P003");
+        Course course5 = new Course("C005","Elementary5",true,"P004");
+        Course course6 = new Course("C006","Elementary6",true,"P002");
+        courseCatalogDB.put("C001",course1);
+        courseCatalogDB.put("C002",course2);
+        courseCatalogDB.put("C003",course3);
+        courseCatalogDB.put("C004",course4);
+        courseCatalogDB.put("C005",course5);
+        courseCatalogDB.put("C006",course6);
 
         Student student1 = new Student("S001","student1",null,"pass",null,null,false,null,null,false);
         studentDB.put("S001",student1);
@@ -51,7 +65,7 @@ public class CRSApplication {
         Scanner in = new Scanner(System.in);
         do {
             System.out.println("----------- Welcome to Course Registration System ------------");
-            System.out.println("1. Login + Role");
+            System.out.println("1. Login");
             System.out.println("2. New Student Registration");
             System.out.println("3. Update Password");
             System.out.println("4. Exit");
@@ -59,20 +73,16 @@ public class CRSApplication {
             input = in.nextInt();
             switch (input) {
                 case 1:
-                    System.out.println("Select your Role: ");
-                    System.out.println("1. Admin");
-                    System.out.println("2. Student");
-                    System.out.println("3. Professor");
-                    System.out.println("Enter Your Choice: ");
-                    int roleInput = in.nextInt();
-
                     System.out.println("Enter your UserID: ");
                     String userID = in.next();
                     System.out.println("Enter your Password: ");
                     String password = in.next();
 
-                    // verify
-
+                    // verifying credentials
+                    int roleInput=0;
+                    if(studentDB.get(userID)!=null && studentDB.get(userID).getPassword().equals(password)) roleInput=2;
+                    if(adminDB.get(userID)!=null && adminDB.get(userID).getPassword().equals(password)) roleInput=1;
+                    if(professorDB.get(userID)!=null && professorDB.get(userID).getPassword().equals(password)) roleInput=3;
 
                     switch (roleInput) {
                         case 1:
@@ -91,7 +101,7 @@ public class CRSApplication {
                             break;
 
                         default:
-                            System.out.println("Invalid Role");
+                            System.out.println("Invalid Credentials");
                     }
                     break;
 
@@ -109,6 +119,9 @@ public class CRSApplication {
 
                 case 3:
                     System.out.println("Update Password");
+                    break;
+
+                case 4:
                     break;
 
                 default:

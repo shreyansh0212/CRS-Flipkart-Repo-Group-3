@@ -63,6 +63,9 @@ public class AdminCRSMenu {
                     adminImpl.approvePendingRequests();
                     break;
 
+                case 7:
+                    break;
+
                 default:
                     System.out.println("Invalid Input");
             }

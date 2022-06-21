@@ -43,6 +43,9 @@ public class ProfessorCRSMenu {
                     professorImpl.addGrade(courseID);
                     break;
 
+                case 4:
+                    break;
+
                 default:
                     System.out.println("Invalid Input");
             }
