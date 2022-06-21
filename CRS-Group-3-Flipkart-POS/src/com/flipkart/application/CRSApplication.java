@@ -12,40 +12,41 @@ import javafx.util.Pair;
 
 public class CRSApplication {
 
-    public static HashMap<Integer, Admin> adminDB;
+    public static HashMap<String, Admin> adminDB = new HashMap<>();
+    // Admin admin0 = new Admin(000,"admin0","admin","pass",null);
 
     // StudentID, Student
-    public static HashMap<Integer, Student> studentDB;
+    public static HashMap<String, Student> studentDB = new HashMap<>();
 
     // ProfessorID, Professor
-    public static HashMap<Integer, Professor> professorDB;
+    public static HashMap<String, Professor> professorDB = new HashMap<>();
 
     // StudentID, Student
-    public static HashMap<Integer, Student> pendingDB;
+    public static HashMap<String, Student> pendingDB = new HashMap<>();
 
     // CourseID, Course
-    public static HashMap<String, Course> courseCatalogDB;
+    public static HashMap<String, Course> courseCatalogDB = new HashMap<>();
 
     // courseID, StudentID, Grade
-    public static HashMap<Pair<String,Integer>,String> registeredCoursesDB;
+    public static HashMap<Pair<String,String>,String> registeredCoursesDB = new HashMap<>();
 
 
 
-    public static void main(String[] args)
-    {
-        // Scanner scan = new Scanner(System.in);
-        // Check if the scanner has a token
-        // System.out.println("Boolean Result: " + scan.hasNext());
-        // Print the string
-        // System.out.println("String: " +scan.nextLine());
-        // scan.close();
-        /**
-         *      1. Login + Role
-         *      2. New Student Registration
-         *      3. Update Password
-         *      4. Exit
-         */
-        // add admin
+    public static void main(String[] args) {
+        Admin admin0 = new Admin("000","admin0","admin","pass",null);
+        adminDB.put(admin0.getUserID(),admin0);
+
+        Professor prof0 = new Professor("001","prof0","prof","pass",null,null,null,null);
+        professorDB.put(prof0.getUserID(),prof0);
+
+        Course course1 = new Course("CS0001","Elementary",true,"001");
+        Course course2 = new Course("CS0002","Intermediate",true,"001");
+        courseCatalogDB.put("CS0001",course1);
+        courseCatalogDB.put("CS0002",course2);
+
+        Student student1 = new Student("S001","student1",null,"pass",null,null,false,null,null,false);
+        studentDB.put("S001",student1);
+
         Integer input;
         Scanner in = new Scanner(System.in);
         do {
@@ -54,6 +55,7 @@ public class CRSApplication {
             System.out.println("2. New Student Registration");
             System.out.println("3. Update Password");
             System.out.println("4. Exit");
+            System.out.println("Enter Your Choice: ");
             input = in.nextInt();
             switch (input) {
                 case 1:
@@ -61,13 +63,13 @@ public class CRSApplication {
                     System.out.println("1. Admin");
                     System.out.println("2. Student");
                     System.out.println("3. Professor");
-
+                    System.out.println("Enter Your Choice: ");
                     int roleInput = in.nextInt();
 
-                    System.out.print("Enter your UserID: ");
-                    String userID = in.nextLine();
+                    System.out.println("Enter your UserID: ");
+                    String userID = in.next();
                     System.out.println("Enter your Password: ");
-                    String password = in.nextLine();
+                    String password = in.next();
 
                     // verify
 
@@ -95,14 +97,14 @@ public class CRSApplication {
 
                 case 2:
                     // registration
-                    System.out.print("Enter your UserID: ");
-                    userID = in.nextLine();
+                    System.out.println("Enter your UserID: ");
+                    userID = in.next();
                     System.out.println("Enter your Password: ");
-                    password = in.nextLine();
+                    password = in.next();
                     System.out.println("Enter your Name: ");
-                    String name = in.nextLine();
-                    Student student = new Student(Integer.parseInt(userID),name,"student",password,null,null, false,null,null,false);
-                    pendingDB.put(Integer.parseInt(userID),student);
+                    String name = in.next();
+                    Student student = new Student(userID,name,"student",password,null,null, false,null,null,false);
+                    pendingDB.put(userID,student);
                     break;
 
                 case 3:
@@ -115,24 +117,6 @@ public class CRSApplication {
             }
         }
         while(input!=4);
-
-
-//        System.out.println("--------Enter Your Details-------- ");
-//        //Scanner in = new Scanner(System.in);
-//        System.out.print("Enter your UserID: ");
-//        String UserID = in.nextLine();
-//         System.out.println("Name: " + UserID);
-//
-//        // Try and Catch
-//        System.out.print("Enter your Password: ");
-//        String password = in.nextLine();
-//         System.out.println("Password: " + password);
-//         System.out.print("Enter your role: ");
-//
-//        String role = in.nextLine();
-//        // Specific Role Menu
-//        System.out.println("Role: " + role);
-
         in.close();
     }
 }

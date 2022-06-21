@@ -20,7 +20,7 @@ public class ProfessorImplementation implements ProfessorInterface{
         for(Student enrolled:enrolledStudents) {
             System.out.println("StudentID " + enrolled.getUserID() +  " : ");
             String grade = in.next();
-            Pair<String,Integer> psi=new Pair<String,Integer>(courseID, enrolled.getUserID());
+            Pair<String,String> psi=new Pair<String,String>(courseID, enrolled.getUserID());
             registeredCoursesDB.put(psi,grade);
             // studentDB.get(enrolled.getUserID()).setCoursePreferences() = enrolled.getCoursesRegistered();
         }
@@ -33,8 +33,8 @@ public class ProfessorImplementation implements ProfessorInterface{
     public List <Student > viewEnrolledStudents(String courseID) {
         List <Student > enrolledStudents = new ArrayList<Student>();
         for(Map.Entry entry:registeredCoursesDB.entrySet()) {
-            Pair<String,Integer> psi = (Pair<String, Integer>) entry.getKey();
-            if(psi.getKey()==courseID) {
+            Pair<String,String> psi = (Pair<String,String>) entry.getKey();
+            if(psi.getKey().equals(courseID)) {
                 enrolledStudents.add(studentDB.get(psi.getValue()));
             }
         }
@@ -49,7 +49,10 @@ public class ProfessorImplementation implements ProfessorInterface{
         List<String> courses = new ArrayList<>();
         for (Map.Entry entry:courseCatalogDB.entrySet()) {
             Course course = (Course) entry.getValue();
-            if(course.isOffered() && course.getProfessorID() == Integer.parseInt(userID)) {
+
+            if(course.isOffered() && course.getProfessorID().equals(userID)) {
+
+                System.out.println("CourseID: "+ course.getCourseID());
                 courses.add(course.getCourseID());
             }
         }

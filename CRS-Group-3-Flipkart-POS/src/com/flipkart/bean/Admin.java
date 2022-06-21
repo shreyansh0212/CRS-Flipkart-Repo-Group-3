@@ -12,7 +12,7 @@ public class Admin extends User{
 	 * @param password
 	 * @param dateOfJoining
 	 */
-	public Admin(int userID, String name, String role, String password, Date dateOfJoining) {
+	public Admin(String userID, String name, String role, String password, Date dateOfJoining) {
 		super(userID, name, role, password);
 		this.dateOfJoining = dateOfJoining;
 	}

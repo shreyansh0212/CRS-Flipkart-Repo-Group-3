@@ -27,11 +27,12 @@ public class AdminCRSMenu {
             System.out.println("5. Approve Student");
             System.out.println("6. Approve Student Requests for Registration");
             System.out.println("7. Exit");
+            System.out.println("Enter Your Choice: ");
             input = in.nextInt();
             switch (input) {
                 case 1:
-                    Professor professor = new Professor();
-                    adminImpl.addProfessor(professor);
+                    Professor prof1 = new Professor("002","prof1","prof","pass",null,null,null,null);
+                    adminImpl.addProfessor(prof1);
                     break;
 
                 case 2:
@@ -43,8 +44,8 @@ public class AdminCRSMenu {
                     String courseID = in.next();
                     System.out.println("Enter Course Name to add: ");
                     String courseName = in.next();
-                    System.out.println("Enter Professor Name to add: ");
-                    Integer professorID = in.nextInt();
+                    System.out.println("Enter ProfessorID to add: ");
+                    String professorID = in.next();
                     Course course = new Course(courseID,courseName,false,professorID);
                     adminImpl.addCourse(course);
                     break;

@@ -25,7 +25,7 @@ public class Student extends User{
 	 * @param isRegistered
      * @param coursesRegistered - key: courseID, value: Grade
 	 */
-	public Student(int userID, String name, String role, String password, String branch, String batch,
+	public Student(String userID, String name, String role, String password, String branch, String batch,
 			boolean feePaymentStatus, List<String> coursePreferences, List<StudentGrade>coursesRegistered, boolean isRegistered) {
 		super(userID, name, role, password);
 		this.branch = branch;

@@ -23,6 +23,7 @@ public class ProfessorCRSMenu {
             System.out.println("2. View Enrolled Students");
             System.out.println("3. Add Grade");
             System.out.println("4. Exit");
+            System.out.println("Enter Your Choice: ");
             input = in.nextInt();
 
             switch (input) {
@@ -48,7 +49,6 @@ public class ProfessorCRSMenu {
 
         }
         while(input!=4);
-
 
     }
 }

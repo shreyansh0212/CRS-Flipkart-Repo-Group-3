@@ -9,14 +9,6 @@ public class Professor extends User{
     private String designation;
     private List<String> offeredCourses;
 
-    public Professor() {
-        super(null, null,null,null);
-        this.dateOfJoining = null;
-        this.department = null;
-        this.designation = null;
-        this.offeredCourses = null;
-    }
-
     /**
 	 * @param userID
 	 * @param name
@@ -28,8 +20,8 @@ public class Professor extends User{
 	 * @param offeredCourses
 	 */
 
-	public Professor(Integer userID, String name, String role, String password, Date dateOfJoining, String department,
-			String designation, List<String> offeredCourses) {
+	public Professor(String userID, String name, String role, String password, Date dateOfJoining, String department,
+                     String designation, List<String> offeredCourses) {
 		super(userID, name, role, password);
 		this.dateOfJoining = dateOfJoining;
 		this.department = department;

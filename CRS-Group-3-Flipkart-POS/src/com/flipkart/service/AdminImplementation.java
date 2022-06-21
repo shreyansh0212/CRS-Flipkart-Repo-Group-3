@@ -40,6 +40,7 @@ public class AdminImplementation implements AdminInterface{
     @Override
     public void addCourse(Course course) {
         courseCatalogDB.put((String)course.getCourseID(),course);
+        System.out.println("Course Added with ID: " + course.getCourseID() + " course name: " + course.getCourseName());
     }
 
     /**
@@ -47,7 +48,7 @@ public class AdminImplementation implements AdminInterface{
      */
     @Override
     public void dropCourse(String courseID) {
-        System.out.println("Course Removed with ID: " + (Course)courseCatalogDB.get(courseID));
+        System.out.println("Course Removed with ID: " + courseID + " course name: " + courseCatalogDB.get(courseID).getCourseName());
         courseCatalogDB.remove(courseID);
     }
 
@@ -57,16 +58,17 @@ public class AdminImplementation implements AdminInterface{
     @Override
     public void showCourses() {
         for (Map.Entry entry:courseCatalogDB.entrySet()) {
-            System.out.println(entry);
-            // System.out.println("CourseID: " + (String)entry.getKey() + " Course Name: " + ((Course)entry.getValue()).getCourseName() + " ProfessorID: " + ((Course)entry.getValue()).getProfessorID());
+            System.out.println("CourseID: " + (String)entry.getKey() + ", Course Name: " + ((Course)entry.getValue()).getCourseName() + ", ProfessorID: " + ((Course)entry.getValue()).getProfessorID());
         }
     }
 
     @Override
     public void approvePendingRequests() {
         for(Map.Entry entry:pendingDB.entrySet()) {
-            studentDB.put((Integer)entry.getKey(),(Student)entry.getValue());
-            System.out.println("Student with UserID: " + (Integer)entry.getKey() + " Approved");
+            Student student = (Student)entry.getValue();
+            studentDB.put((String)entry.getKey(),student);
+            System.out.println("Student with UserID: " + (String)entry.getKey() + " Approved");
+            student.setRegistered(true);
         }
         pendingDB.clear();
     }
