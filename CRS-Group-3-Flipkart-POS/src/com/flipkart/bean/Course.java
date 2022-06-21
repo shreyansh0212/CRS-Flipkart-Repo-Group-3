@@ -4,7 +4,7 @@ public class Course {
     private String CourseID;
     private String CourseName;
     private boolean isOffered;
-    private int professorID;
+    private Integer professorID;
 
     /**
 	 * @param courseID
@@ -12,7 +12,7 @@ public class Course {
 	 * @param isOffered
 	 * @param professorID
 	 */
-	public Course(String courseID, String courseName, boolean isOffered, int professorID) {
+	public Course(String courseID, String courseName, boolean isOffered, Integer professorID) {
 		super();
 		CourseID = courseID;
 		CourseName = courseName;

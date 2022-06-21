@@ -1,10 +1,15 @@
 package com.flipkart.service;
 
+import com.flipkart.bean.Course;
+import com.flipkart.bean.Professor;
+
 public interface AdminInterface {
     public void approveStudent();
-    public void addProfessor();
+    public void addProfessor(Professor professor);
     public void generateReport();
-    public void addCourse();
-    public void dropCourse();
+    public void addCourse(Course course);
+    public void dropCourse(String courseID);
     public void showCourses();
+
+    void approvePendingRequests();
 }

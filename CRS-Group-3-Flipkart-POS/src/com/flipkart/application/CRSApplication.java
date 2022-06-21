@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import com.flipkart.application.AdminCRSMenu;
 import com.flipkart.bean.Admin;
+import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 
@@ -17,6 +18,8 @@ public class CRSApplication {
     public static HashMap<Integer, Professor> professorDB;
 
     public static HashMap<Integer, Student> pendingDB;
+
+    public static HashMap<String, Course> courseCatalogDB;
 
 
 
@@ -60,6 +63,7 @@ public class CRSApplication {
 
                     // verify
 
+
                     switch (roleInput) {
                         case 1:
                             AdminCRSMenu adminCRSMenu = new AdminCRSMenu();
@@ -75,6 +79,9 @@ public class CRSApplication {
                             ProfessorCRSMenu professorCRSMenu = new ProfessorCRSMenu();
                             professorCRSMenu.showMenu();
                             break;
+
+                        default:
+                            System.out.println("Invalid Role");
                     }
                     break;
 
@@ -102,21 +109,21 @@ public class CRSApplication {
         while(input!=4);
 
 
-        System.out.println("--------Enter Your Details-------- ");
-        //Scanner in = new Scanner(System.in);
-        System.out.print("Enter your UserID: ");
-        String UserID = in.nextLine();
-         System.out.println("Name: " + UserID);
-
-        // Try and Catch
-        System.out.print("Enter your Password: ");
-        String password = in.nextLine();
-         System.out.println("Password: " + password);
-         System.out.print("Enter your role: ");
-
-        String role = in.nextLine();
-        // Specific Role Menu
-        System.out.println("Role: " + role);
+//        System.out.println("--------Enter Your Details-------- ");
+//        //Scanner in = new Scanner(System.in);
+//        System.out.print("Enter your UserID: ");
+//        String UserID = in.nextLine();
+//         System.out.println("Name: " + UserID);
+//
+//        // Try and Catch
+//        System.out.print("Enter your Password: ");
+//        String password = in.nextLine();
+//         System.out.println("Password: " + password);
+//         System.out.print("Enter your role: ");
+//
+//        String role = in.nextLine();
+//        // Specific Role Menu
+//        System.out.println("Role: " + role);
 
         in.close();
     }

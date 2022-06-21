@@ -1,7 +1,7 @@
 package com.flipkart.bean;
 
 public class User {
-    private int userID;
+    private Integer userID;
     private String name;
     private String role;
     private String password;
@@ -14,7 +14,7 @@ public class User {
 	 * @param role
 	 * @param password
 	 */
-	public User(int userID, String name, String role, String password) {
+	public User(Integer userID, String name, String role, String password) {
 		super();
 		this.userID = userID;
 		this.name = name;
