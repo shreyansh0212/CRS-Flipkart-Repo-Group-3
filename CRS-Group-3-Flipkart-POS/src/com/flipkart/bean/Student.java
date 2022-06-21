@@ -1,12 +1,16 @@
 package com.flipkart.bean;
 
+import java.util.HashMap;
 import java.util.List;
+import com.flipkart.bean.StudentGrade;
 
 public class Student extends User{
     private String branch;
     private String batch;
     private boolean feePaymentStatus;
     private List<String> coursePreferences;
+
+    private HashMap<String,String> coursesRegistered;
     private boolean isRegistered;
 
     /**
@@ -19,9 +23,10 @@ public class Student extends User{
 	 * @param feePaymentStatus
 	 * @param coursePreferences
 	 * @param isRegistered
+     * @param coursesRegistered - key: courseID, value: Grade
 	 */
 	public Student(int userID, String name, String role, String password, String branch, String batch,
-			boolean feePaymentStatus, List<String> coursePreferences, boolean isRegistered) {
+			boolean feePaymentStatus, List<String> coursePreferences, List<StudentGrade>coursesRegistered, boolean isRegistered) {
 		super(userID, name, role, password);
 		this.branch = branch;
 		this.batch = batch;
@@ -70,4 +75,11 @@ public class Student extends User{
         isRegistered = registered;
     }
 
+    public HashMap<String, String> getCoursesRegistered() {
+        return coursesRegistered;
+    }
+
+    public void setCoursesRegistered(HashMap<String, String> coursesRegistered) {
+        this.coursesRegistered = coursesRegistered;
+    }
 }

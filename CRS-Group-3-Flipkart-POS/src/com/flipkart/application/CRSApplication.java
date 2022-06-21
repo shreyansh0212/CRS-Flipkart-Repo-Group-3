@@ -8,18 +8,26 @@ import com.flipkart.bean.Admin;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
+import javafx.util.Pair;
 
 public class CRSApplication {
 
     public static HashMap<Integer, Admin> adminDB;
 
+    // StudentID, Student
     public static HashMap<Integer, Student> studentDB;
 
+    // ProfessorID, Professor
     public static HashMap<Integer, Professor> professorDB;
 
+    // StudentID, Student
     public static HashMap<Integer, Student> pendingDB;
 
+    // CourseID, Course
     public static HashMap<String, Course> courseCatalogDB;
+
+    // courseID, StudentID, Grade
+    public static HashMap<Pair<String,Integer>,String> registeredCoursesDB;
 
 
 
@@ -72,12 +80,12 @@ public class CRSApplication {
 
                         case 2:
                             StudentCRSMenu studentCRSMenu = new StudentCRSMenu();
-                            studentCRSMenu.showMenu();
+                            studentCRSMenu.showMenu(userID);
                             break;
 
                         case 3:
                             ProfessorCRSMenu professorCRSMenu = new ProfessorCRSMenu();
-                            professorCRSMenu.showMenu();
+                            professorCRSMenu.showMenu(userID);
                             break;
 
                         default:
@@ -93,7 +101,7 @@ public class CRSApplication {
                     password = in.nextLine();
                     System.out.println("Enter your Name: ");
                     String name = in.nextLine();
-                    Student student = new Student(Integer.parseInt(userID),name,"student",password,null,null, false,null,false);
+                    Student student = new Student(Integer.parseInt(userID),name,"student",password,null,null, false,null,null,false);
                     pendingDB.put(Integer.parseInt(userID),student);
                     break;
 
