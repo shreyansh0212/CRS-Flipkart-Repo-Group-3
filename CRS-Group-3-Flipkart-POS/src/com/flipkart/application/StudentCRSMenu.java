@@ -7,9 +7,6 @@ import com.flipkart.service.StudentInterface;
 
 import java.util.Scanner;
 
-import static com.flipkart.application.CRSApplication.professorDB;
-import static com.flipkart.application.CRSApplication.studentDB;
-
 public class StudentCRSMenu {
     StudentInterface studentImpl;
     public StudentCRSMenu() {
@@ -22,37 +19,37 @@ public class StudentCRSMenu {
         do {
             createMenu();
             input = in.nextInt();
-            Student student = studentDB.get(userID);
+            //Student student = studentDB.get(userID);
             switch (input) {
                 case 1:
-                    studentImpl.registerCourses(student);
+                    // studentImpl.registerCourses(student);
                     break;
 
                 case 2:
-                    studentImpl.addCourse(student);
+                    // studentImpl.addCourse(student);
                     break;
 
                 case 3:
-                    studentImpl.dropCourse(student);
+                    //studentImpl.dropCourse(student);
                     break;
 
                 case 4:
-                    studentImpl.viewEnrolledCourses(student);
+                    //studentImpl.viewEnrolledCourses(student);
                     break;
                 case 5:
-                    studentImpl.payFees(student);
+                    //studentImpl.payFees(student);
                     break;
 
                 case 6:
-                    studentImpl.viewGradeCard(student);
+                    //studentImpl.viewGradeCard(student);
                     break;
 
                 case 7:
-                    studentImpl.changePassword(student);
+                    //studentImpl.changePassword(student);
                     break;
 
                 case 8:
-                    studentImpl.showCourses();
+                    //studentImpl.showCourses();
                     break;
 
                 case 9:

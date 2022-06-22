@@ -6,8 +6,6 @@ import com.flipkart.service.ProfessorInterface;
 
 import java.util.Scanner;
 
-import static com.flipkart.application.CRSApplication.professorDB;
-
 public class ProfessorCRSMenu {
     ProfessorInterface professorImpl;
     public ProfessorCRSMenu() {

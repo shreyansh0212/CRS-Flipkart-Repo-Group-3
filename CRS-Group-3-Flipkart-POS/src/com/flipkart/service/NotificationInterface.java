@@ -1,5 +1,5 @@
 package com.flipkart.service;
 
 public interface NotificationInterface {
-    public void Notification();
+    public void sendNotification();
 }

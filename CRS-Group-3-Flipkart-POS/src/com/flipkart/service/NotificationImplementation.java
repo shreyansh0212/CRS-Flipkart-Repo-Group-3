@@ -5,7 +5,7 @@ public class NotificationImplementation implements NotificationInterface{
      *
      */
     @Override
-    public void Notification() {
+    public void sendNotification() {
 
     }
 }

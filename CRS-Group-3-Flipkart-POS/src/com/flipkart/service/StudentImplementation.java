@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import static com.flipkart.application.CRSApplication.courseCatalogDB;
-import static com.flipkart.application.CRSApplication.registeredCoursesDB;
 
 public class StudentImplementation implements StudentInterface{
     /**
@@ -32,10 +30,10 @@ public class StudentImplementation implements StudentInterface{
         }
         // not applying student strength condition
         List<String> preferences = student.getCoursePreferences();
-        for(int i=0;i<4;i++) {
-            Pair<String,String> pss = new Pair<>(preferences.get(i),student.getUserID());
-            registeredCoursesDB.put(pss,null);
-        }
+//        for(int i=0;i<4;i++) {
+//            Pair<String,String> pss = new Pair<>(preferences.get(i),student.getUserID());
+//            registeredCoursesDB.put(pss,null);
+//        }
         // in.close();
     }
 
@@ -44,13 +42,13 @@ public class StudentImplementation implements StudentInterface{
      */
     @Override
     public void addCourse(Student student) {
-        showCourses();
-        System.out.println("Enter CourseID to add Course: ");
-        Scanner in = new Scanner(System.in);
-        String courseID = in.next();
-        Pair<String,String> pss = new Pair<>(courseID,student.getUserID());
-        registeredCoursesDB.put(pss,null);
-        System.out.println("Course Added with CourseID: " + courseID);
+//        showCourses();
+//        System.out.println("Enter CourseID to add Course: ");
+//        Scanner in = new Scanner(System.in);
+//        String courseID = in.next();
+//        Pair<String,String> pss = new Pair<>(courseID,student.getUserID());
+//        registeredCoursesDB.put(pss,null);
+//        System.out.println("Course Added with CourseID: " + courseID);
     }
 
     /**
@@ -61,14 +59,14 @@ public class StudentImplementation implements StudentInterface{
         List<String> enrolledCourses = viewEnrolledCourses(student);
         for(int i=0;i<enrolledCourses.size();i++) {
             Pair<String,String> pss = new Pair<>(enrolledCourses.get(i),student.getUserID());
-            String grade = registeredCoursesDB.get(pss);
+            //String grade = registeredCoursesDB.get(pss);
             // System.out.println("CourseID: " + enrolledCourses.get(i) + " --> Grade: " + grade);
         }
         System.out.println("Enter CourseID to drop Course: ");
         Scanner in = new Scanner(System.in);
         String courseID = in.next();
         Pair<String,String> pss = new Pair<>(courseID,student.getUserID());
-        registeredCoursesDB.remove(pss);
+        //registeredCoursesDB.remove(pss);
         System.out.println("Course Dropped with CourseID: " + courseID);
     }
 
@@ -78,14 +76,14 @@ public class StudentImplementation implements StudentInterface{
     @Override
     public List<String> viewEnrolledCourses(Student student) {
         List<String> enrolledCourses = new ArrayList<>();
-        for(Map.Entry entry:registeredCoursesDB.entrySet()) {
-            Pair<String,String> pss = (Pair<String, String>) entry.getKey();
-            if(pss.getValue().equals(student.getUserID())) {
-                System.out.println("Enrolled Courses: ");
-                System.out.println("CourseID: " + pss.getKey());
-                enrolledCourses.add(pss.getKey());
-            }
-        }
+//        for(Map.Entry entry:registeredCoursesDB.entrySet()) {
+//            Pair<String,String> pss = (Pair<String, String>) entry.getKey();
+//            if(pss.getValue().equals(student.getUserID())) {
+//                System.out.println("Enrolled Courses: ");
+//                System.out.println("CourseID: " + pss.getKey());
+//                enrolledCourses.add(pss.getKey());
+//            }
+//        }
         return enrolledCourses;
 
     }
@@ -140,14 +138,14 @@ public class StudentImplementation implements StudentInterface{
      */
     @Override
     public void viewGradeCard(Student student) {
-        System.out.println("Show Student Details!");
-        System.out.println("Student Grades");
-        List<String> enrolledCourses = viewEnrolledCourses(student);
-        for(int i=0;i<enrolledCourses.size();i++) {
-            Pair<String,String> pss = new Pair<>(enrolledCourses.get(i),student.getUserID());
-            String grade = registeredCoursesDB.get(pss);
-            System.out.println("CourseID: " + enrolledCourses.get(i) + " --> Grade: " + grade);
-        }
+//        System.out.println("Show Student Details!");
+//        System.out.println("Student Grades");
+//        List<String> enrolledCourses = viewEnrolledCourses(student);
+//        for(int i=0;i<enrolledCourses.size();i++) {
+//            Pair<String,String> pss = new Pair<>(enrolledCourses.get(i),student.getUserID());
+//            String grade = registeredCoursesDB.get(pss);
+//            System.out.println("CourseID: " + enrolledCourses.get(i) + " --> Grade: " + grade);
+//        }
 
     }
 
@@ -156,10 +154,10 @@ public class StudentImplementation implements StudentInterface{
      */
     @Override
     public void showCourses() {
-        for (Map.Entry entry:courseCatalogDB.entrySet())
-        {
-            Course course = (Course) entry.getValue();
-            System.out.println("CourseID: " + entry.getKey() + ", Course Name: " + course.getCourseName());
-        }
+//        for (Map.Entry entry:courseCatalogDB.entrySet())
+//        {
+//            Course course = (Course) entry.getValue();
+//            System.out.println("CourseID: " + entry.getKey() + ", Course Name: " + course.getCourseName());
+//        }
     }
 }
