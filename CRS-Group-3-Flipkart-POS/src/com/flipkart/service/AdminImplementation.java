@@ -24,6 +24,7 @@ public class AdminImplementation implements AdminInterface{
     @Override
     public void addProfessor(Professor professor) {
         professorDB.put(professor.getUserID(),professor);
+        System.out.println("Professor (UserID: " + professor.getUserID() + ") added successfully!");
     }
 
     /**
@@ -31,7 +32,7 @@ public class AdminImplementation implements AdminInterface{
      */
     @Override
     public void generateReport() {
-
+        // done in student implementation
     }
 
     /**

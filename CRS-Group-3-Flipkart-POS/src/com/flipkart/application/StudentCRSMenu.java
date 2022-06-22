@@ -20,18 +20,7 @@ public class StudentCRSMenu {
         Scanner in = new Scanner(System.in);
         int input = 0;
         do {
-            System.out.println("---------- Welcome Student ----------");
-            System.out.println("Please select your function:");
-            System.out.println("1. Fill Courses Preference: ");
-            System.out.println("2. Add Course: ");
-            System.out.println("3. Drop Course: ");
-            System.out.println("4. View Enrolled Courses");
-            System.out.println("5. Pay Fees");
-            System.out.println("6. View Grade Card");
-            System.out.println("7. Change Password");
-            System.out.println("8. See Course Catalog");
-            System.out.println("9. Exit");
-            System.out.println("Enter Your Choice: ");
+            createMenu();
             input = in.nextInt();
             Student student = studentDB.get(userID);
             switch (input) {
@@ -74,6 +63,21 @@ public class StudentCRSMenu {
             }
         }
         while(input!=9);
+    }
+
+    public void createMenu() {
+        System.out.println("---------- Welcome Student ----------");
+        System.out.println("Please select your function:");
+        System.out.println("1. Fill Courses Preference: ");
+        System.out.println("2. Add Course: ");
+        System.out.println("3. Drop Course: ");
+        System.out.println("4. View Enrolled Courses");
+        System.out.println("5. Pay Fees");
+        System.out.println("6. View Grade Card");
+        System.out.println("7. Change Password");
+        System.out.println("8. See Course Catalog");
+        System.out.println("9. Exit");
+        System.out.println("Enter Your Choice: ");
     }
 
 //    public void registerCourses() {

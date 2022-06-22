@@ -17,13 +17,7 @@ public class ProfessorCRSMenu {
         Scanner in = new Scanner(System.in);
         int input=0;
         do {
-            System.out.println("---------- Welcome Professor " + ((Professor)professorDB.get(userID)).getName() + " ----------");
-            System.out.println("Please select your function:");
-            System.out.println("1. Get Courses");
-            System.out.println("2. View Enrolled Students");
-            System.out.println("3. Add Grade");
-            System.out.println("4. Exit");
-            System.out.println("Enter Your Choice: ");
+            createMenu();
             input = in.nextInt();
 
             switch (input) {
@@ -53,5 +47,15 @@ public class ProfessorCRSMenu {
         }
         while(input!=4);
 
+    }
+
+    public void createMenu() {
+        System.out.println("---------- Welcome Professor ----------");
+        System.out.println("Please select your function:");
+        System.out.println("1. Get Courses");
+        System.out.println("2. View Enrolled Students");
+        System.out.println("3. Add Grade");
+        System.out.println("4. Exit");
+        System.out.println("Enter Your Choice: ");
     }
 }

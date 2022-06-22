@@ -36,6 +36,7 @@ public class ProfessorImplementation implements ProfessorInterface{
             Pair<String,String> psi = (Pair<String,String>) entry.getKey();
             if(psi.getKey().equals(courseID)) {
                 enrolledStudents.add(studentDB.get(psi.getValue()));
+                System.out.println("Student: " + psi.getValue());
             }
         }
         return enrolledStudents;

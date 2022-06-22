@@ -12,8 +12,8 @@ import javafx.util.Pair;
 
 public class CRSApplication {
 
+    // AdminID, Admin
     public static HashMap<String, Admin> adminDB = new HashMap<>();
-    // Admin admin0 = new Admin(000,"admin0","admin","pass",null);
 
     // StudentID, Student
     public static HashMap<String, Student> studentDB = new HashMap<>();
@@ -27,7 +27,7 @@ public class CRSApplication {
     // CourseID, Course
     public static HashMap<String, Course> courseCatalogDB = new HashMap<>();
 
-    // courseID, StudentID, Grade
+    // {courseID, StudentID}, Grade
     public static HashMap<Pair<String,String>,String> registeredCoursesDB = new HashMap<>();
 
 

@@ -18,20 +18,15 @@ public class AdminCRSMenu {
         Scanner in = new Scanner(System.in);
         int input=0;
         do {
-            System.out.println("---------- Welcome Admin ----------");
-            System.out.println("Please select your function:");
-            System.out.println("1. Add Professor");
-            System.out.println("2. Show Course Catalog");
-            System.out.println("3. Add Course to Catalog");
-            System.out.println("4. Delete Course from Catalog");
-            System.out.println("5. Approve Student");
-            System.out.println("6. Approve Student Requests for Registration");
-            System.out.println("7. Exit");
-            System.out.println("Enter Your Choice: ");
+            createMenu();
             input = in.nextInt();
             switch (input) {
                 case 1:
                     Professor prof1 = new Professor("002","prof1","prof","pass",null,null,null,null);
+//                    System.out.println("Enter ProfessorID: ");
+//                    String profID = in.next();
+//                    System.out.println("Enter Professor Name: ");
+//                    String profName = in.next();
                     adminImpl.addProfessor(prof1);
                     break;
 
@@ -72,6 +67,19 @@ public class AdminCRSMenu {
         }
         while(input!=7);
 
+    }
+
+    public void createMenu() {
+        System.out.println("---------- Welcome Admin ----------");
+        System.out.println("Please select your function:");
+        System.out.println("1. Add Professor");
+        System.out.println("2. Show Course Catalog");
+        System.out.println("3. Add Course to Catalog");
+        System.out.println("4. Delete Course from Catalog");
+        System.out.println("5. Approve Student");
+        System.out.println("6. Approve Student Requests for Registration");
+        System.out.println("7. Exit");
+        System.out.println("Enter Your Choice: ");
     }
 
 //    public void addProfessor() {
