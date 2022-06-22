@@ -2,6 +2,7 @@ package com.flipkart.application;
 
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
+import com.flipkart.dao.LoginDAOOperation;
 import com.flipkart.service.StudentImplementation;
 import com.flipkart.service.StudentInterface;
 
@@ -14,6 +15,11 @@ public class StudentCRSMenu {
     }
 
     public void showMenu(String userID) {
+
+        if(!LoginDAOOperation.isapproved(userID)){
+            System.out.println("Your semester registration has not been approved yet!");
+            return;
+        }
         Scanner in = new Scanner(System.in);
         int input = 0;
         do {
@@ -22,26 +28,26 @@ public class StudentCRSMenu {
             //Student student = studentDB.get(userID);
             switch (input) {
                 case 1:
-                    // studentImpl.registerCourses(student);
+                    studentImpl.registerCourses(userID);
                     break;
 
                 case 2:
-                    // studentImpl.addCourse(student);
+                     studentImpl.addCourse(userID);
                     break;
 
                 case 3:
-                    //studentImpl.dropCourse(student);
+                    studentImpl.dropCourse(userID);
                     break;
 
                 case 4:
-                    //studentImpl.viewEnrolledCourses(student);
+                    studentImpl.viewEnrolledCourses(userID);
                     break;
                 case 5:
-                    //studentImpl.payFees(student);
+                    studentImpl.payFees(userID);
                     break;
 
                 case 6:
-                    //studentImpl.viewGradeCard(student);
+                    studentImpl.viewGradeCard(userID);
                     break;
 
                 case 7:
@@ -49,7 +55,7 @@ public class StudentCRSMenu {
                     break;
 
                 case 8:
-                    //studentImpl.showCourses();
+                    studentImpl.showCourses();
                     break;
 
                 case 9:

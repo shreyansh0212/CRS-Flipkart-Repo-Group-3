@@ -1,16 +1,23 @@
 package com.flipkart.dao;
 
-import com.flipkart.bean.Student;
+import javafx.util.Pair;
 
 import java.util.List;
 
 public interface StudentDAOInterface {
-    public void registerCourses(Student student);
-    public void addCourse(Student student);
-    public void dropCourse(Student student);
-    public List<String> viewEnrolledCourses(Student student);
-    public void payFees(Student student);
-    void changePassword(Student student);
-    void viewGradeCard(Student student);
-    void showCourses();
+    public void preferenceUpdate(String userID, List<String> preference);
+    public void addToRegistration(String userID, String courseID);
+    public void dropFromRegistration(String userID, String courseID);
+
+    public List<String> viewEnrolledCourses(String userID);
+    public List<Pair<String, String>> grades(String userID);
+    public void showCourses();
+
+    public void preferenceShow(String userID);
+
+    public boolean isRegistered(String userID);
+
+    public boolean isFeePaymentStatus(String userID);
+
+    public void setFeePaymentStatus(String userID, String mode, String refID, int amt);
 }
