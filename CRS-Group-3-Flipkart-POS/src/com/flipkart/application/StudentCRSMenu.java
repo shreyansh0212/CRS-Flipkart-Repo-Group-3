@@ -2,6 +2,9 @@ package com.flipkart.application;
 
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
+import com.flipkart.dao.LoginDAOOperation;
+import com.flipkart.exception.CourseAlreadyPresent;
+import com.flipkart.exception.CourseNotPresentException;
 import com.flipkart.service.StudentImplementation;
 import com.flipkart.service.StudentInterface;
 
@@ -9,61 +12,65 @@ import java.util.Scanner;
 
 public class StudentCRSMenu {
     StudentInterface studentImpl;
-    Scanner scanner;
     public StudentCRSMenu() {
-
-        scanner = new Scanner(System.in);
         studentImpl = new StudentImplementation();
     }
 
     public void showMenu(String userID) {
-
+        Scanner in = new Scanner(System.in);
         int input = 0;
         do {
             createMenu();
-            input = scanner.nextInt();
-
+            input = in.nextInt();
+            //Student student = studentDB.get(userID);
             switch (input) {
                 case 1:
-                    registerCourses();
+                    studentImpl.registerCourses(userID);
                     break;
 
                 case 2:
-                    addCourse();
+                    try {
+                        studentImpl.addCourse(userID);
+                    } catch (CourseAlreadyPresent e){
+                        System.out.println(e.getMsg());
+                    }
                     break;
 
                 case 3:
-                    dropCourse();
+                    try {
+                        studentImpl.dropCourse(userID);
+                    } catch (CourseNotPresentException e){
+                        System.out.println(e.getMsg());
+                    }
                     break;
 
                 case 4:
-                    viewEnrolledCourses();
+                    studentImpl.viewEnrolledCourses(userID);
                     break;
-
                 case 5:
-                    payFees();
+                    studentImpl.payFees(userID);
                     break;
 
                 case 6:
-                    viewGradeCard();
+                    studentImpl.viewGradeCard(userID);
                     break;
 
                 case 7:
-                    viewCourseCatalog();
+                    //studentImpl.changePassword(student);
                     break;
 
                 case 8:
+                    studentImpl.showCourses();
+                    break;
+
+                case 9:
                     break;
 
                 default:
                     System.out.println("Invalid Selection");
             }
         }
-        while(input!=8);
-    }
-
-    private void viewCourseCatalog() {
-
+        while(input!=9);
     }
 
     public void createMenu() {

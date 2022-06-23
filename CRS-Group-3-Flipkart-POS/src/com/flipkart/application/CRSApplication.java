@@ -20,6 +20,7 @@ import com.flipkart.dao.UserDAOInterface;
 import com.flipkart.dao.UserDAOOperation;
 import com.flipkart.service.UserImplementation;
 import com.flipkart.service.UserInterface;
+import com.flipkart.dao.RequestApprovalDAOOperation;
 import javafx.util.Pair;
 
 public class CRSApplication {
@@ -89,6 +90,11 @@ public class CRSApplication {
                     password = in.next();
                     System.out.println("Enter your Name: ");
                     String name = in.next();
+                    System.out.println("Enter your Batch: ");
+                    String batch = in.next();
+                    System.out.println("Enter your Address: ");
+                    String address = in.next();
+                    RequestApprovalDAOOperation.request(userID,password,name,batch,address);
                     // Student student = new Student(userID,name,"student",password,null,null, false,null,null,false);
                     // pendingDB.put(userID,student);
                     break;

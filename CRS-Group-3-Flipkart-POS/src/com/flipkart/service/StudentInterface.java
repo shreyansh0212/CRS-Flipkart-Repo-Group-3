@@ -1,18 +1,19 @@
 package com.flipkart.service;
 
 import com.flipkart.bean.Student;
+import com.flipkart.exception.CourseAlreadyPresent;
+import com.flipkart.exception.CourseNotPresentException;
 
 import java.util.List;
 
 public interface StudentInterface {
 
-    public void registerCourses(Student student);
-    public void addCourse(Student student);
-    public void dropCourse(Student student);
-    public List<String> viewEnrolledCourses(Student student);
-    public void payFees(Student student);
-    void changePassword(Student student);
-    void viewGradeCard(Student student);
+    public void registerCourses(String userID);
+    public void addCourse(String userID) throws CourseAlreadyPresent;
+    public void dropCourse(String userID) throws CourseNotPresentException;
+    public void viewEnrolledCourses(String userID);
+    public void payFees(String userID);
+    void viewGradeCard(String userID);
 
     void showCourses();
 }
