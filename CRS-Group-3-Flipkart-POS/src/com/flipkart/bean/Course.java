@@ -5,6 +5,7 @@ public class Course {
     private String CourseName;
     private boolean isOffered;
     private String professorID;
+    private Integer courseStrength=0;
 
     /**
 	 * @param courseID
@@ -12,15 +13,20 @@ public class Course {
 	 * @param isOffered
 	 * @param professorID
 	 */
-	public Course(String courseID, String courseName, boolean isOffered, String professorID) {
+	public Course(String courseID, String courseName, boolean isOffered, String professorID,Integer courseStrength) {
 		super();
 		CourseID = courseID;
 		CourseName = courseName;
 		this.isOffered = isOffered;
 		this.professorID = professorID;
+        this.courseStrength = courseStrength;
 	}
 
-	public String getCourseID() {
+    public Course() {
+
+    }
+
+    public String getCourseID() {
         return CourseID;
     }
 
@@ -52,5 +58,11 @@ public class Course {
         this.professorID = professorID;
     }
 
+    public Integer getCourseStrength() {
+        return courseStrength;
+    }
 
+    public void setCourseStrength(Integer courseStrength) {
+        this.courseStrength = courseStrength;
+    }
 }

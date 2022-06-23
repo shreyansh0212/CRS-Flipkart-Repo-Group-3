@@ -22,7 +22,11 @@ public class User {
 		this.password = password;
 	}
 
-	public String getUserID() {
+    public User() {
+
+    }
+
+    public String getUserID() {
         return userID;
     }
 

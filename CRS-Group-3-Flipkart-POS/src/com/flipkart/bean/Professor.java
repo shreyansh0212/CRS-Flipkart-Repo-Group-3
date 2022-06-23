@@ -29,7 +29,11 @@ public class Professor extends User{
 		this.offeredCourses = offeredCourses;
 	}
 
-	public Date getDateOfJoining() {
+    public Professor() {
+        super();
+    }
+
+    public Date getDateOfJoining() {
         return dateOfJoining;
     }
 

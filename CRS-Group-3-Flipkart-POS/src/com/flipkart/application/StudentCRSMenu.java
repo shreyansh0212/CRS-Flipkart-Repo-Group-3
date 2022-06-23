@@ -9,63 +9,67 @@ import java.util.Scanner;
 
 public class StudentCRSMenu {
     StudentInterface studentImpl;
+    Scanner scanner;
     public StudentCRSMenu() {
+
+        scanner = new Scanner(System.in);
         studentImpl = new StudentImplementation();
     }
 
     public void showMenu(String userID) {
-        Scanner in = new Scanner(System.in);
+
         int input = 0;
         do {
             createMenu();
-            input = in.nextInt();
-            //Student student = studentDB.get(userID);
+            input = scanner.nextInt();
+
             switch (input) {
                 case 1:
-                    // studentImpl.registerCourses(student);
+                    registerCourses();
                     break;
 
                 case 2:
-                    // studentImpl.addCourse(student);
+                    addCourse();
                     break;
 
                 case 3:
-                    //studentImpl.dropCourse(student);
+                    dropCourse();
                     break;
 
                 case 4:
-                    //studentImpl.viewEnrolledCourses(student);
+                    viewEnrolledCourses();
                     break;
+
                 case 5:
-                    //studentImpl.payFees(student);
+                    payFees();
                     break;
 
                 case 6:
-                    //studentImpl.viewGradeCard(student);
+                    viewGradeCard();
                     break;
 
                 case 7:
-                    //studentImpl.changePassword(student);
+                    viewCourseCatalog();
                     break;
 
                 case 8:
-                    //studentImpl.showCourses();
-                    break;
-
-                case 9:
                     break;
 
                 default:
                     System.out.println("Invalid Selection");
             }
         }
-        while(input!=9);
+        while(input!=8);
+    }
+
+    private void viewCourseCatalog() {
+
     }
 
     public void createMenu() {
         System.out.println("---------- Welcome Student ----------");
         System.out.println("Please select your function:");
-        System.out.println("1. Fill Courses Preference: ");
+        System.out.println("1. Register Courses: ");
         System.out.println("2. Add Course: ");
         System.out.println("3. Drop Course: ");
         System.out.println("4. View Enrolled Courses");
@@ -77,31 +81,31 @@ public class StudentCRSMenu {
         System.out.println("Enter Your Choice: ");
     }
 
-//    public void registerCourses() {
-//
-//    }
-//
-//    public void addCourse() {
-//
-//    }
-//
-//    public void dropCourse() {
-//
-//    }
-//
-//    public void payFees() {
-//
-//    }
-//
-//    public void viewEnrolledCourses() {
-//
-//    }
-//
-//    public void viewCourses() {
-//        // used to check available courses
-//    }
-//
-//    public void viewGradeCard() {
-//
-//    }
+    public void registerCourses() {
+
+    }
+
+    public void addCourse() {
+
+    }
+
+    public void dropCourse() {
+
+    }
+
+    public void payFees() {
+
+    }
+
+    public void viewEnrolledCourses() {
+
+    }
+
+    public void viewCourses() {
+        // used to check available courses
+    }
+
+    public void viewGradeCard() {
+
+    }
 }

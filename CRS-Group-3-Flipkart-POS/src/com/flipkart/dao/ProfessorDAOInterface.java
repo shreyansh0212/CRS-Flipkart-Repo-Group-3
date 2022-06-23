@@ -1,11 +1,11 @@
 package com.flipkart.dao;
 
-import com.flipkart.bean.Student;
+import javafx.util.Pair;
 
 import java.util.List;
 
 public interface ProfessorDAOInterface {
-    public void addGrade(String courseID);
-    public List<Student> viewEnrolledStudents(String courseID);
-    public List<String> getCourses(String userID);
+    public boolean addGrade(String grade,String courseID,String studentID);
+    public List<Pair<String, String>> viewEnrolledStudents(String professorID);
+    public List<String> getCourses(String professorID);
 }

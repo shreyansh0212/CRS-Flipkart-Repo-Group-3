@@ -1,5 +1,5 @@
 package com.flipkart.dao;
 
 public interface PaymentDAOInterface {
-    public void choosePaymentMethod();
+    public String viewPaymentMethod(String referenceID);
 }

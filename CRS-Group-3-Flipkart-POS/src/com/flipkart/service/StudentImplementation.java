@@ -130,7 +130,7 @@ public class StudentImplementation implements StudentInterface{
      */
     @Override
     public void changePassword(Student student) {
-
+        // not required
     }
 
     /**
@@ -154,10 +154,6 @@ public class StudentImplementation implements StudentInterface{
      */
     @Override
     public void showCourses() {
-//        for (Map.Entry entry:courseCatalogDB.entrySet())
-//        {
-//            Course course = (Course) entry.getValue();
-//            System.out.println("CourseID: " + entry.getKey() + ", Course Name: " + course.getCourseName());
-//        }
+
     }
 }

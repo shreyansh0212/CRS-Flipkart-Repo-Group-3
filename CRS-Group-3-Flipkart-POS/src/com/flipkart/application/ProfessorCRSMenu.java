@@ -8,31 +8,28 @@ import java.util.Scanner;
 
 public class ProfessorCRSMenu {
     ProfessorInterface professorImpl;
+    Scanner scanner;
     public ProfessorCRSMenu() {
+        scanner = new Scanner(System.in);
         professorImpl = new ProfessorImplementation();
     }
     public void showMenu(String userID) {
-        Scanner in = new Scanner(System.in);
+
         int input=0;
         do {
             createMenu();
-            input = in.nextInt();
-
+            input = scanner.nextInt();
             switch (input) {
                 case 1:
-                    professorImpl.getCourses(userID);
+                    getCourses(userID);
                     break;
 
                 case 2:
-                    System.out.println("Enter CourseID to view Students: ");
-                    String courseID = in.next();
-                    professorImpl.viewEnrolledStudents(courseID);
+                    viewEnrolledStudents(userID);
                     break;
 
                 case 3:
-                    System.out.println("Enter CourseID to add Grades: ");
-                    courseID = in.next();
-                    professorImpl.addGrade(courseID);
+                    addGrade(userID);
                     break;
 
                 case 4:
@@ -41,10 +38,9 @@ public class ProfessorCRSMenu {
                 default:
                     System.out.println("Invalid Input");
             }
-
         }
         while(input!=4);
-
+        scanner.close();
     }
 
     public void createMenu() {
@@ -55,5 +51,20 @@ public class ProfessorCRSMenu {
         System.out.println("3. Add Grade");
         System.out.println("4. Exit");
         System.out.println("Enter Your Choice: ");
+    }
+
+    public void getCourses(String professorID) {
+        System.out.println("------- Listed Courses --------");
+        professorImpl.getCourses(professorID);
+    }
+
+    public void addGrade(String professorID) {
+        System.out.println("------ Add Grades -------");
+        professorImpl.addGrade(professorID);
+    }
+
+    public void viewEnrolledStudents(String professorID) {
+        System.out.println("------- View Enrolled Students -------");
+        professorImpl.viewEnrolledStudents(professorID);
     }
 }

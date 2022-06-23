@@ -10,52 +10,40 @@ import java.util.Scanner;
 
 public class AdminCRSMenu {
     AdminInterface adminImpl;
+    Scanner scanner;
     public AdminCRSMenu() {
+        scanner = new Scanner(System.in);
         adminImpl = new AdminImplementation();
     }
     public void showMenu() {
 
-        Scanner in = new Scanner(System.in);
         int input=0;
         do {
             createMenu();
-            input = in.nextInt();
+            input = scanner.nextInt();
             switch (input) {
                 case 1:
-                    Professor prof1 = new Professor("002","prof1","prof","pass",null,null,null,null);
-//                    System.out.println("Enter ProfessorID: ");
-//                    String profID = in.next();
-//                    System.out.println("Enter Professor Name: ");
-//                    String profName = in.next();
-                    adminImpl.addProfessor(prof1);
+                    addProfessor();
                     break;
 
                 case 2:
-                    adminImpl.showCourses();
+                    showCourseCatalog();
                     break;
 
                 case 3:
-                    System.out.println("Enter CourseID to add: ");
-                    String courseID = in.next();
-                    System.out.println("Enter Course Name to add: ");
-                    String courseName = in.next();
-                    System.out.println("Enter ProfessorID to add: ");
-                    String professorID = in.next();
-                    Course course = new Course(courseID,courseName,false,professorID);
-                    adminImpl.addCourse(course);
+                    addCourseToCatalog();
                     break;
 
                 case 4:
-                    System.out.println("Enter CourseID to Drop: ");
-                    adminImpl.dropCourse(in.next());
+                    deleteCourseFromCatalog();
                     break;
 
                 case 5:
-                    adminImpl.approveStudent();
+                    approveStudent();
                     break;
 
                 case 6:
-                    adminImpl.approvePendingRequests();
+                    approvePendingRequests();
                     break;
 
                 case 7:
@@ -82,25 +70,80 @@ public class AdminCRSMenu {
         System.out.println("Enter Your Choice: ");
     }
 
-//    public void addProfessor() {
-//
-//    }
-//
-//    public void showCourseCatalog() {
-//
-//    }
-//
-//    public void addCourseToCatalog() {
-//
-//    }
-//
-//    public void deleteCourseFromCatalog() {
-//
-//    }
-//
-//    public void approveStudent() {
-//
-//    }
+    public void addProfessor() {
 
+        System.out.println("-------------- Add Professor -------------");
+
+
+        Professor professor = new Professor();
+
+        System.out.println("Enter User Id:");
+        String userId = scanner.next();
+        professor.setUserID(userId);
+
+        System.out.println("Enter Password:");
+        String password = scanner.next();
+        professor.setPassword(password);
+
+        System.out.println("Enter Professor Name:");
+        String professorName = scanner.next();
+        professor.setName(professorName);
+
+        System.out.println("Enter Department:");
+        String department = scanner.next();
+        professor.setDepartment(department);
+
+        professor.setRole("professor");
+
+        adminImpl.addProfessor(professor);
+    }
+
+    public void showCourseCatalog() {
+        System.out.println("-------------- Show Courses -------------");
+        adminImpl.showCourses();
+    }
+
+    public void addCourseToCatalog() {
+        Course course = new Course();
+        System.out.println("-------------- Add Course -------------");
+        System.out.println("Enter Course Id:");
+        String courseId = scanner.next();
+        course.setCourseID(courseId);
+
+        System.out.println("Enter Course Name:");
+        String courseName = scanner.next();
+        course.setCourseName(courseName);
+
+        System.out.println("Enter Professor Id:");
+        String professorId = scanner.next();
+        course.setProfessorID(professorId);
+
+        course.setOffered(true);
+        course.setCourseStrength(0);
+
+        adminImpl.addCourse(course);
+    }
+
+    public void deleteCourseFromCatalog() {
+        showCourseCatalog();
+        System.out.println("-------------- Drop Course -------------");
+
+        System.out.println("Enter Course Id:");
+        String courseId = scanner.next();
+
+        adminImpl.dropCourse(courseId);
+    }
+
+    public void approveStudent() {
+        System.out.println("-------------- Approve Student -------------");
+
+        System.out.println("Enter Student Id:");
+        String studentId = scanner.next();
+
+        adminImpl.approveStudent(studentId);
+    }
+     public void approvePendingRequests() {
+
+     }
 }
 

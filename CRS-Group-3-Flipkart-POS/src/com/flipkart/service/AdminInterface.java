@@ -4,7 +4,7 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 
 public interface AdminInterface {
-    public void approveStudent();
+    public void approveStudent(String studentid);
     public void addProfessor(Professor professor);
     public void generateReport();
     public void addCourse(Course course);

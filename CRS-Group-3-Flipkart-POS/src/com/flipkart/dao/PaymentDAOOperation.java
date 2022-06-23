@@ -5,7 +5,7 @@ public class PaymentDAOOperation implements PaymentDAOInterface{
      *
      */
     @Override
-    public void choosePaymentMethod() {
-
+    public String viewPaymentMethod(String referenceID) {
+        return null;
     }
 }
