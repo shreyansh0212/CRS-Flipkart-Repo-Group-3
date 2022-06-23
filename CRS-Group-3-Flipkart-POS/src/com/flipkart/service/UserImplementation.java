@@ -2,6 +2,7 @@ package com.flipkart.service;
 
 import com.flipkart.dao.UserDAOInterface;
 import com.flipkart.dao.UserDAOOperation;
+import com.flipkart.exception.LoginFailedException;
 
 public class UserImplementation implements UserInterface{
     @Override
@@ -10,7 +11,13 @@ public class UserImplementation implements UserInterface{
     }
     public int login(String userID, String password){
         UserDAOInterface log = new UserDAOOperation();
-        return log.login(userID,password);
+        int role = 0;
+        try{
+            role = log.login(userID,password);
+        } catch (LoginFailedException e){
+            System.out.println(e.getMsg());
+        }
+        return role;
     }
     /**
      *

@@ -1,5 +1,7 @@
 package com.flipkart.dao;
 
+import com.flipkart.exception.LoginFailedException;
+
 import java.sql.*;
 
 import static com.flipkart.application.CRSApplication.*;
@@ -10,7 +12,7 @@ public class UserDAOOperation implements UserDAOInterface{
      *
      */
 
-    public int login(String userID, String password){
+    public int login(String userID, String password) throws LoginFailedException {
         int role = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");

@@ -5,11 +5,14 @@ import com.flipkart.dao.CoursesDAOInterface;
 import com.flipkart.dao.CoursesDAOOperation;
 import com.flipkart.dao.StudentDAOInterface;
 import com.flipkart.dao.StudentDAOOperation;
+import com.flipkart.exception.CourseAlreadyPresent;
+import com.flipkart.exception.CourseNotPresentException;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.CompletionException;
 
 
 public class StudentImplementation implements StudentInterface{
@@ -45,7 +48,7 @@ public class StudentImplementation implements StudentInterface{
      * @param userID
      */
     @Override
-    public void addCourse(String userID) {
+    public void addCourse(String userID) throws CourseAlreadyPresent {
         StudentDAOInterface pref = new StudentDAOOperation();
         pref.preferenceShow(userID);
         showCourses();
@@ -53,6 +56,10 @@ public class StudentImplementation implements StudentInterface{
         Scanner in = new Scanner(System.in);
         String courseID = in.next();
         StudentDAOInterface upd = new StudentDAOOperation();
+        boolean ifprsnt = upd.chkRegistration(userID,courseID);
+        if(ifprsnt){
+            throw new CourseAlreadyPresent();
+        }
         upd.addToRegistration(userID,courseID);
 //        Pair<String,String> pss = new Pair<>(courseID,student.getUserID());
 //        registeredCoursesDB.put(pss,null);
@@ -63,7 +70,7 @@ public class StudentImplementation implements StudentInterface{
      * @param userID
      */
     @Override
-    public void dropCourse(String userID) {
+    public void dropCourse(String userID) throws CourseNotPresentException {
         StudentDAOInterface pref = new StudentDAOOperation();
         pref.preferenceShow(userID);
         showCourses();
@@ -71,7 +78,12 @@ public class StudentImplementation implements StudentInterface{
         Scanner in = new Scanner(System.in);
         String courseID = in.next();
         StudentDAOInterface upd = new StudentDAOOperation();
+        boolean ifprsnt = upd.chkRegistration(userID,courseID);
+        if(!ifprsnt){
+            throw new CourseNotPresentException();
+        }
         upd.dropFromRegistration(userID,courseID);
+
 //        List<String> enrolledCourses = viewEnrolledCourses(student);
 //        for(int i=0;i<enrolledCourses.size();i++) {
 //            Pair<String,String> pss = new Pair<>(enrolledCourses.get(i),student.getUserID());

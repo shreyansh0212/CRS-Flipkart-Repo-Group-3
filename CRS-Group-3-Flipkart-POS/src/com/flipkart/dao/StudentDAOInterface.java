@@ -7,6 +7,7 @@ import java.util.List;
 public interface StudentDAOInterface {
     public void preferenceUpdate(String userID, List<String> preference);
     public void addToRegistration(String userID, String courseID);
+    public boolean chkRegistration(String userID, String courseID);
     public void dropFromRegistration(String userID, String courseID);
 
     public List<String> viewEnrolledCourses(String userID);

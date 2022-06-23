@@ -1,5 +1,6 @@
 package com.flipkart.dao;
 
+import com.flipkart.exception.CourseNotPresentException;
 import javafx.util.Pair;
 
 import java.sql.*;
@@ -76,6 +77,25 @@ public class StudentDAOOperation implements StudentDAOInterface{
         }
     }
 
+    public boolean chkRegistration(String userID, String courseID){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            String chk = chkpresent;
+            PreparedStatement stmt = conn.prepareStatement(chk);
+            stmt.setString(1,userID);
+            stmt.setString(2,courseID);
+            ResultSet rs = stmt.executeQuery(chk);
+            if(!rs.last()){
+                return false;
+            }
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
     /**
      * @param userID
      */

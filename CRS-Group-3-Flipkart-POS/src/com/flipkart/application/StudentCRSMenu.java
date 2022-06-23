@@ -3,6 +3,8 @@ package com.flipkart.application;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.dao.LoginDAOOperation;
+import com.flipkart.exception.CourseAlreadyPresent;
+import com.flipkart.exception.CourseNotPresentException;
 import com.flipkart.service.StudentImplementation;
 import com.flipkart.service.StudentInterface;
 
@@ -32,11 +34,19 @@ public class StudentCRSMenu {
                     break;
 
                 case 2:
-                     studentImpl.addCourse(userID);
+                    try {
+                        studentImpl.addCourse(userID);
+                    } catch (CourseAlreadyPresent e){
+                        System.out.println(e.getMsg());
+                    }
                     break;
 
                 case 3:
-                    studentImpl.dropCourse(userID);
+                    try {
+                        studentImpl.dropCourse(userID);
+                    } catch (CourseNotPresentException e){
+                        System.out.println(e.getMsg());
+                    }
                     break;
 
                 case 4:

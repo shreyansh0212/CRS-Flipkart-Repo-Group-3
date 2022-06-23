@@ -15,5 +15,7 @@ public class SQLQueriesConstants {
     public static final String viewcourbyprof = "SELECT * FROM course WHERE professorid = ?";
     public static final String viewstudbycourse = "SELECT * FROM registeredcourses WHERE courseid = ?";
     public static final String addgrade = "UPDATE registeredcourses SET grade = ?";
+    public static final String chkpresent = "SELECT * FROM registeredcourses WHERE userid = ? and courseid = ?";
+
 
 }
