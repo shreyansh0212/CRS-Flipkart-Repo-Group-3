@@ -64,7 +64,7 @@ public class CRSApplication {
                     switch (role) {
                         case "admin":
                             AdminCRSMenu adminCRSMenu = new AdminCRSMenu();
-                            adminCRSMenu.showMenu();
+                            adminCRSMenu.showMenu(userID);
                             break;
 
                         case "student":

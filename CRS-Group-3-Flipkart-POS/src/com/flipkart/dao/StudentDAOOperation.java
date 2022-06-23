@@ -17,10 +17,8 @@ public class StudentDAOOperation implements StudentDAOInterface{
     @Override
     public void preferenceUpdate(String userID, List<String> preference) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = updPref;
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,preference.get(0));
             stmt.setString(2,preference.get(1));
             stmt.setString(3,preference.get(2));
@@ -31,16 +29,12 @@ public class StudentDAOOperation implements StudentDAOInterface{
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
     public void preferenceShow(String userID){
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = studshow;
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,userID);
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();
@@ -53,8 +47,6 @@ public class StudentDAOOperation implements StudentDAOInterface{
             System.out.println("6. " + rs.getString("preference6"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
     /**
@@ -63,26 +55,20 @@ public class StudentDAOOperation implements StudentDAOInterface{
     @Override
     public void addToRegistration(String userID, String courseID) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = addtoreg;
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,userID);
             stmt.setString(2,courseID);
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
     public boolean chkRegistration(String userID, String courseID){
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String chk = chkpresent;
-            PreparedStatement stmt = conn.prepareStatement(chk);
+            PreparedStatement stmt = connection.prepareStatement(chk);
             stmt.setString(1,userID);
             stmt.setString(2,courseID);
             ResultSet rs = stmt.executeQuery(chk);
@@ -92,8 +78,6 @@ public class StudentDAOOperation implements StudentDAOInterface{
             return true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
     /**
@@ -102,16 +86,12 @@ public class StudentDAOOperation implements StudentDAOInterface{
     @Override
     public void dropFromRegistration(String userID, String courseID) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = dropfromreg;
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,userID);
             stmt.setString(2,courseID);
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -124,10 +104,8 @@ public class StudentDAOOperation implements StudentDAOInterface{
     public List<String> viewEnrolledCourses(String userID) {
         List<String> enr = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = viewenrcour;
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,userID);
             System.out.println("Your registered courses are: ");
             ResultSet rs = stmt.executeQuery(sql);
@@ -137,60 +115,46 @@ public class StudentDAOOperation implements StudentDAOInterface{
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
         return enr;
     }
 
     public boolean isRegistered(String userID){
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = studshow;
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,userID);
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();
             return rs.getBoolean("isregistered");
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
 
     public boolean isFeePaymentStatus(String userID){
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = studshow;
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,userID);
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();
             return rs.getBoolean("feesPaymentStatus");
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
 
     public void setFeePaymentStatus(String userID, String mode, String refID, int amt){
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = addpay;
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,refID);
             stmt.setString(2,userID);
             stmt.setInt(3,amt);
             stmt.setString(4,mode);
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -203,10 +167,8 @@ public class StudentDAOOperation implements StudentDAOInterface{
     public List<Pair<String, String>> grades(String userID) {
         List<Pair<String,String>> grd = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = viewenrcour;
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,userID);
             System.out.println("Your registered courses are: ");
             ResultSet rs = stmt.executeQuery(sql);
@@ -215,8 +177,6 @@ public class StudentDAOOperation implements StudentDAOInterface{
 //                System.out.println(rs.getString("courseid") + ": " + rs.getString("grade"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         return grd;
@@ -228,10 +188,8 @@ public class StudentDAOOperation implements StudentDAOInterface{
     @Override
     public void showCourses() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = viewcour;
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql);
             System.out.println("Your registered courses are: ");
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()){
@@ -240,8 +198,6 @@ public class StudentDAOOperation implements StudentDAOInterface{
                         rs.getString("professorid") + ", " + rs.getInt("coursestrength"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

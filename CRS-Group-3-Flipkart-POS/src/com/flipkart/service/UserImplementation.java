@@ -5,10 +5,6 @@ import com.flipkart.dao.UserDAOOperation;
 
 public class UserImplementation implements UserInterface{
     UserDAOInterface userDAOInterface = new UserDAOOperation();
-    @Override
-    public void updatePersonalDetails() {
-
-    }
 
     /**
      * @param userID

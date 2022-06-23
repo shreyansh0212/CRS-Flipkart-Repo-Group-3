@@ -10,10 +10,8 @@ public class LoginDAOOperation {
     public static int login(String userID, String password) {
         int role = 0;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = logincheck;
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,userID);
             stmt.setString(2,password);
             ResultSet rs = stmt.executeQuery(sql);
@@ -26,8 +24,6 @@ public class LoginDAOOperation {
                 else role = 0;
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
