@@ -165,8 +165,8 @@ public class StudentDAOOperation implements StudentDAOInterface{
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1,refID);
             stmt.setString(2,userID);
-            stmt.setInt(2,amt);
-            stmt.setString(2,mode);
+            stmt.setInt(3,amt);
+            stmt.setString(4,mode);
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);

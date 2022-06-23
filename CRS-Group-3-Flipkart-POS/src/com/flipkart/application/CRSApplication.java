@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import com.flipkart.dao.LoginDAOOperation;
 import com.flipkart.dao.RequestApprovalDAOOperation;
+import com.flipkart.service.UserImplementation;
+import com.flipkart.service.UserInterface;
 
 public class CRSApplication {
 
@@ -126,7 +128,8 @@ public class CRSApplication {
 
                     // verifying credentials
                     int roleInput=0;
-                    roleInput = LoginDAOOperation.login(userID,password);
+                    UserInterface usr = new UserImplementation();
+                    roleInput = usr.login(userID,password);
 //                    if(studentDB.get(userID)!=null && studentDB.get(userID).getPassword().equals(password)) roleInput=2;
 //                    if(adminDB.get(userID)!=null && adminDB.get(userID).getPassword().equals(password)) roleInput=1;
 //                    if(professorDB.get(userID)!=null && professorDB.get(userID).getPassword().equals(password)) roleInput=3;

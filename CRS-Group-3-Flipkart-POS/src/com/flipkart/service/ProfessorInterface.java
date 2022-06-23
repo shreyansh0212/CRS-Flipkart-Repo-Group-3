@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ProfessorInterface {
     public void addGrade(String courseID);
-    public List<Student> viewEnrolledStudents(String courseID);
-    public List<String> getCourses(String userID);
+    public void viewEnrolledStudents(String courseID);
+    public void getCourses(String userID);
 }
