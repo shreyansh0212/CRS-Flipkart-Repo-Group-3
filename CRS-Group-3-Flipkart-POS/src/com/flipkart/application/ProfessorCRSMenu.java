@@ -6,13 +6,31 @@ import com.flipkart.service.ProfessorInterface;
 
 import java.util.Scanner;
 
+/**
+ *
+ *  Class for professor Interface
+ *
+ */
+
 public class ProfessorCRSMenu {
     ProfessorInterface professorImpl;
     Scanner scanner;
+
+    /**
+     *
+     * Default Constructor
+     *
+     */
     public ProfessorCRSMenu() {
         scanner = new Scanner(System.in);
         professorImpl = new ProfessorImplementation();
     }
+
+    /**
+     *
+     * Parameterized Constructor
+     * @param userID
+     */
     public void showMenu(String userID) {
         professorImpl.loginMsg(userID);
         int input=0;
@@ -42,6 +60,12 @@ public class ProfessorCRSMenu {
         while(input!=4);
     }
 
+    /**
+     *
+     * Method to create Admin Menu
+     *
+     */
+
     public void createMenu() {
         System.out.println("---------- Welcome Professor ----------");
         System.out.println("Please select your function:");
@@ -52,15 +76,30 @@ public class ProfessorCRSMenu {
         System.out.println("Enter Your Choice: ");
     }
 
+    /**
+     *  Method to get listed courses for professor
+     * @param professorID
+     */
+
     public void getCourses(String professorID) {
         System.out.println("------- Listed Courses --------");
         professorImpl.getCourses(professorID);
     }
 
+    /**
+     * Method to add grades of students
+     * @param professorID
+     */
+
     public void addGrade(String professorID) {
         System.out.println("------ Add Grades -------");
         professorImpl.addGrade(professorID);
     }
+
+    /**
+     *  Method to get the list of students for Class.
+     * @param professorID
+     */
 
     public void viewEnrolledStudents(String professorID) {
         System.out.println("------- View Enrolled Students -------");
