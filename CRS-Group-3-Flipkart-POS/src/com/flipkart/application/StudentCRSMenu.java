@@ -108,6 +108,10 @@ public class StudentCRSMenu {
         }
     }
 
+    /**
+     *
+     * @param userID
+     */
     public void payFees(String userID) {
         studentImpl.payFees(userID);
     }
