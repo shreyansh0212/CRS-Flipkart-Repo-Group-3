@@ -8,6 +8,9 @@ import com.flipkart.exception.UserAlreadyExist;
 
 public interface AdminInterface {
     public void loginMsg(String userID);
+
+    public void viewCourseRegistration(String studentId);
+    public void updIsRegistered(String studentId, boolean approval);
     public void approveStudent(String studentid);
     public void addProfessor(Professor professor) throws UserAlreadyExist;
     public void generateReport();

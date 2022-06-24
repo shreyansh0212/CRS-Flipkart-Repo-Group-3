@@ -1,5 +1,13 @@
 package com.flipkart.dao;
 
+import com.flipkart.constants.SQLQueriesConstants;
+import com.flipkart.exception.UserAlreadyExist;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import static com.flipkart.application.CRSApplication.connection;
+
 public class NotificationDAOOperation implements NotificationDAOInterface{
     /**
      * @param notificationID
@@ -7,7 +15,16 @@ public class NotificationDAOOperation implements NotificationDAOInterface{
      * @param message
      */
     @Override
-    public void sendNotification(String notificationID, String studentID, String message) {
-
+    public void sendNotification(String notificationID, String adminID, String studentID, String message) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.ADD_NOTIF);
+            statement.setString(1,notificationID);
+            statement.setString(2,adminID);
+            statement.setString(3,studentID);
+            statement.setString(4,message);
+            int row = statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

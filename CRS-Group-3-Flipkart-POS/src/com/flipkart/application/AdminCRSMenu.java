@@ -7,6 +7,8 @@ import com.flipkart.exception.CourseNotPresentException;
 import com.flipkart.exception.UserAlreadyExist;
 import com.flipkart.service.AdminImplementation;
 import com.flipkart.service.AdminInterface;
+import com.flipkart.service.NotificationImplementation;
+import com.flipkart.service.NotificationInterface;
 
 import java.util.Scanner;
 
@@ -50,6 +52,10 @@ public class AdminCRSMenu {
                         break;
 
                     case 7:
+                        approveCourseRegistration(userID);
+                        break;
+
+                    case 8:
                         break;
 
                     default:
@@ -72,7 +78,8 @@ public class AdminCRSMenu {
         System.out.println("4. Delete Course from Catalog");
         System.out.println("5. Approve Student");
         System.out.println("6. View Pending Registration Requests");
-        System.out.println("7. Exit");
+        System.out.println("7. Approve Course Registration of Students");
+        System.out.println("8. Exit");
         System.out.println("Enter Your Choice: ");
     }
 
@@ -159,6 +166,19 @@ public class AdminCRSMenu {
         String studentId = scanner.next();
 
         adminImpl.approveStudent(studentId);
+    }
+
+    public void approveCourseRegistration(String adminID){
+        System.out.println("-------------- Approve Course Registration for Students -------------");
+        System.out.println("Enter Student Id:");
+        String studentId = scanner.next();
+        adminImpl.viewCourseRegistration(studentId);
+        System.out.println("Enter 1 to approve and 0 otherwise");
+        boolean approval = scanner.nextBoolean();
+        adminImpl.updIsRegistered(studentId,approval);
+        NotificationInterface sendNotif = new NotificationImplementation();
+        sendNotif.sendNotifCourseReg(adminID,studentId,approval);
+
     }
      public void approvePendingRequests() {
          System.out.println("-------------- Students Waiting for approval-------------");

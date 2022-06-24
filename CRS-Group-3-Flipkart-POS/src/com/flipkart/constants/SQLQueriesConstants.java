@@ -20,8 +20,9 @@ public class SQLQueriesConstants {
     public static final String VERIFY_CREDENTIALS = "select password from user where userid = ?";
     public static final String UPDATE_PASSWORD = "update user set password=? where userid = ?";
     public static final String GET_ROLE = "select role from user where userid = ?";
-
+    public static final String ADD_NOTIF = "INSERT INTO notification VALUES (?,?,?,?)";
     // Admin Queries
+    public static final String UPDISREGISTERED = "UPDATE student SET isregistered = ? WHERE studentid = ?";
     public static final String DELETE_COURSE = "delete from course where courseid = ?";
     public static final String ADD_COURSE = "insert into course(courseid, coursename, professorid) values (?, ?, ?)";
     public static final String ADD_PROFESSOR = "insert into professor(professorid, professorname, department) values (?, ?, ?)";
