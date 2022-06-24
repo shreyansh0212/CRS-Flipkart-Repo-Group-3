@@ -1,6 +1,7 @@
 package com.flipkart.dao;
 
 import com.flipkart.constants.SQLQueriesConstants;
+import com.flipkart.exception.GradeNotAddedException;
 import javafx.util.Pair;
 
 import java.sql.Connection;
@@ -38,7 +39,7 @@ public class ProfessorDAOOperation implements ProfessorDAOInterface{
      * @return
      */
     @Override
-    public boolean addGrade(String grade, String courseID, String studentID) {
+    public boolean addGrade(String grade, String courseID, String studentID) throws GradeNotAddedException {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQLQueriesConstants.ADD_GRADE);
             preparedStatement.setString(1,grade);
@@ -50,7 +51,7 @@ public class ProfessorDAOOperation implements ProfessorDAOInterface{
                 return true;
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new GradeNotAddedException(studentID,courseID);
         }
         return false;
     }

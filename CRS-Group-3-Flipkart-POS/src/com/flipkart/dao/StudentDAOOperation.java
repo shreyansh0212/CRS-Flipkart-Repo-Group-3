@@ -2,10 +2,7 @@ package com.flipkart.dao;
 
 import com.flipkart.bean.User;
 import com.flipkart.constants.SQLQueriesConstants;
-import com.flipkart.exception.CourseAlreadyRegistered;
-import com.flipkart.exception.CourseNotPresentException;
-import com.flipkart.exception.UserAlreadyExist;
-import com.flipkart.exception.UserNotFoundException;
+import com.flipkart.exception.*;
 import com.mysql.cj.protocol.Resultset;
 import javafx.util.Pair;
 
@@ -39,7 +36,15 @@ public class StudentDAOOperation implements StudentDAOInterface{
      * @param preference
      */
     @Override
-    public void preferenceUpdate(String userID, List<String> preference) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException {
+    public void preferenceUpdate(String userID, List<String> preference) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException, CourseLimitExceededException {
+        try {
+            Integer count = this.getNumberOfEnrolledCourses(userID);
+            if (count >= 6) {
+                throw new CourseLimitExceededException(count);
+            }
+        }catch (CourseLimitExceededException e){
+            throw e;
+        }
         try {
             preparedStatement = connection.prepareStatement(UPDATE_PREFERENCE);
             for (int i=0;i<6;i++) {
@@ -58,6 +63,8 @@ public class StudentDAOOperation implements StudentDAOInterface{
 
                 } catch (CourseAlreadyRegistered ce) {
                     throw ce;
+                } catch (CourseLimitExceededException ee) {
+                    throw ee;
                 }
             }
 
@@ -70,7 +77,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
      * @param userID
      */
     @Override
-    public void addCourse(String courseID, String userID) throws CourseAlreadyRegistered, CourseNotPresentException {
+    public void addCourse(String courseID, String userID) throws CourseAlreadyRegistered, CourseNotPresentException, CourseLimitExceededException {
 //        try{
 //            preparedStatement = connection.prepareStatement(SQLQueriesConstants.CHECK_COURSE_AVAILABILITY);
 //            preparedStatement.setString(1,courseID);
@@ -82,6 +89,10 @@ public class StudentDAOOperation implements StudentDAOInterface{
 //            throw new RuntimeException(e);
 //        }
         try {
+            Integer count = this.getNumberOfEnrolledCourses(userID);
+            if(count>=6){
+                throw new CourseLimitExceededException(count);
+            }
             this.checkCourseAvailability(courseID);
             PreparedStatement stmt = connection.prepareStatement(ADD_TO_REGISTER);
             stmt.setString(1,courseID);
@@ -96,6 +107,8 @@ public class StudentDAOOperation implements StudentDAOInterface{
             throw new CourseAlreadyRegistered(courseID,userID);
         }catch (CourseNotPresentException ce){
             throw ce;
+        } catch (CourseLimitExceededException ee) {
+            throw ee;
         }
     }
 
@@ -217,7 +230,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
      * @param address
      */
     @Override
-    public void newRegistration(String studentID, String password, String name, String batch, String address) throws UserAlreadyExist {
+    public void newRegistration(String studentID, String password, String name, String batch, String address) throws UserAlreadyExist, UserNotAdded {
         AdminDAOInterface adminDAOInterface = new AdminDAOOperation();
         adminDAOInterface.addUser(new User(studentID,name,"student",password));
         try {
@@ -229,6 +242,8 @@ public class StudentDAOOperation implements StudentDAOInterface{
             int row = preparedStatement.executeUpdate();
             if(row > 0) {
                 System.out.println("New Registration Done!");
+            }else {
+                throw new UserNotAdded(studentID);
             }
 
         } catch (SQLException e) {
@@ -291,5 +306,20 @@ public class StudentDAOOperation implements StudentDAOInterface{
         } catch (SQLException | CourseNotPresentException e) {
             throw new CourseNotPresentException(courseID);
         }
+    }
+
+    public Integer getNumberOfEnrolledCourses(String studentID){
+        try{
+            preparedStatement = connection.prepareStatement(SQLQueriesConstants.GET_NUMBER_OF_ENROLLED_COURSES);
+            preparedStatement.setString(1,studentID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                Integer count = resultSet.getInt(1);
+                return count;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
     }
 }

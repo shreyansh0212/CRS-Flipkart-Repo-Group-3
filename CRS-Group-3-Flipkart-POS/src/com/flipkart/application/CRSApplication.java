@@ -71,6 +71,7 @@ public class CRSApplication {
                         if (role.equals(null)) role = "";
                         switch (role) {
                             case "admin":
+                                System.out.println("Successful Login!");
                                 AdminCRSMenu adminCRSMenu = new AdminCRSMenu();
                                 adminCRSMenu.showMenu(userID);
                                 break;
@@ -86,12 +87,14 @@ public class CRSApplication {
                                     System.out.println(ue.getMessage());
                                 }
                                 if(approvalStatus) {
+                                    System.out.println("Successful Login!");
                                     StudentCRSMenu studentCRSMenu = new StudentCRSMenu();
                                     studentCRSMenu.showMenu(userID);
                                 }
                                 break;
 
                             case "professor":
+                                System.out.println("Successful Login!");
                                 ProfessorCRSMenu professorCRSMenu = new ProfessorCRSMenu();
                                 professorCRSMenu.showMenu(userID);
                                 break;

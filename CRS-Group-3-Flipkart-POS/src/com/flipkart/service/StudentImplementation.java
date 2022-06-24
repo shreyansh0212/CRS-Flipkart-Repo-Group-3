@@ -44,7 +44,7 @@ public class StudentImplementation implements StudentInterface{
                 }
             }
             studentDAOInterface.preferenceUpdate(userID,preference);
-        }catch (CourseAlreadyRegistered | CourseNotPresentException e){
+        }catch (CourseAlreadyRegistered | CourseNotPresentException | CourseLimitExceededException e){
             System.out.println(e.getMessage());
         }
     }
@@ -61,7 +61,7 @@ public class StudentImplementation implements StudentInterface{
         try{
             studentDAOInterface.addCourse(courseID,userID);
             System.out.println("Course Added with CourseID: " + courseID);
-        }catch(CourseAlreadyRegistered | CourseNotPresentException e){
+        }catch(CourseAlreadyRegistered | CourseNotPresentException | CourseLimitExceededException e){
             System.out.println(e.getMessage());
         }
 
@@ -136,7 +136,7 @@ public class StudentImplementation implements StudentInterface{
                     System.out.println("Invalid Selection");
             }
         } catch (FeesAlreadyPaid | UserNotFoundException | StudentNotRegistered e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
 
     }
@@ -161,10 +161,10 @@ public class StudentImplementation implements StudentInterface{
      * @param address
      */
     @Override
-    public void newRegistration(String studentID, String password, String name, String batch, String address) throws UserAlreadyExist {
+    public void newRegistration(String studentID, String password, String name, String batch, String address) throws UserAlreadyExist, UserNotAdded {
         try{
             studentDAOInterface.newRegistration(studentID,password,name,batch,address);
-        }catch(UserAlreadyExist e){
+        }catch(UserAlreadyExist | UserNotAdded e){
             throw e;
         }
     }
