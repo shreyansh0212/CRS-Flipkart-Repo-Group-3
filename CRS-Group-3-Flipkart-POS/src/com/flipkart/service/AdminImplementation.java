@@ -2,7 +2,6 @@ package com.flipkart.service;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
-import com.flipkart.bean.Student;
 import com.flipkart.dao.AdminDAOInterface;
 import com.flipkart.dao.AdminDAOOperation;
 import com.flipkart.exception.CourseAlreadyPresent;
@@ -10,9 +9,6 @@ import com.flipkart.exception.CourseNotPresentException;
 import com.flipkart.exception.UserAlreadyExist;
 
 import java.time.LocalDateTime;
-import java.util.Map;
-
-import static com.flipkart.application.CRSApplication.*;
 
 
 public class AdminImplementation implements AdminInterface{
@@ -78,6 +74,6 @@ public class AdminImplementation implements AdminInterface{
     }
 
     @Override
-    public void PendingRequests() {adminDAOInterface.appliedstudents();}
+    public void PendingRequests() {adminDAOInterface.viewPendingRequests();}
 
 }

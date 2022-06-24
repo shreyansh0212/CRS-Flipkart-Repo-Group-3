@@ -158,7 +158,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
     }
 
     @Override
-    public void appliedstudents(){
+    public void viewPendingRequests(){
         try {
             statement = connection.prepareStatement(SQLQueriesConstants.APPROVE_STUDENT_LIST);
             ResultSet resultSet = statement.executeQuery();

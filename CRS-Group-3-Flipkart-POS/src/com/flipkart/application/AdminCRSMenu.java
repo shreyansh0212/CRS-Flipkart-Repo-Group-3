@@ -71,7 +71,7 @@ public class AdminCRSMenu {
         System.out.println("3. Add Course to Catalog");
         System.out.println("4. Delete Course from Catalog");
         System.out.println("5. Approve Student");
-        System.out.println("6. Approve Student Requests for Registration");
+        System.out.println("6. View Pending Registration Requests");
         System.out.println("7. Exit");
         System.out.println("Enter Your Choice: ");
     }
@@ -163,7 +163,6 @@ public class AdminCRSMenu {
      public void approvePendingRequests() {
          System.out.println("-------------- Students Waiting for approval-------------");
          adminImpl.PendingRequests() ;
-
      }
 }
 
