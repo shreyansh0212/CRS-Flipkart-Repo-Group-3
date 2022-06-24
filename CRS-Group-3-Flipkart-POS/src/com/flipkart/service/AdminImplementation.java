@@ -8,6 +8,7 @@ import com.flipkart.dao.AdminDAOOperation;
 import com.flipkart.exception.CourseAlreadyPresent;
 import com.flipkart.exception.CourseNotPresentException;
 import com.flipkart.exception.UserAlreadyExist;
+import com.flipkart.exception.UserNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,8 +33,8 @@ public class AdminImplementation implements AdminInterface{
         regcourses.forEach(System.out::println);
     }
 
-    public void updIsRegistered(String studentId, boolean approval){
-        adminDAOInterface.updIsRegistered(studentId,approval);
+    public void updIsRegistered(String studentId) throws UserNotFoundException {
+        adminDAOInterface.updIsRegistered(studentId);
     }
     @Override
     public void approveStudent(String studentid) {
@@ -89,5 +90,5 @@ public class AdminImplementation implements AdminInterface{
     @Override
     public void PendingRequests() {adminDAOInterface.viewPendingRequests();}
 
-    }
 }
+

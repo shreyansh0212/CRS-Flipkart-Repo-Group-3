@@ -5,6 +5,7 @@ import com.flipkart.bean.Professor;
 import com.flipkart.exception.CourseAlreadyPresent;
 import com.flipkart.exception.CourseNotPresentException;
 import com.flipkart.exception.UserAlreadyExist;
+import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.service.AdminImplementation;
 import com.flipkart.service.AdminInterface;
 import com.flipkart.service.NotificationImplementation;
@@ -62,7 +63,7 @@ public class AdminCRSMenu {
                         System.out.println("Invalid Input");
                 }
             }
-            while (input != 7);
+            while (input != 8);
         }catch(Exception e){
             System.out.println(e);
         }
@@ -168,17 +169,14 @@ public class AdminCRSMenu {
         adminImpl.approveStudent(studentId);
     }
 
-    public void approveCourseRegistration(String adminID){
+    public void approveCourseRegistration(String adminID) throws UserNotFoundException {
         System.out.println("-------------- Approve Course Registration for Students -------------");
         System.out.println("Enter Student Id:");
         String studentId = scanner.next();
         adminImpl.viewCourseRegistration(studentId);
-        System.out.println("Enter 1 to approve and 0 otherwise");
-        boolean approval = scanner.nextBoolean();
-        adminImpl.updIsRegistered(studentId,approval);
-        NotificationInterface sendNotif = new NotificationImplementation();
-        sendNotif.sendNotifCourseReg(adminID,studentId,approval);
-
+        adminImpl.updIsRegistered(studentId);
+        NotificationInterface notificationImplementation = new NotificationImplementation();
+        notificationImplementation.sendNotifCourseReg(adminID,studentId);
     }
      public void approvePendingRequests() {
          System.out.println("-------------- Students Waiting for approval-------------");

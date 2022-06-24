@@ -5,12 +5,13 @@ import com.flipkart.bean.Professor;
 import com.flipkart.exception.CourseAlreadyPresent;
 import com.flipkart.exception.CourseNotPresentException;
 import com.flipkart.exception.UserAlreadyExist;
+import com.flipkart.exception.UserNotFoundException;
 
 public interface AdminInterface {
     public void loginMsg(String userID);
 
     public void viewCourseRegistration(String studentId);
-    public void updIsRegistered(String studentId, boolean approval);
+    public void updIsRegistered(String studentId) throws UserNotFoundException;
     public void approveStudent(String studentid);
     public void addProfessor(Professor professor) throws UserAlreadyExist;
     public void generateReport();

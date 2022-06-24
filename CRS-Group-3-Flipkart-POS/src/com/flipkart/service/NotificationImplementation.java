@@ -14,17 +14,11 @@ public class NotificationImplementation implements NotificationInterface{
 
     }
 
-    public void sendNotifCourseReg(String adminID, String studentId, boolean approval){
-        String text;
-        if(approval){
-            text = "Your course registration has been approved by " + adminID;
-        }
-        else {
-            text = "Your course registration has been rejected by " + adminID + ". Please update your preferences.";
-        }
+    public void sendNotifCourseReg(String adminID, String studentId){
+        String text = "Your course registration has been approved by " + adminID;
         LocalDateTime localDateTime = LocalDateTime.now();
-        String notifid = adminID + studentId + localDateTime;
+        String notificationID = adminID + studentId + localDateTime;
         NotificationDAOInterface notificationDAOInterface = new NotificationDAOOperation();
-        notificationDAOInterface.sendNotification(notifid,adminID,studentId,text);
+        notificationDAOInterface.sendNotification(notificationID,adminID,studentId,text);
     }
 }

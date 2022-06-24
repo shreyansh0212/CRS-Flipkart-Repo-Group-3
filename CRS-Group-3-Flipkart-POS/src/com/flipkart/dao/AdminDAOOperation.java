@@ -8,6 +8,7 @@ import com.flipkart.constants.SQLQueriesConstants;
 import com.flipkart.exception.CourseAlreadyPresent;
 import com.flipkart.exception.CourseNotPresentException;
 import com.flipkart.exception.UserAlreadyExist;
+import com.flipkart.exception.UserNotFoundException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,12 +42,16 @@ public class AdminDAOOperation implements AdminDAOInterface{
         return username;
     }
 
-    public void updIsRegistered(String studentId, boolean approval){
+    public void updIsRegistered(String studentId) throws UserNotFoundException{
         try {
-            statement = connection.prepareStatement(SQLQueriesConstants.UPDISREGISTERED);
-            statement.setBoolean(1,approval);
-            statement.setString(2,studentId);
+            statement = connection.prepareStatement(APPROVE_REGISTRATION);
+            statement.setString(1,studentId);
             int row = statement.executeUpdate();
+            if(row > 0) {
+                System.out.println("Student Registration for Courses Approved!");
+            } else {
+                throw new UserNotFoundException(studentId);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
