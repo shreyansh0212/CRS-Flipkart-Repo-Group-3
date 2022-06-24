@@ -71,17 +71,18 @@ public class StudentDAOOperation implements StudentDAOInterface{
      */
     @Override
     public void addCourse(String courseID, String userID) throws CourseAlreadyRegistered, CourseNotPresentException {
-        try{
-            preparedStatement = connection.prepareStatement(SQLQueriesConstants.CHECK_COURSE_AVAILABILITY);
-            preparedStatement.setString(1,courseID);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if(!resultSet.next()) {
-                throw new CourseNotPresentException(courseID);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+//        try{
+//            preparedStatement = connection.prepareStatement(SQLQueriesConstants.CHECK_COURSE_AVAILABILITY);
+//            preparedStatement.setString(1,courseID);
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//            if(!resultSet.next()) {
+//                throw new CourseNotPresentException(courseID);
+//            }
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
         try {
+            this.checkCourseAvailability(courseID);
             PreparedStatement stmt = connection.prepareStatement(ADD_TO_REGISTER);
             stmt.setString(1,courseID);
             stmt.setString(2,userID);
@@ -91,6 +92,8 @@ public class StudentDAOOperation implements StudentDAOInterface{
             }
         } catch (SQLException e) {
             throw new CourseAlreadyRegistered(courseID,userID);
+        }catch (CourseNotPresentException ce){
+            throw ce;
         }
     }
 
@@ -246,5 +249,18 @@ public class StudentDAOOperation implements StudentDAOInterface{
             throw new RuntimeException(e);
         }
         return grd;
+    }
+    public Boolean checkCourseAvailability(String courseID) throws CourseNotPresentException{
+        try{
+            preparedStatement = connection.prepareStatement(SQLQueriesConstants.CHECK_COURSE_AVAILABILITY);
+            preparedStatement.setString(1,courseID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(!resultSet.next()) {
+                throw new CourseNotPresentException(courseID);
+            }
+            return true;
+        } catch (SQLException | CourseNotPresentException e) {
+            throw new CourseNotPresentException(courseID);
+        }
     }
 }

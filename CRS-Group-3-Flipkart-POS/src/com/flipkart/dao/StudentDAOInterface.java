@@ -28,4 +28,5 @@ public interface StudentDAOInterface {
     void newRegistration(String studentID, String password, String name, String batch, String address) throws UserAlreadyExist;
 
     Boolean checkApprovalStatus(String userID) throws UserNotFoundException;
+    public Boolean checkCourseAvailability(String courseID) throws CourseNotPresentException;
 }

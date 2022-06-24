@@ -30,13 +30,19 @@ public class StudentImplementation implements StudentInterface{
 
         AdminDAOInterface adminDAOInterface = new AdminDAOOperation();
         adminDAOInterface.showCourses();
-        System.out.println("Select four primary and two alternative courses using CourseID: ");
-        Scanner in = new Scanner(System.in);
-        for(int i=1;i<=6;i++) {
-            System.out.println("Preference " + i + ". Enter CourseID: ");
-            preference.add(in.next());
-        }
         try{
+            System.out.println("Select four primary and two alternative courses using CourseID: ");
+            Scanner in = new Scanner(System.in);
+            for(int i=1;i<=6;i++) {
+                System.out.println("Preference " + i + ". Enter CourseID: ");
+                String courseID = in.next();
+                try {
+                    studentDAOInterface.checkCourseAvailability(courseID);
+                    preference.add(courseID);
+                }catch (CourseNotPresentException e){
+                    throw e;
+                }
+            }
             studentDAOInterface.preferenceUpdate(userID,preference);
         }catch (CourseAlreadyRegistered | CourseNotPresentException e){
             System.out.println(e.getMessage());
