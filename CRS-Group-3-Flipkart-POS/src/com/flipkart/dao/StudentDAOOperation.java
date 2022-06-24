@@ -89,11 +89,24 @@ public class StudentDAOOperation implements StudentDAOInterface{
             int row = stmt.executeUpdate();
             if(row!=0) {
                 System.out.println("Added Course: " + courseID);
+                UpdatetableInc(courseID);
+
             }
         } catch (SQLException e) {
             throw new CourseAlreadyRegistered(courseID,userID);
         }catch (CourseNotPresentException ce){
             throw ce;
+        }
+    }
+
+    private void UpdatetableInc(String courseID) {
+        try {
+            PreparedStatement stm = connection.prepareStatement(SQLQueriesConstants.UPDATE_COURSE_INC);
+            stm.setString(1,courseID);
+            stm.executeUpdate();
+            System.out.println("its happening");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -111,10 +124,23 @@ public class StudentDAOOperation implements StudentDAOInterface{
             int status = preparedStatement.executeUpdate();
             if(status!=0) {
                 System.out.println("Course: " + courseID + " Dropped!");
+                UpdatetableDec(courseID);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void UpdatetableDec(String courseID) {
+        try {
+            PreparedStatement stm = connection.prepareStatement(UPDATE_COURSE_DEC);
+            stm.setString(1,courseID);
+            stm.executeUpdate();
+            System.out.println("its happening");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     /**

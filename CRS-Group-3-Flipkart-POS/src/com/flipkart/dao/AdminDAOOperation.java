@@ -23,6 +23,8 @@ public class AdminDAOOperation implements AdminDAOInterface{
     private PreparedStatement statement = null;
 
     /**
+     * getting username from
+     *@aram userid
      *
      */
 
@@ -150,7 +152,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
             statement = connection.prepareStatement(SQLQueriesConstants.SHOW_COURSES);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()) {
-                System.out.println(" CourseID: " + resultSet.getString(1) + ", Course Name: " + resultSet.getString(2));
+                System.out.println(" CourseID: " + resultSet.getString(1) + ", Course Name: " + resultSet.getString(2)+", registred students: " + resultSet.getString(6));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
