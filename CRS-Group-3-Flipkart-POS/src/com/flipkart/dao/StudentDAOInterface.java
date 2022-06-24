@@ -5,6 +5,7 @@ import javafx.util.Pair;
 import java.util.List;
 
 public interface StudentDAOInterface {
+    public String getUsername(String userID);
     public void preferenceUpdate(String userID, List<String> preference);
     public void addCourse(String userID, String courseID);
     public void dropCourse(String userID, String courseID);

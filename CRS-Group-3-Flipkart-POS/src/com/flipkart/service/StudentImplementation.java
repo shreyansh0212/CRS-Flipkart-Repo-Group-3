@@ -5,6 +5,7 @@ import com.flipkart.exception.CourseAlreadyPresent;
 import com.flipkart.exception.CourseNotPresentException;
 import javafx.util.Pair;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +14,12 @@ import java.util.Scanner;
 public class StudentImplementation implements StudentInterface{
 
     StudentDAOInterface studentDAOInterface = new StudentDAOOperation();
+
+    public void loginMsg(String userID){
+        String username = studentDAOInterface.getUsername(userID);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println("Stduent - " + username + "(" + userID + ") has logged in at time " + localDateTime);
+    }
 
     /**
      * @param userID
@@ -120,9 +127,10 @@ public class StudentImplementation implements StudentInterface{
     public void viewGradeCard(String userID) {
         System.out.println("Student Grades");
         List<Pair<String,String>> enrolledCourses = studentDAOInterface.viewGrades(userID);
-        for(int i=0;i<enrolledCourses.size();i++) {
-            System.out.println("CourseID: " + enrolledCourses.get(i).getKey() + " --> Grade: " + enrolledCourses.get(i).getValue());
-        }
+//        for(int i=0;i<enrolledCourses.size();i++) {
+//            System.out.println("CourseID: " + enrolledCourses.get(i).getKey() + " --> Grade: " + enrolledCourses.get(i).getValue());
+//        }
+        enrolledCourses.forEach(i -> System.out.println("CourseID: " + i.getKey() + " --> Grade: " + i.getValue()));
 
     }
 

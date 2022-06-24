@@ -8,6 +8,7 @@ import com.flipkart.bean.User;
 import java.util.List;
 
 public interface AdminDAOInterface {
+    public String getUsername(String userID);
     public void approveStudent(String studentID);
     public void addUser(User user);
     public void addProfessor(Professor professor);

@@ -20,6 +20,7 @@ public class StudentCRSMenu {
     }
 
     public void showMenu(String userID) {
+        studentImpl.loginMsg(userID);
         int input = 0;
         do {
             createMenu();

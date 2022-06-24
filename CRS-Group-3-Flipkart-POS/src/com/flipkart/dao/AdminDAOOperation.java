@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import static com.flipkart.application.CRSApplication.connection;
+import static com.flipkart.constants.SQLQueriesConstants.adminshow;
+import static com.flipkart.constants.SQLQueriesConstants.profshow;
 
 
 public class AdminDAOOperation implements AdminDAOInterface{
@@ -21,7 +23,20 @@ public class AdminDAOOperation implements AdminDAOInterface{
      *
      */
 
-
+    public String getUsername(String userID){
+        String username = "";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(adminshow);
+            preparedStatement.setString(1,userID);
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                username = rs.getString("adminname");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return username;
+    }
     @Override
     public void approveStudent(String studentID) {
         try {

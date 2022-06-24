@@ -7,7 +7,7 @@ import com.flipkart.exception.CourseNotPresentException;
 import java.util.List;
 
 public interface StudentInterface {
-
+    public void loginMsg(String userID);
     public void registerCourses(String userID);
     public void addCourse(String userID) throws CourseAlreadyPresent;
     public void dropCourse(String userID) throws CourseNotPresentException;
