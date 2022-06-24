@@ -12,10 +12,10 @@ import com.flipkart.exception.UserAlreadyExist;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import static com.flipkart.application.CRSApplication.connection;
-import static com.flipkart.constants.SQLQueriesConstants.adminshow;
-import static com.flipkart.constants.SQLQueriesConstants.profshow;
+import static com.flipkart.constants.SQLQueriesConstants.*;
 
 
 public class AdminDAOOperation implements AdminDAOInterface{
@@ -39,6 +39,35 @@ public class AdminDAOOperation implements AdminDAOInterface{
             throw new RuntimeException(e);
         }
         return username;
+    }
+
+    public void updIsRegistered(String studentId, boolean approval){
+        try {
+            statement = connection.prepareStatement(SQLQueriesConstants.UPDISREGISTERED);
+            statement.setBoolean(1,approval);
+            statement.setString(2,studentId);
+            int row = statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<String> getCourses(String studentID){
+        List<String> enrolledCourses = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(VIEW_ENROLLED_COURSES);
+            preparedStatement.setString(1,studentID);
+            System.out.println("Student's registered courses are: ");
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                enrolledCourses.add(rs.getString("courseid"));
+//                System.out.println(rs.getString("courseid") + ": " + rs.getString("grade"));
+//                System.out.println("Student ID: " + studentID + " -> Course ID: " + rs.getString("courseid"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return enrolledCourses;
     }
     @Override
     public void approveStudent(String studentID) {

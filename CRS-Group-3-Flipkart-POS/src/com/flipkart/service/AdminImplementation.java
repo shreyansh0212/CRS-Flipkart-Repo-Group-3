@@ -10,6 +10,7 @@ import com.flipkart.exception.CourseNotPresentException;
 import com.flipkart.exception.UserAlreadyExist;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 import static com.flipkart.application.CRSApplication.*;
@@ -26,6 +27,14 @@ public class AdminImplementation implements AdminInterface{
         System.out.println("Admin - " + username + "(" + userID + ") has logged in at time " + localDateTime);
     }
 
+    public void viewCourseRegistration(String studentId){
+        List<String> regcourses = adminDAOInterface.getCourses(studentId);
+        regcourses.forEach(System.out::println);
+    }
+
+    public void updIsRegistered(String studentId, boolean approval){
+        adminDAOInterface.updIsRegistered(studentId,approval);
+    }
     @Override
     public void approveStudent(String studentid) {
         adminDAOInterface.approveStudent(studentid);
