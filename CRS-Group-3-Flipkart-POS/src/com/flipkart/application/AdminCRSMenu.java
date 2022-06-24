@@ -160,6 +160,7 @@ public class AdminCRSMenu {
         }
     }
 
+
     public void approveStudent() {
         System.out.println("-------------- Approve Student -------------");
 
@@ -178,6 +179,12 @@ public class AdminCRSMenu {
         NotificationInterface notificationImplementation = new NotificationImplementation();
         notificationImplementation.sendNotifCourseReg(adminID,studentId);
     }
+
+    /**
+     *
+     *  Method to get list of students waiting for approval.
+     *
+     */
      public void approvePendingRequests() {
          System.out.println("-------------- Students Waiting for approval-------------");
          adminImpl.PendingRequests() ;

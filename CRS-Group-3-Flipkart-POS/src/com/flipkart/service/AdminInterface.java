@@ -19,5 +19,7 @@ public interface AdminInterface {
     public void dropCourse(String courseID) throws CourseNotPresentException;
     public void showCourses();
 
-    void PendingRequests();
+    public void PendingRequests();
+
+    public void NonRegisteredstudentlist();
 }

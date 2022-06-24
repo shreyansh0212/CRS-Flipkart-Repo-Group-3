@@ -89,6 +89,8 @@ public class AdminImplementation implements AdminInterface{
 
     @Override
     public void PendingRequests() {adminDAOInterface.viewPendingRequests();}
+    @Override
+    public void NonRegisteredstudentlist(){adminDAOInterface.viewNotregistredstudents();}
 
 }
 

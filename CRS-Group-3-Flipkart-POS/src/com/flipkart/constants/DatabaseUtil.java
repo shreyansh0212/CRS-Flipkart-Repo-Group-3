@@ -9,7 +9,7 @@ public class DatabaseUtil {
 
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "Blue_176454";
+    static final String PASS = "Blue_176489";
     static Connection conn = null;
 
     public static Connection getConn() {

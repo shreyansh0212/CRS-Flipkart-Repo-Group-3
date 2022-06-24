@@ -10,6 +10,8 @@ public class SQLQueriesConstants {
     public static final String profshow = "SELECT * FROM professor WHERE professorid = ?";
     public static final String ADD_TO_REGISTER = "INSERT INTO registeredcourses (courseid,studentid) VALUES (?,?)";
 //    public static final String REGISTER_COURSES = "INSERT INTO registeredcourses (courseid,studentid) VALUES ((?,?),(?,?),(?,?),(?,?))";
+    public static final String UPDATE_COURSE_INC ="UPDATE course SET coursestrength=coursestrength+1 WHERE courseid =? ";
+    public static final String UPDATE_COURSE_DEC ="UPDATE course SET coursestrength=coursestrength-1 WHERE courseid =? ";
     public static final String DROP_FROM_REGISTER = "delete from registeredcourses where (courseid = ? ) and (studentid = ?)";
     public static final String VIEW_ENROLLED_COURSES = "SELECT * FROM registeredcourses WHERE studentid = ?";
     public static final String ADD_PAYMENT = "INSERT INTO paymentmode VALUES (?,?,?,?,now())";
@@ -30,7 +32,9 @@ public class SQLQueriesConstants {
     public static final String SHOW_COURSES = "select * from course";
     public static final String APPROVE_STUDENT = "update student set isapproved = 1 where studentid = ?";
 
+
     public static final String APPROVE_STUDENT_LIST = "select * from student where isapproved = 0 ";
+    public static final String NON_REGISTERED_STUDENT_LIST = "select * from student where isregistered = 0 ";
     public static final String CHECK_COURSE_AVAILABILITY = "select * from course where courseid = ?";
 
     // Professor Queries
