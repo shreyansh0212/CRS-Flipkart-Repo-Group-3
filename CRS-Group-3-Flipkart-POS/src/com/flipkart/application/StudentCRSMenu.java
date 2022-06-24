@@ -3,10 +3,12 @@ package com.flipkart.application;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.exception.CourseAlreadyPresent;
+import com.flipkart.exception.CourseAlreadyRegistered;
 import com.flipkart.exception.CourseNotPresentException;
 import com.flipkart.service.StudentImplementation;
 import com.flipkart.service.StudentInterface;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class StudentCRSMenu {
@@ -21,45 +23,49 @@ public class StudentCRSMenu {
 
     public void showMenu(String userID) {
         int input = 0;
-        do {
-            createMenu();
-            input = scanner.nextInt();
-            switch (input) {
-                case 1:
-                    registerCourses(userID);
-                    break;
+        try {
+            do {
+                createMenu();
+                input = scanner.nextInt();
+                switch (input) {
+                    case 1:
+                        registerCourses(userID);
+                        break;
 
-                case 2:
-                    addCourse(userID);
-                    break;
+                    case 2:
+                        addCourse(userID);
+                        break;
 
-                case 3:
-                    dropCourse(userID);
-                    break;
+                    case 3:
+                        dropCourse(userID);
+                        break;
 
-                case 4:
-                    viewEnrolledCourses(userID);
-                    break;
-                case 5:
-                    payFees(userID);
-                    break;
+                    case 4:
+                        viewEnrolledCourses(userID);
+                        break;
+                    case 5:
+                        payFees(userID);
+                        break;
 
-                case 6:
-                    viewGradeCard(userID);
-                    break;
+                    case 6:
+                        viewGradeCard(userID);
+                        break;
 
-                case 7:
-                    showCourses();
-                    break;
+                    case 7:
+                        showCourses();
+                        break;
 
-                case 8:
-                    break;
+                    case 8:
+                        break;
 
-                default:
-                    System.out.println("Invalid Selection");
+                    default:
+                        System.out.println("Invalid Selection");
+                }
             }
+            while (input != 8);
+        }catch(Exception e){
+            System.out.println("Exception Message: " + e.getMessage());
         }
-        while(input!=8);
     }
 
     public void createMenu() {
@@ -77,15 +83,19 @@ public class StudentCRSMenu {
         System.out.println("Enter Your Choice: ");
     }
 
-    public void registerCourses(String userID) {
-        studentImpl.registerCourses(userID);
+    public void registerCourses(String userID) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException {
+        try{
+            studentImpl.registerCourses(userID);
+        }catch(CourseAlreadyRegistered | CourseNotPresentException e){
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void addCourse(String userID) {
+    public void addCourse(String userID) throws CourseAlreadyRegistered, CourseNotPresentException {
         try {
             studentImpl.addCourse(userID);
-        } catch (CourseAlreadyPresent e) {
-            throw new RuntimeException(e);
+        } catch (CourseAlreadyRegistered | CourseNotPresentException e) {
+            System.out.println(e.getMessage());
         }
     }
 

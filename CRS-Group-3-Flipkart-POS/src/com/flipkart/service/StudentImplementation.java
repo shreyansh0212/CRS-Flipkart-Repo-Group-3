@@ -1,10 +1,10 @@
 package com.flipkart.service;
 
 import com.flipkart.dao.*;
-import com.flipkart.exception.CourseAlreadyPresent;
-import com.flipkart.exception.CourseNotPresentException;
+import com.flipkart.exception.*;
 import javafx.util.Pair;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +18,7 @@ public class StudentImplementation implements StudentInterface{
      * @param userID
      */
     @Override
-    public void registerCourses(String userID) {
+    public void registerCourses(String userID) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException {
         List<String> preference = new ArrayList<>();
 
         AdminDAOInterface adminDAOInterface = new AdminDAOOperation();
@@ -29,20 +29,29 @@ public class StudentImplementation implements StudentInterface{
             System.out.println("Preference " + i + ". Enter CourseID: ");
             preference.add(in.next());
         }
-        studentDAOInterface.preferenceUpdate(userID,preference);
+        try{
+            studentDAOInterface.preferenceUpdate(userID,preference);
+        }catch (CourseAlreadyRegistered | CourseNotPresentException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
      * @param userID
      */
     @Override
-    public void addCourse(String userID) throws CourseAlreadyPresent {
+    public void addCourse(String userID) throws CourseAlreadyRegistered,CourseNotPresentException {
         showCourses();
         System.out.println("Enter CourseID to add Course: ");
         Scanner in = new Scanner(System.in);
         String courseID = in.next();
-        studentDAOInterface.addCourse(courseID,userID);
-        System.out.println("Course Added with CourseID: " + courseID);
+        try{
+            studentDAOInterface.addCourse(courseID,userID);
+            System.out.println("Course Added with CourseID: " + courseID);
+        }catch(CourseAlreadyRegistered | CourseNotPresentException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     /**
@@ -133,8 +142,12 @@ public class StudentImplementation implements StudentInterface{
      * @param address
      */
     @Override
-    public void newRegistration(String studentID, String password, String name, String batch, String address) {
-        studentDAOInterface.newRegistration(studentID,password,name,batch,address);
+    public void newRegistration(String studentID, String password, String name, String batch, String address) throws UserAlreadyExist {
+        try{
+            studentDAOInterface.newRegistration(studentID,password,name,batch,address);
+        }catch(UserAlreadyExist e){
+            throw e;
+        }
     }
 
     /**
@@ -145,4 +158,20 @@ public class StudentImplementation implements StudentInterface{
         AdminDAOInterface adminDAOInterface = new AdminDAOOperation();
         adminDAOInterface.showCourses();
     }
+
+    /**
+     * @param userID
+     * @return
+     */
+    @Override
+    public Boolean checkApprovalStatus(String userID) throws UserNotFoundException, StudentNotApproved {
+        Boolean approvalStatus = studentDAOInterface.checkApprovalStatus(userID);
+        if(!approvalStatus){
+            throw new StudentNotApproved(userID);
+        }else{
+            return true;
+        }
+
+    }
+
 }

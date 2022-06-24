@@ -5,6 +5,9 @@ import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
 import com.flipkart.constants.SQLQueriesConstants;
+import com.flipkart.exception.CourseAlreadyPresent;
+import com.flipkart.exception.CourseNotPresentException;
+import com.flipkart.exception.UserAlreadyExist;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,15 +43,18 @@ public class AdminDAOOperation implements AdminDAOInterface{
      * @param user
      */
     @Override
-    public void addUser(User user) {
+    public void addUser(User user) throws UserAlreadyExist {
         try {
             statement = connection.prepareStatement(SQLQueriesConstants.ADD_USER);
             statement.setString(1,user.getUserID());
             statement.setString(2,user.getPassword());
             statement.setString(3,user.getRole());
             int row = statement.executeUpdate();
+            if(row==0){
+                throw new UserAlreadyExist(user.getUserID());
+            }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new UserAlreadyExist(user.getUserID());
         }
     }
 
@@ -56,7 +62,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
      * @param professor
      */
     @Override
-    public void addProfessor(Professor professor) {
+    public void addProfessor(Professor professor) throws UserAlreadyExist{
         this.addUser(professor);
         try {
             statement = connection.prepareStatement(SQLQueriesConstants.ADD_PROFESSOR);
@@ -84,7 +90,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
      * @param course
      */
     @Override
-    public void addCourse(Course course) {
+    public void addCourse(Course course) throws CourseAlreadyPresent {
         try {
             statement = connection.prepareStatement(SQLQueriesConstants.ADD_COURSE);
             statement.setString(1,course.getCourseID());
@@ -96,7 +102,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
                 System.out.println("Course Added!");
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new CourseAlreadyPresent(course.getCourseID());
         }
     }
 
@@ -104,13 +110,16 @@ public class AdminDAOOperation implements AdminDAOInterface{
      * @param courseID
      */
     @Override
-    public void dropCourse(String courseID) {
+    public void dropCourse(String courseID) throws CourseNotPresentException {
         try {
             statement = connection.prepareStatement(SQLQueriesConstants.DELETE_COURSE);
             statement.setString(1,courseID);
             int row = statement.executeUpdate();
             if(row!=0) {
                 System.out.println("Course Deleted!");
+            }
+            else{
+                throw new CourseNotPresentException(courseID);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

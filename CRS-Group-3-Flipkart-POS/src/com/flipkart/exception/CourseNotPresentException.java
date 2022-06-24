@@ -1,8 +1,11 @@
 package com.flipkart.exception;
 
 public class CourseNotPresentException extends Exception{
-    private String  msg = "Selected course is not present";
-    public String getMsg(){
-        return msg;
+    private String  courseID;
+    public CourseNotPresentException(String courseID){
+        this.courseID = courseID;
+    }
+    public String getMessage(){
+        return "Course with courseID: " + courseID + " is NOT in the course catalog!";
     }
 }

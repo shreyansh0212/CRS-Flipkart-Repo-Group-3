@@ -5,6 +5,9 @@ import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.dao.AdminDAOInterface;
 import com.flipkart.dao.AdminDAOOperation;
+import com.flipkart.exception.CourseAlreadyPresent;
+import com.flipkart.exception.CourseNotPresentException;
+import com.flipkart.exception.UserAlreadyExist;
 
 import java.util.Map;
 
@@ -27,8 +30,12 @@ public class AdminImplementation implements AdminInterface{
      *
      */
     @Override
-    public void addProfessor(Professor professor) {
-       adminDAOInterface.addProfessor(professor);
+    public void addProfessor(Professor professor) throws UserAlreadyExist {
+       try{
+           adminDAOInterface.addProfessor(professor);
+       }catch (UserAlreadyExist e){
+           throw e;
+       }
     }
 
     /**
@@ -43,13 +50,21 @@ public class AdminImplementation implements AdminInterface{
      *
      */
     @Override
-    public void addCourse(Course course) {
-        adminDAOInterface.addCourse(course);
+    public void addCourse(Course course) throws CourseAlreadyPresent {
+        try{
+            adminDAOInterface.addCourse(course);
+        }catch(CourseAlreadyPresent e){
+            throw e;
+        }
     }
 
     @Override
-    public void dropCourse(String courseID) {
-        adminDAOInterface.dropCourse(courseID);
+    public void dropCourse(String courseID) throws CourseNotPresentException {
+        try{
+            adminDAOInterface.dropCourse(courseID);
+        }catch(CourseNotPresentException e){
+            throw e;
+        }
     }
 
     @Override

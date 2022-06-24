@@ -26,6 +26,7 @@ public class SQLQueriesConstants {
     public static final String ADD_USER = "insert into user(userid, password, role) values (?, ?, ?)";
     public static final String SHOW_COURSES = "select * from course";
     public static final String APPROVE_STUDENT = "update student set isapproved = 1 where studentid = ?";
+    public static final String CHECK_COURSE_AVAILABILITY = "select * from course where courseid = ?";
 
     // Professor Queries
     public static final String ADD_GRADE="update registeredcourses set grade=? where courseid=? and studentid=?";
@@ -33,9 +34,5 @@ public class SQLQueriesConstants {
     public static final String VIEW_ENROLLED_STUDENTS="select course.courseid,course.coursename,registeredcourses.studentid from course inner join registeredcourses on course.courseid = registeredcourses.courseid where course.professorid = ? order by course.courseid";
 
 
-
-
-
-
-
+    public static final String GET_APPROVAL_STATUS = "select isapproved from student where studentid=?";
 }

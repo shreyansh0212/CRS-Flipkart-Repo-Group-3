@@ -2,6 +2,11 @@ package com.flipkart.dao;
 
 import com.flipkart.bean.User;
 import com.flipkart.constants.SQLQueriesConstants;
+import com.flipkart.exception.CourseAlreadyRegistered;
+import com.flipkart.exception.CourseNotPresentException;
+import com.flipkart.exception.UserAlreadyExist;
+import com.flipkart.exception.UserNotFoundException;
+import com.mysql.cj.protocol.Resultset;
 import javafx.util.Pair;
 
 import java.sql.*;
@@ -19,7 +24,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
      * @param preference
      */
     @Override
-    public void preferenceUpdate(String userID, List<String> preference) {
+    public void preferenceUpdate(String userID, List<String> preference) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException {
         try {
             preparedStatement = connection.prepareStatement(UPDATE_PREFERENCE);
             for (int i=0;i<6;i++) {
@@ -36,11 +41,13 @@ public class StudentDAOOperation implements StudentDAOInterface{
 
                 } catch (NullPointerException e) {
 
+                } catch (CourseAlreadyRegistered ce) {
+                    throw ce;
                 }
             }
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException | CourseAlreadyRegistered | CourseNotPresentException e) {
+            throw e;
         }
     }
 
@@ -48,7 +55,17 @@ public class StudentDAOOperation implements StudentDAOInterface{
      * @param userID
      */
     @Override
-    public void addCourse(String courseID, String userID) {
+    public void addCourse(String courseID, String userID) throws CourseAlreadyRegistered, CourseNotPresentException {
+        try{
+            preparedStatement = connection.prepareStatement(SQLQueriesConstants.CHECK_COURSE_AVAILABILITY);
+            preparedStatement.setString(1,courseID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(!resultSet.next()) {
+                throw new CourseNotPresentException(courseID);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         try {
             PreparedStatement stmt = connection.prepareStatement(ADD_TO_REGISTER);
             stmt.setString(1,courseID);
@@ -58,7 +75,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
                 System.out.println("Added Course: " + courseID);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new CourseAlreadyRegistered(courseID,userID);
         }
     }
 
@@ -153,7 +170,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
      * @param address
      */
     @Override
-    public void newRegistration(String studentID, String password, String name, String batch, String address) {
+    public void newRegistration(String studentID, String password, String name, String batch, String address) throws UserAlreadyExist {
         AdminDAOInterface adminDAOInterface = new AdminDAOOperation();
         adminDAOInterface.addUser(new User(studentID,name,"student",password));
         try {
@@ -167,6 +184,27 @@ public class StudentDAOOperation implements StudentDAOInterface{
                 System.out.println("New Registration Done!");
             }
 
+        } catch (SQLException e) {
+            throw new UserAlreadyExist(studentID);
+        }
+    }
+
+    /**
+     * @param userID
+     * @return
+     */
+    @Override
+    public Boolean checkApprovalStatus(String userID) throws UserNotFoundException{
+        try {
+            preparedStatement = connection.prepareStatement(SQLQueriesConstants.GET_APPROVAL_STATUS);
+            preparedStatement.setString(1,userID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) {
+                return resultSet.getBoolean("isapproved");
+            }
+            else{
+                throw new UserNotFoundException(userID);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

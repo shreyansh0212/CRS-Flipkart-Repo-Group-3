@@ -2,6 +2,9 @@ package com.flipkart.application;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
+import com.flipkart.exception.CourseAlreadyPresent;
+import com.flipkart.exception.CourseNotPresentException;
+import com.flipkart.exception.UserAlreadyExist;
 import com.flipkart.service.AdminImplementation;
 import com.flipkart.service.AdminInterface;
 
@@ -15,44 +18,47 @@ public class AdminCRSMenu {
         adminImpl = new AdminImplementation();
     }
     public void showMenu(String userID) {
+        try{
+            int input = 0;
+            do {
+                createMenu();
+                input = scanner.nextInt();
+                switch (input) {
+                    case 1:
+                        addProfessor();
+                        break;
 
-        int input=0;
-        do {
-            createMenu();
-            input = scanner.nextInt();
-            switch (input) {
-                case 1:
-                    addProfessor();
-                    break;
+                    case 2:
+                        showCourseCatalog();
+                        break;
 
-                case 2:
-                    showCourseCatalog();
-                    break;
+                    case 3:
+                        addCourseToCatalog();
+                        break;
 
-                case 3:
-                    addCourseToCatalog();
-                    break;
+                    case 4:
+                        deleteCourseFromCatalog();
+                        break;
 
-                case 4:
-                    deleteCourseFromCatalog();
-                    break;
+                    case 5:
+                        approveStudent();
+                        break;
 
-                case 5:
-                    approveStudent();
-                    break;
+                    case 6:
+                        approvePendingRequests();
+                        break;
 
-                case 6:
-                    approvePendingRequests();
-                    break;
+                    case 7:
+                        break;
 
-                case 7:
-                    break;
-
-                default:
-                    System.out.println("Invalid Input");
+                    default:
+                        System.out.println("Invalid Input");
+                }
             }
+            while (input != 7);
+        }catch(Exception e){
+            System.out.println(e);
         }
-        while(input!=7);
 
     }
 
@@ -69,7 +75,7 @@ public class AdminCRSMenu {
         System.out.println("Enter Your Choice: ");
     }
 
-    public void addProfessor() {
+    public void addProfessor() throws UserAlreadyExist {
 
         System.out.println("-------------- Add Professor -------------");
 
@@ -94,7 +100,11 @@ public class AdminCRSMenu {
 
         professor.setRole("professor");
 
-        adminImpl.addProfessor(professor);
+        try{
+            adminImpl.addProfessor(professor);
+        }catch(UserAlreadyExist e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void showCourseCatalog() {
@@ -102,7 +112,7 @@ public class AdminCRSMenu {
         adminImpl.showCourses();
     }
 
-    public void addCourseToCatalog() {
+    public void addCourseToCatalog() throws CourseAlreadyPresent {
         Course course = new Course();
         System.out.println("-------------- Add Course -------------");
         System.out.println("Enter Course Id:");
@@ -120,7 +130,11 @@ public class AdminCRSMenu {
         course.setOffered(true);
         course.setCourseStrength(0);
 
-        adminImpl.addCourse(course);
+        try{
+            adminImpl.addCourse(course);
+        }catch(CourseAlreadyPresent e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void deleteCourseFromCatalog() {
@@ -130,7 +144,11 @@ public class AdminCRSMenu {
         System.out.println("Enter Course Id:");
         String courseId = scanner.next();
 
-        adminImpl.dropCourse(courseId);
+        try{
+            adminImpl.dropCourse(courseId);
+        }catch(CourseNotPresentException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void approveStudent() {
