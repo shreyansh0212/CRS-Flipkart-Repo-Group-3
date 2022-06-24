@@ -1,0 +1,13 @@
+package com.flipkart.exception;
+
+public class CourseAlreadyRegistered extends Exception{
+    private String  courseID;
+    private String studentID;
+    public CourseAlreadyRegistered(String courseID,String studentID){
+        this.courseID = courseID;
+        this.studentID = studentID;
+    }
+    public String getMessage(){
+        return "Course with courseID: " + courseID + " is already registered for student with studentID: " + studentID;
+    }
+}
