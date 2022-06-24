@@ -78,7 +78,6 @@ public class AdminImplementation implements AdminInterface{
     }
 
     @Override
-    public void approvePendingRequests() {
+    public void PendingRequests() {adminDAOInterface.appliedstudents();}
 
-    }
 }

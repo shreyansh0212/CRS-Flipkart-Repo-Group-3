@@ -161,6 +161,8 @@ public class AdminCRSMenu {
         adminImpl.approveStudent(studentId);
     }
      public void approvePendingRequests() {
+         System.out.println("-------------- Students Waiting for approval-------------");
+         adminImpl.PendingRequests() ;
 
      }
 }

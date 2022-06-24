@@ -19,5 +19,5 @@ public interface AdminDAOInterface {
     public void addCourse(Course course) throws CourseAlreadyPresent;
     public void dropCourse(String courseID) throws CourseNotPresentException;
     public void showCourses();
-    public List<Student> approvePendingRequests();
+    public void appliedstudents();
 }

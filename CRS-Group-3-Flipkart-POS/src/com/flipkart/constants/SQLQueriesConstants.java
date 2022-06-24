@@ -28,6 +28,8 @@ public class SQLQueriesConstants {
     public static final String ADD_USER = "insert into user(userid, password, role) values (?, ?, ?)";
     public static final String SHOW_COURSES = "select * from course";
     public static final String APPROVE_STUDENT = "update student set isapproved = 1 where studentid = ?";
+
+    public static final String APPROVE_STUDENT_LIST = "select * from student where isapproved = 1 ";
     public static final String CHECK_COURSE_AVAILABILITY = "select * from course where courseid = ?";
 
     // Professor Queries

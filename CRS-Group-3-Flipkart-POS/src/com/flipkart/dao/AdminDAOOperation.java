@@ -157,12 +157,21 @@ public class AdminDAOOperation implements AdminDAOInterface{
         }
     }
 
+    @Override
+    public void appliedstudents(){
+        try {
+            statement = connection.prepareStatement(SQLQueriesConstants.APPROVE_STUDENT_LIST);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                System.out.println(" StudentID: " + resultSet.getString(1) + "   Student Name: " + resultSet.getString(2));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * @return
      */
-    @Override
-    public List<Student> approvePendingRequests() {
 
-        return null;
-    }
 }
