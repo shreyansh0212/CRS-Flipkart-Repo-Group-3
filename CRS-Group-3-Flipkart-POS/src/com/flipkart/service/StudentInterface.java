@@ -15,5 +15,7 @@ public interface StudentInterface {
     public void payFees(String userID);
     void viewGradeCard(String userID);
 
+    void newRegistration(String studentID, String password, String name, String batch, String address);
+
     void showCourses();
 }

@@ -1,15 +1,19 @@
 package com.flipkart.dao;
 
-import com.flipkart.exception.CourseNotPresentException;
+import com.flipkart.bean.User;
+import com.flipkart.constants.SQLQueriesConstants;
 import javafx.util.Pair;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.flipkart.application.CRSApplication.*;
 import static com.flipkart.constants.SQLQueriesConstants.*;
 
 public class StudentDAOOperation implements StudentDAOInterface{
+
+    PreparedStatement preparedStatement;
     /**
      * @param userID
      * @param preference
@@ -17,80 +21,62 @@ public class StudentDAOOperation implements StudentDAOInterface{
     @Override
     public void preferenceUpdate(String userID, List<String> preference) {
         try {
-            String sql = updPref;
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1,preference.get(0));
-            stmt.setString(2,preference.get(1));
-            stmt.setString(3,preference.get(2));
-            stmt.setString(4,preference.get(3));
-            stmt.setString(5,preference.get(4));
-            stmt.setString(6,preference.get(5));
-            stmt.setString(7,userID);
-            stmt.executeUpdate(sql);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    public void preferenceShow(String userID){
-        try {
-            String sql = studshow;
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1,userID);
-            ResultSet rs = stmt.executeQuery(sql);
-            rs.next();
-            System.out.println("Your course preferences are: ");
-            System.out.println("1. " + rs.getString("preference1"));
-            System.out.println("2. " + rs.getString("preference2"));
-            System.out.println("3. " + rs.getString("preference3"));
-            System.out.println("4. " + rs.getString("preference4"));
-            System.out.println("5. " + rs.getString("preference5"));
-            System.out.println("6. " + rs.getString("preference6"));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    /**
-     * @param userID
-     */
-    @Override
-    public void addToRegistration(String userID, String courseID) {
-        try {
-            String sql = addtoreg;
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1,userID);
-            stmt.setString(2,courseID);
-            stmt.executeUpdate(sql);
+            preparedStatement = connection.prepareStatement(UPDATE_PREFERENCE);
+            for (int i=0;i<6;i++) {
+                preparedStatement.setString(i+1,preference.get(i));
+            }
+            preparedStatement.setString(7,userID);
+            int row = preparedStatement.executeUpdate();
+            if(row!=0) {
+                System.out.println("Your Courses are Registered!");
+                try {
+                    for(int i=0;i<4;i++) {
+                        this.addCourse(preference.get(i),userID);
+                    }
+
+                } catch (NullPointerException e) {
+
+                }
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public boolean chkRegistration(String userID, String courseID){
-        try {
-            String chk = chkpresent;
-            PreparedStatement stmt = connection.prepareStatement(chk);
-            stmt.setString(1,userID);
-            stmt.setString(2,courseID);
-            ResultSet rs = stmt.executeQuery(chk);
-            if(!rs.last()){
-                return false;
-            }
-            return true;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
     /**
      * @param userID
      */
     @Override
-    public void dropFromRegistration(String userID, String courseID) {
+    public void addCourse(String courseID, String userID) {
         try {
-            String sql = dropfromreg;
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1,userID);
-            stmt.setString(2,courseID);
-            stmt.executeUpdate(sql);
+            PreparedStatement stmt = connection.prepareStatement(ADD_TO_REGISTER);
+            stmt.setString(1,courseID);
+            stmt.setString(2,userID);
+            int row = stmt.executeUpdate();
+            if(row!=0) {
+                System.out.println("Added Course: " + courseID);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * @param userID
+     */
+    @Override
+    public void dropCourse(String userID, String courseID) {
+        try {
+            preparedStatement = connection.prepareStatement(DROP_FROM_REGISTER);
+
+            preparedStatement.setString(1,courseID);
+            preparedStatement.setString(2,userID);
+
+            int status = preparedStatement.executeUpdate();
+            if(status!=0) {
+                System.out.println("Course: " + courseID + " Dropped!");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -102,21 +88,21 @@ public class StudentDAOOperation implements StudentDAOInterface{
      */
     @Override
     public List<String> viewEnrolledCourses(String userID) {
-        List<String> enr = null;
+        List<String> enrolledCourses = new ArrayList<>();
         try {
-            String sql = viewenrcour;
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1,userID);
+            preparedStatement = connection.prepareStatement(VIEW_ENROLLED_COURSES);
+            preparedStatement.setString(1,userID);
             System.out.println("Your registered courses are: ");
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
-                enr.add(rs.getString("courseid"));
+                enrolledCourses.add(rs.getString("courseid"));
 //                System.out.println(rs.getString("courseid") + ": " + rs.getString("grade"));
+                System.out.println("Student ID: " + userID + " -> Course ID: " + rs.getString("courseid"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return enr;
+        return enrolledCourses;
     }
 
     public boolean isRegistered(String userID){
@@ -124,8 +110,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
             String sql = studshow;
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,userID);
-            ResultSet rs = stmt.executeQuery(sql);
-            rs.next();
+            ResultSet rs = stmt.executeQuery();
             return rs.getBoolean("isregistered");
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -137,7 +122,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
             String sql = studshow;
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,userID);
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery();
             rs.next();
             return rs.getBoolean("feesPaymentStatus");
         } catch (SQLException e) {
@@ -147,13 +132,41 @@ public class StudentDAOOperation implements StudentDAOInterface{
 
     public void setFeePaymentStatus(String userID, String mode, String refID, int amt){
         try {
-            String sql = addpay;
+            String sql = ADD_PAYMENT;
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,refID);
             stmt.setString(2,userID);
             stmt.setInt(3,amt);
             stmt.setString(4,mode);
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * @param studentID
+     * @param password
+     * @param name
+     * @param batch
+     * @param address
+     */
+    @Override
+    public void newRegistration(String studentID, String password, String name, String batch, String address) {
+        AdminDAOInterface adminDAOInterface = new AdminDAOOperation();
+        adminDAOInterface.addUser(new User(studentID,name,"student",password));
+        try {
+            preparedStatement = connection.prepareStatement(NEW_REGISTER_STUDENT);
+            preparedStatement.setString(1,studentID);
+            preparedStatement.setString(2,name);
+            preparedStatement.setString(3,batch);
+            preparedStatement.setString(4,address);
+            int row = preparedStatement.executeUpdate();
+            if(row > 0) {
+                System.out.println("New Registration Done!");
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -164,14 +177,14 @@ public class StudentDAOOperation implements StudentDAOInterface{
      * @return
      */
     @Override
-    public List<Pair<String, String>> grades(String userID) {
-        List<Pair<String,String>> grd = null;
+    public List<Pair<String, String>> viewGrades(String userID) {
+        List<Pair<String,String>> grd = new ArrayList<>();
         try {
-            String sql = viewenrcour;
+            String sql = VIEW_ENROLLED_COURSES;
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,userID);
-            System.out.println("Your registered courses are: ");
-            ResultSet rs = stmt.executeQuery(sql);
+            System.out.println("------ Grade Card -------");
+            ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 grd.add(new Pair <String,String> (rs.getString("courseid"),rs.getString("grade")));
 //                System.out.println(rs.getString("courseid") + ": " + rs.getString("grade"));
@@ -180,25 +193,5 @@ public class StudentDAOOperation implements StudentDAOInterface{
             throw new RuntimeException(e);
         }
         return grd;
-    }
-
-    /**
-     *
-     */
-    @Override
-    public void showCourses() {
-        try {
-            String sql = viewcour;
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            System.out.println("Your registered courses are: ");
-            ResultSet rs = stmt.executeQuery(sql);
-            while(rs.next()){
-                System.out.println(rs.getString("courseid") + ", " + rs.getString("coursename") +
-                        ", " + rs.getString("department") + ", " + rs.getBoolean("isoffered")+ ", " +
-                        rs.getString("professorid") + ", " + rs.getInt("coursestrength"));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

@@ -18,9 +18,10 @@ import com.flipkart.bean.Student;
 import com.flipkart.constants.DatabaseUtil;
 import com.flipkart.dao.UserDAOInterface;
 import com.flipkart.dao.UserDAOOperation;
+import com.flipkart.service.StudentImplementation;
+import com.flipkart.service.StudentInterface;
 import com.flipkart.service.UserImplementation;
 import com.flipkart.service.UserInterface;
-import com.flipkart.dao.RequestApprovalDAOOperation;
 import javafx.util.Pair;
 
 public class CRSApplication {
@@ -94,13 +95,16 @@ public class CRSApplication {
                     String batch = in.next();
                     System.out.println("Enter your Address: ");
                     String address = in.next();
-                    RequestApprovalDAOOperation.request(userID,password,name,batch,address);
-                    // Student student = new Student(userID,name,"student",password,null,null, false,null,null,false);
-                    // pendingDB.put(userID,student);
+                    StudentInterface studentInterface =new StudentImplementation();
+                    studentInterface.newRegistration(userID,password,name,batch,address);
                     break;
 
                 case 3:
-                    System.out.println("Update Password");
+                    System.out.println("Enter your UserID: ");
+                    userID = in.next();
+                    System.out.println("Enter your Password: ");
+                    password = in.next();
+                    userInterface.updatePassword(userID,password);
                     break;
 
                 case 4:

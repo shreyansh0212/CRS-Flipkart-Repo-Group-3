@@ -1,11 +1,11 @@
 package com.flipkart.dao;
 
-import com.flipkart.application.CRSApplication;
 import com.flipkart.constants.SQLQueriesConstants;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import static com.flipkart.application.CRSApplication.connection;
 
@@ -39,10 +39,17 @@ public class UserDAOOperation implements UserDAOInterface{
      * @return
      */
     @Override
-    public boolean updatePassword(String userID,String password) {
+    public boolean updatePassword(String userID, String password) {
+        if(!this.verifyCredentials(userID,password)) {
+            System.out.println("Invalid Credentials!");
+            return false;
+        }
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQLQueriesConstants.UPDATE_PASSWORD);
-            preparedStatement.setString(1,password);
+            System.out.println("Enter New Password: ");
+            Scanner scanner = new Scanner(System.in);
+            String new_password=scanner.next();
+            preparedStatement.setString(1,new_password);
             preparedStatement.setString(2,userID);
             int resultSet = preparedStatement.executeUpdate();
             if (resultSet==1){

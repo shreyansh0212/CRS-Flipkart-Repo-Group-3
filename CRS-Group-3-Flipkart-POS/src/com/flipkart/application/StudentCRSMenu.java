@@ -2,7 +2,6 @@ package com.flipkart.application;
 
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
-import com.flipkart.dao.LoginDAOOperation;
 import com.flipkart.exception.CourseAlreadyPresent;
 import com.flipkart.exception.CourseNotPresentException;
 import com.flipkart.service.StudentImplementation;
@@ -12,65 +11,55 @@ import java.util.Scanner;
 
 public class StudentCRSMenu {
     StudentInterface studentImpl;
+    Scanner scanner;
     public StudentCRSMenu() {
+
         studentImpl = new StudentImplementation();
+        scanner = new Scanner(System.in);
+
     }
 
     public void showMenu(String userID) {
-        Scanner in = new Scanner(System.in);
         int input = 0;
         do {
             createMenu();
-            input = in.nextInt();
-            //Student student = studentDB.get(userID);
+            input = scanner.nextInt();
             switch (input) {
                 case 1:
-                    studentImpl.registerCourses(userID);
+                    registerCourses(userID);
                     break;
 
                 case 2:
-                    try {
-                        studentImpl.addCourse(userID);
-                    } catch (CourseAlreadyPresent e){
-                        System.out.println(e.getMsg());
-                    }
+                    addCourse(userID);
                     break;
 
                 case 3:
-                    try {
-                        studentImpl.dropCourse(userID);
-                    } catch (CourseNotPresentException e){
-                        System.out.println(e.getMsg());
-                    }
+                    dropCourse(userID);
                     break;
 
                 case 4:
-                    studentImpl.viewEnrolledCourses(userID);
+                    viewEnrolledCourses(userID);
                     break;
                 case 5:
-                    studentImpl.payFees(userID);
+                    payFees(userID);
                     break;
 
                 case 6:
-                    studentImpl.viewGradeCard(userID);
+                    viewGradeCard(userID);
                     break;
 
                 case 7:
-                    //studentImpl.changePassword(student);
+                    showCourses();
                     break;
 
                 case 8:
-                    studentImpl.showCourses();
-                    break;
-
-                case 9:
                     break;
 
                 default:
                     System.out.println("Invalid Selection");
             }
         }
-        while(input!=9);
+        while(input!=8);
     }
 
     public void createMenu() {
@@ -82,37 +71,45 @@ public class StudentCRSMenu {
         System.out.println("4. View Enrolled Courses");
         System.out.println("5. Pay Fees");
         System.out.println("6. View Grade Card");
-        System.out.println("7. Change Password");
-        System.out.println("8. See Course Catalog");
-        System.out.println("9. Exit");
+        //System.out.println("7. Change Password");
+        System.out.println("7. See Course Catalog");
+        System.out.println("8. Exit");
         System.out.println("Enter Your Choice: ");
     }
 
-    public void registerCourses() {
-
+    public void registerCourses(String userID) {
+        studentImpl.registerCourses(userID);
     }
 
-    public void addCourse() {
-
+    public void addCourse(String userID) {
+        try {
+            studentImpl.addCourse(userID);
+        } catch (CourseAlreadyPresent e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void dropCourse() {
-
+    public void dropCourse(String userID) {
+        try {
+            studentImpl.dropCourse(userID);
+        } catch (CourseNotPresentException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void payFees() {
-
+    public void payFees(String userID) {
+        studentImpl.payFees(userID);
     }
 
-    public void viewEnrolledCourses() {
-
+    public void viewEnrolledCourses(String userID) {
+        studentImpl.viewEnrolledCourses(userID);
     }
 
-    public void viewCourses() {
-        // used to check available courses
+    public void showCourses() {
+        studentImpl.showCourses();
     }
 
-    public void viewGradeCard() {
-
+    public void viewGradeCard(String userID) {
+        studentImpl.viewGradeCard(userID);
     }
 }

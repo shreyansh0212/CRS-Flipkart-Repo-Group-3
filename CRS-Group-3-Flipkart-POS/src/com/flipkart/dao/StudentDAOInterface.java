@@ -6,19 +6,17 @@ import java.util.List;
 
 public interface StudentDAOInterface {
     public void preferenceUpdate(String userID, List<String> preference);
-    public void addToRegistration(String userID, String courseID);
-    public boolean chkRegistration(String userID, String courseID);
-    public void dropFromRegistration(String userID, String courseID);
+    public void addCourse(String userID, String courseID);
+    public void dropCourse(String userID, String courseID);
 
     public List<String> viewEnrolledCourses(String userID);
-    public List<Pair<String, String>> grades(String userID);
-    public void showCourses();
-
-    public void preferenceShow(String userID);
+    public List<Pair<String, String>> viewGrades(String userID);
 
     public boolean isRegistered(String userID);
 
     public boolean isFeePaymentStatus(String userID);
 
     public void setFeePaymentStatus(String userID, String mode, String refID, int amt);
+
+    void newRegistration(String studentID, String password, String name, String batch, String address);
 }
