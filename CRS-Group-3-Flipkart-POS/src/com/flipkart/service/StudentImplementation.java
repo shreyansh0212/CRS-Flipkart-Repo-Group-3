@@ -44,7 +44,7 @@ public class StudentImplementation implements StudentInterface{
                 }
             }
             studentDAOInterface.preferenceUpdate(userID,preference);
-        }catch (CourseAlreadyRegistered | CourseNotPresentException e){
+        }catch (CourseAlreadyRegistered | CourseNotPresentException | com.flipkart.exception.SeatNotAvailableException e){
             System.out.println(e.getMessage());
         }
     }
@@ -61,7 +61,7 @@ public class StudentImplementation implements StudentInterface{
         try{
             studentDAOInterface.addCourse(courseID,userID);
             System.out.println("Course Added with CourseID: " + courseID);
-        }catch(CourseAlreadyRegistered | CourseNotPresentException e){
+        }catch(CourseAlreadyRegistered | CourseNotPresentException | com.flipkart.exception.SeatNotAvailableException e){
             System.out.println(e.getMessage());
         }
 

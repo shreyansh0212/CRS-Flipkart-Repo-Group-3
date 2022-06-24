@@ -12,9 +12,11 @@ import java.util.List;
 public interface StudentDAOInterface {
     public String getUsername(String userID);
 
-    public void preferenceUpdate(String userID, List<String> preference) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException;
-    public void addCourse(String userID, String courseID) throws CourseAlreadyRegistered, CourseNotPresentException;
+    public void preferenceUpdate(String userID, List<String> preference) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException, com.flipkart.exception.SeatNotAvailableException;
+    public void addCourse(String userID, String courseID) throws CourseAlreadyRegistered, CourseNotPresentException, com.flipkart.exception.SeatNotAvailableException;
     public void dropCourse(String userID, String courseID);
+
+
 
     public List<String> viewEnrolledCourses(String userID);
     public List<Pair<String, String>> viewGrades(String userID);
@@ -28,5 +30,5 @@ public interface StudentDAOInterface {
     void newRegistration(String studentID, String password, String name, String batch, String address) throws UserAlreadyExist;
 
     Boolean checkApprovalStatus(String userID) throws UserNotFoundException;
-    public Boolean checkCourseAvailability(String courseID) throws CourseNotPresentException;
+    public Boolean checkCourseAvailability(String courseID) throws CourseNotPresentException, com.flipkart.exception.SeatNotAvailableException;
 }
