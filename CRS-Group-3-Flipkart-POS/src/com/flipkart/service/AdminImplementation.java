@@ -9,6 +9,7 @@ import com.flipkart.exception.CourseAlreadyPresent;
 import com.flipkart.exception.CourseNotPresentException;
 import com.flipkart.exception.UserAlreadyExist;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import static com.flipkart.application.CRSApplication.*;
@@ -19,7 +20,11 @@ public class AdminImplementation implements AdminInterface{
     /**
      *
      */
-
+    public void loginMsg(String userID){
+        String username = adminDAOInterface.getUsername(userID);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println("Admin - " + username + "(" + userID + ") has logged in at time " + localDateTime);
+    }
 
     @Override
     public void approveStudent(String studentid) {

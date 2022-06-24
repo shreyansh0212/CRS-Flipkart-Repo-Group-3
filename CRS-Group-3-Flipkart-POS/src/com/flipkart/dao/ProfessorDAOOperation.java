@@ -11,8 +11,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.flipkart.application.CRSApplication.connection;
+import static com.flipkart.constants.SQLQueriesConstants.profshow;
+import static com.flipkart.constants.SQLQueriesConstants.studshow;
 
 public class ProfessorDAOOperation implements ProfessorDAOInterface{
+
+    public String getUsername(String userID){
+        String username = "";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(profshow);
+            preparedStatement.setString(1,userID);
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                username = rs.getString("professorname");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return username;
+    }
     //PreparedStatement preparedStatement;
     /**
      * @param courseID

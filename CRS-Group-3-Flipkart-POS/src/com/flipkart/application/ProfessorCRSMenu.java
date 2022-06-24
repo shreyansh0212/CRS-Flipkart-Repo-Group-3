@@ -14,7 +14,7 @@ public class ProfessorCRSMenu {
         professorImpl = new ProfessorImplementation();
     }
     public void showMenu(String userID) {
-
+        professorImpl.loginMsg(userID);
         int input=0;
         do {
             createMenu();
@@ -40,7 +40,6 @@ public class ProfessorCRSMenu {
             }
         }
         while(input!=4);
-        scanner.close();
     }
 
     public void createMenu() {

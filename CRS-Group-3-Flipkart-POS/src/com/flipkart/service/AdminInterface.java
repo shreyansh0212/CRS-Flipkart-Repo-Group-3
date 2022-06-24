@@ -7,6 +7,7 @@ import com.flipkart.exception.CourseNotPresentException;
 import com.flipkart.exception.UserAlreadyExist;
 
 public interface AdminInterface {
+    public void loginMsg(String userID);
     public void approveStudent(String studentid);
     public void addProfessor(Professor professor) throws UserAlreadyExist;
     public void generateReport();

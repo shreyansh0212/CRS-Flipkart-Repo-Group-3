@@ -19,6 +19,7 @@ public class AdminCRSMenu {
     }
     public void showMenu(String userID) {
         try{
+            adminImpl.loginMsg(userID);
             int input = 0;
             do {
                 createMenu();

@@ -19,6 +19,21 @@ import static com.flipkart.constants.SQLQueriesConstants.*;
 public class StudentDAOOperation implements StudentDAOInterface{
 
     PreparedStatement preparedStatement;
+
+    public String getUsername(String userID){
+        String username = "";
+        try {
+            preparedStatement = connection.prepareStatement(studshow);
+            preparedStatement.setString(1,userID);
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                username = rs.getString("studentname");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return username;
+    }
     /**
      * @param userID
      * @param preference

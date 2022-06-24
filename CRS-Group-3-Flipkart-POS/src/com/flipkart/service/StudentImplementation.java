@@ -5,6 +5,7 @@ import com.flipkart.exception.*;
 import javafx.util.Pair;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +14,12 @@ import java.util.Scanner;
 public class StudentImplementation implements StudentInterface{
 
     StudentDAOInterface studentDAOInterface = new StudentDAOOperation();
+
+    public void loginMsg(String userID){
+        String username = studentDAOInterface.getUsername(userID);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println("Stduent - " + username + "(" + userID + ") has logged in at time " + localDateTime);
+    }
 
     /**
      * @param userID

@@ -4,6 +4,7 @@ import com.flipkart.dao.ProfessorDAOInterface;
 import com.flipkart.dao.ProfessorDAOOperation;
 import javafx.util.Pair;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class ProfessorImplementation implements ProfessorInterface{
@@ -11,6 +12,12 @@ public class ProfessorImplementation implements ProfessorInterface{
      *
      */
     ProfessorDAOInterface professorDAOInterface = new ProfessorDAOOperation();
+
+    public void loginMsg(String userID){
+        String username = professorDAOInterface.getUsername(userID);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println("Professor - " + username + "(" + userID + ") has logged in at time " + localDateTime);
+    }
     @Override
     public void addGrade(String professorID) {
         List< Pair<String,String>> enrolledStudents = viewEnrolledStudents(professorID);

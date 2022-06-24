@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface StudentDAOInterface {
+    public String getUsername(String userID);
+
     public void preferenceUpdate(String userID, List<String> preference) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException;
     public void addCourse(String userID, String courseID) throws CourseAlreadyRegistered, CourseNotPresentException;
     public void dropCourse(String userID, String courseID);

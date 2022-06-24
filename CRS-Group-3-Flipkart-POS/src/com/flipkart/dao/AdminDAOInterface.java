@@ -11,6 +11,7 @@ import com.flipkart.exception.UserAlreadyExist;
 import java.util.List;
 
 public interface AdminDAOInterface {
+    public String getUsername(String userID);
     public void approveStudent(String studentID);
     public void addUser(User user) throws UserAlreadyExist;
     public void addProfessor(Professor professor) throws UserAlreadyExist;
