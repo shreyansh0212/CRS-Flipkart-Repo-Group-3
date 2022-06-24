@@ -36,7 +36,6 @@ public class SQLQueriesConstants {
     public static final String ADD_GRADE="update registeredcourses set grade=? where courseid=? and studentid=?";
     public static final String GET_COURSES="select * from course where professorid = ?";
     public static final String VIEW_ENROLLED_STUDENTS="select course.courseid,course.coursename,registeredcourses.studentid from course inner join registeredcourses on course.courseid = registeredcourses.courseid where course.professorid = ? order by course.courseid";
-
-
     public static final String GET_APPROVAL_STATUS = "select isapproved from student where studentid=?";
+    public static final String GET_FEES_STATUS = "select feesPaymentStatus from student where studentid = ?";
 }

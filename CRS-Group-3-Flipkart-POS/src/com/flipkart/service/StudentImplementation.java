@@ -18,7 +18,7 @@ public class StudentImplementation implements StudentInterface{
     public void loginMsg(String userID){
         String username = studentDAOInterface.getUsername(userID);
         LocalDateTime localDateTime = LocalDateTime.now();
-        System.out.println("Stduent - " + username + "(" + userID + ") has logged in at time " + localDateTime);
+        System.out.println("Student - " + username + "(" + userID + ") has logged in at time " + localDateTime);
     }
 
     /**
@@ -102,8 +102,14 @@ public class StudentImplementation implements StudentInterface{
      * @param userID
      */
     @Override
-    public void payFees(String userID) {
-        if(!studentDAOInterface.isFeePaymentStatus(userID)) {
+    public void payFees(String userID){
+        try {
+            if(studentDAOInterface.isFeePaymentStatus(userID)) {
+                throw new FeesAlreadyPaid(userID);
+            }
+            if(!studentDAOInterface.isRegistered(userID)) {
+                throw new StudentNotRegistered(userID);
+            }
             System.out.println("Select Payment Method: ");
             System.out.println("1. Credit Card");
             System.out.println("2. Debit Card");
@@ -129,10 +135,10 @@ public class StudentImplementation implements StudentInterface{
                 default:
                     System.out.println("Invalid Selection");
             }
+        } catch (FeesAlreadyPaid | UserNotFoundException | StudentNotRegistered e) {
+            e.getMessage();
         }
-        else {
-            System.out.println("Fees Already Paid");
-        }
+
     }
 
     /**

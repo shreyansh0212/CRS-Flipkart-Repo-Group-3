@@ -152,14 +152,17 @@ public class StudentDAOOperation implements StudentDAOInterface{
         }
     }
 
-    public boolean isFeePaymentStatus(String userID){
+    public boolean isFeePaymentStatus(String userID) throws UserNotFoundException {
         try {
-            String sql = studshow;
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(GET_FEES_STATUS);
             stmt.setString(1,userID);
             ResultSet rs = stmt.executeQuery();
-            rs.next();
-            return rs.getBoolean("feesPaymentStatus");
+            if(rs.next()) {
+                return rs.getBoolean("feePaymentStatus");
+            }
+            else {
+                throw new UserNotFoundException(userID);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

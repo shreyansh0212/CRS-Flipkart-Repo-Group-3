@@ -21,7 +21,7 @@ public interface StudentDAOInterface {
 
     public boolean isRegistered(String userID);
 
-    public boolean isFeePaymentStatus(String userID);
+    public boolean isFeePaymentStatus(String userID) throws UserNotFoundException;
 
     public void setFeePaymentStatus(String userID, String mode, String refID, int amt);
 
