@@ -5,13 +5,12 @@ public class SQLQueriesConstants {
     public static final String REGISTER_USER = "INSERT INTO user VALUES (?,?,?)";
     public static final String UPDATE_PREFERENCE = "UPDATE student SET preference1 = ?, preference2 = ?, preference3 = ?, " +
             "preference4 = ?, preference5 = ?, preference6 = ? WHERE studentid = ?";
-    public static final String studshow = "SELECT * FROM student where studentid = ?";
+    public static final String SHOW_STUDENT = "SELECT * FROM student where studentid = ?";
     public static final String adminshow = "SELECT * FROM admin WHERE adminid = ?";
     public static final String profshow = "SELECT * FROM professor WHERE professorid = ?";
     public static final String ADD_TO_REGISTER = "INSERT INTO registeredcourses (courseid,studentid) VALUES (?,?)";
-//    public static final String REGISTER_COURSES = "INSERT INTO registeredcourses (courseid,studentid) VALUES ((?,?),(?,?),(?,?),(?,?))";
-    public static final String UPDATE_COURSE_INC ="UPDATE course SET coursestrength=coursestrength+1 WHERE courseid =? ";
-    public static final String UPDATE_COURSE_DEC ="UPDATE course SET coursestrength=coursestrength-1 WHERE courseid =? ";
+    public static final String INCREMENT_COURSE_STRENGTH ="UPDATE course SET coursestrength=coursestrength+1 WHERE courseid =? ";
+    public static final String DECREMENT_COURSE_STRENGTH ="UPDATE course SET coursestrength=coursestrength-1 WHERE courseid =? ";
     public static final String DROP_FROM_REGISTER = "delete from registeredcourses where (courseid = ? ) and (studentid = ?)";
     public static final String VIEW_ENROLLED_COURSES = "SELECT * FROM registeredcourses WHERE studentid = ?";
     public static final String ADD_PAYMENT = "INSERT INTO paymentmode VALUES (?,?,?,?,now())";

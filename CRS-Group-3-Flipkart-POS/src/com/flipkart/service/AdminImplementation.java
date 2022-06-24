@@ -2,7 +2,6 @@ package com.flipkart.service;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
-import com.flipkart.bean.Student;
 import com.flipkart.dao.AdminDAOInterface;
 import com.flipkart.dao.AdminDAOOperation;
 import com.flipkart.exception.CourseAlreadyPresent;
@@ -12,9 +11,6 @@ import com.flipkart.exception.UserNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
-
-import static com.flipkart.application.CRSApplication.*;
 
 
 public class AdminImplementation implements AdminInterface{
@@ -33,8 +29,8 @@ public class AdminImplementation implements AdminInterface{
         regcourses.forEach(System.out::println);
     }
 
-    public void updIsRegistered(String studentId) throws UserNotFoundException {
-        adminDAOInterface.updIsRegistered(studentId);
+    public void approveCourseRegistration(String studentId) throws UserNotFoundException {
+        adminDAOInterface.approveCourseRegistration(studentId);
     }
     @Override
     public void approveStudent(String studentid) {
@@ -90,7 +86,7 @@ public class AdminImplementation implements AdminInterface{
     @Override
     public void PendingRequests() {adminDAOInterface.viewPendingRequests();}
     @Override
-    public void NonRegisteredstudentlist(){adminDAOInterface.viewNotregistredstudents();}
+    public void NonRegisteredstudentlist(){adminDAOInterface.viewNotRegisteredStudents();}
 
 }
 

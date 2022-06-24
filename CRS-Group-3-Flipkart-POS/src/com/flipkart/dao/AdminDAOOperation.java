@@ -22,7 +22,9 @@ import static com.flipkart.constants.SQLQueriesConstants.*;
 public class AdminDAOOperation implements AdminDAOInterface{
 
     private PreparedStatement statement = null;
-
+    NotificationDAOInterface notificationDAOInterface = new NotificationDAOOperation();
+    String adminID = "Admin";
+    String message;
     /**
      * getting username from
      *@aram userid
@@ -44,13 +46,15 @@ public class AdminDAOOperation implements AdminDAOInterface{
         return username;
     }
 
-    public void updIsRegistered(String studentId) throws UserNotFoundException{
+    public void approveCourseRegistration(String studentId) throws UserNotFoundException{
         try {
             statement = connection.prepareStatement(APPROVE_REGISTRATION);
             statement.setString(1,studentId);
             int row = statement.executeUpdate();
             if(row > 0) {
-                System.out.println("Student Registration for Courses Approved!");
+                message = "Student Registration for Courses Approved!";
+                System.out.println(message);
+                notificationDAOInterface.sendNotification(notificationDAOInterface.getNotificationID(adminID,studentId), adminID,studentId,message);
             } else {
                 throw new UserNotFoundException(studentId);
             }
@@ -83,7 +87,9 @@ public class AdminDAOOperation implements AdminDAOInterface{
             statement.setString(1,studentID);
             int row = statement.executeUpdate();
             if(row!=0) {
-                System.out.println("Student Approved!");
+                message = "Student " + studentID + "  Approved!";
+                System.out.println(message);
+                notificationDAOInterface.sendNotification(notificationDAOInterface.getNotificationID(adminID,studentID), adminID,studentID,message);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -186,7 +192,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
             statement = connection.prepareStatement(SQLQueriesConstants.SHOW_COURSES);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()) {
-                System.out.println(" CourseID: " + resultSet.getString(1) + ", Course Name: " + resultSet.getString(2)+", registred students: " + resultSet.getString(6));
+                System.out.println(" CourseID: " + resultSet.getString("courseid") + ", Course Name: " + resultSet.getString("coursename")+", Course Strength: " + resultSet.getString("coursestrength"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -209,7 +215,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
     /**
      * @return
      */
-    public void viewNotregistredstudents(){
+    public void viewNotRegisteredStudents(){
         try {
             statement = connection.prepareStatement(SQLQueriesConstants.NON_REGISTERED_STUDENT_LIST);
             ResultSet resultSet = statement.executeQuery();

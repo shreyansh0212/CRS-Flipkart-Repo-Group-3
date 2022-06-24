@@ -175,7 +175,7 @@ public class AdminCRSMenu {
         System.out.println("Enter Student Id:");
         String studentId = scanner.next();
         adminImpl.viewCourseRegistration(studentId);
-        adminImpl.updIsRegistered(studentId);
+        adminImpl.approveCourseRegistration(studentId);
         NotificationInterface notificationImplementation = new NotificationImplementation();
         notificationImplementation.sendNotifCourseReg(adminID,studentId);
     }

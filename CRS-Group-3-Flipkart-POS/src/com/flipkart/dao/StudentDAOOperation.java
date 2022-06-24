@@ -6,7 +6,6 @@ import com.flipkart.exception.CourseAlreadyRegistered;
 import com.flipkart.exception.CourseNotPresentException;
 import com.flipkart.exception.UserAlreadyExist;
 import com.flipkart.exception.UserNotFoundException;
-import com.mysql.cj.protocol.Resultset;
 import javafx.util.Pair;
 
 import java.sql.*;
@@ -23,7 +22,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
     public String getUsername(String userID){
         String username = "";
         try {
-            preparedStatement = connection.prepareStatement(studshow);
+            preparedStatement = connection.prepareStatement(SHOW_STUDENT);
             preparedStatement.setString(1,userID);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
@@ -89,7 +88,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
             int row = stmt.executeUpdate();
             if(row!=0) {
                 System.out.println("Added Course: " + courseID);
-                UpdatetableInc(courseID);
+                incrementCourseStrength(courseID);
 
             }
         } catch (SQLException e) {
@@ -99,9 +98,9 @@ public class StudentDAOOperation implements StudentDAOInterface{
         }
     }
 
-    private void UpdatetableInc(String courseID) {
+    private void incrementCourseStrength(String courseID) {
         try {
-            PreparedStatement stm = connection.prepareStatement(SQLQueriesConstants.UPDATE_COURSE_INC);
+            PreparedStatement stm = connection.prepareStatement(SQLQueriesConstants.INCREMENT_COURSE_STRENGTH);
             stm.setString(1,courseID);
             stm.executeUpdate();
             System.out.println("its happening");
@@ -124,16 +123,16 @@ public class StudentDAOOperation implements StudentDAOInterface{
             int status = preparedStatement.executeUpdate();
             if(status!=0) {
                 System.out.println("Course: " + courseID + " Dropped!");
-                UpdatetableDec(courseID);
+                decrementCourseStrength(courseID);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void UpdatetableDec(String courseID) {
+    private void decrementCourseStrength(String courseID) {
         try {
-            PreparedStatement stm = connection.prepareStatement(UPDATE_COURSE_DEC);
+            PreparedStatement stm = connection.prepareStatement(DECREMENT_COURSE_STRENGTH);
             stm.setString(1,courseID);
             stm.executeUpdate();
             System.out.println("its happening");
@@ -168,8 +167,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
 
     public boolean isRegistered(String userID){
         try {
-            String sql = studshow;
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(SHOW_STUDENT);
             stmt.setString(1,userID);
             ResultSet rs = stmt.executeQuery();
             return rs.getBoolean("isregistered");
@@ -184,7 +182,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
             stmt.setString(1,userID);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
-                return rs.getBoolean("feePaymentStatus");
+                return rs.getBoolean("feesPaymentStatus");
             }
             else {
                 throw new UserNotFoundException(userID);
@@ -207,6 +205,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        // CALL FOR NOTIFICATION ALSO
     }
 
     /**

@@ -3,7 +3,6 @@ package com.flipkart.dao;
 import com.flipkart.constants.SQLQueriesConstants;
 import javafx.util.Pair;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +11,6 @@ import java.util.List;
 
 import static com.flipkart.application.CRSApplication.connection;
 import static com.flipkart.constants.SQLQueriesConstants.profshow;
-import static com.flipkart.constants.SQLQueriesConstants.studshow;
 
 public class ProfessorDAOOperation implements ProfessorDAOInterface{
 

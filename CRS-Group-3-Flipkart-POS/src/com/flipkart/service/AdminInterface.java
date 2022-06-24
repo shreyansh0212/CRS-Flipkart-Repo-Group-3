@@ -11,7 +11,7 @@ public interface AdminInterface {
     public void loginMsg(String userID);
 
     public void viewCourseRegistration(String studentId);
-    public void updIsRegistered(String studentId) throws UserNotFoundException;
+    public void approveCourseRegistration(String studentId) throws UserNotFoundException;
     public void approveStudent(String studentid);
     public void addProfessor(Professor professor) throws UserAlreadyExist;
     public void generateReport();

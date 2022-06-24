@@ -136,7 +136,7 @@ public class StudentImplementation implements StudentInterface{
                     System.out.println("Invalid Selection");
             }
         } catch (FeesAlreadyPaid | UserNotFoundException | StudentNotRegistered e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
 
     }
