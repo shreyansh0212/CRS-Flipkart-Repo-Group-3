@@ -175,5 +175,17 @@ public class AdminDAOOperation implements AdminDAOInterface{
     /**
      * @return
      */
+    public void viewNotregistredstudents(){
+        try {
+            statement = connection.prepareStatement(SQLQueriesConstants.NON_REGISTERED_STUDENT_LIST);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                System.out.println(" StudentID: " + resultSet.getString(1) + "   Student Name: " + resultSet.getString(2));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-}
+    }
+

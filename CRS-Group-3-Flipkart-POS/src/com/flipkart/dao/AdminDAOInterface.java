@@ -17,4 +17,6 @@ public interface AdminDAOInterface {
     public void dropCourse(String courseID) throws CourseNotPresentException;
     public void showCourses();
     public void viewPendingRequests();
+
+    public void viewNotregistredstudents();
 }
