@@ -2,6 +2,7 @@ package com.flipkart.service;
 
 import com.flipkart.dao.ProfessorDAOInterface;
 import com.flipkart.dao.ProfessorDAOOperation;
+import com.flipkart.exception.GradeNotAddedException;
 import javafx.util.Pair;
 
 import java.time.LocalDateTime;
@@ -19,13 +20,17 @@ public class ProfessorImplementation implements ProfessorInterface{
         System.out.println("Professor - " + username + "(" + userID + ") has logged in at time " + localDateTime);
     }
     @Override
-    public void addGrade(String professorID) {
+    public void addGrade(String professorID) throws GradeNotAddedException {
         List< Pair<String,String>> enrolledStudents = viewEnrolledStudents(professorID);
         Scanner scanner = new Scanner(System.in);
         for(Pair<String,String> enrolled:enrolledStudents) {
             System.out.println("CourseID: " + enrolled.getKey() + ", StudentID: " + enrolled.getValue() +  " Grade: ");
             String grade = scanner.next();
-            professorDAOInterface.addGrade(grade,enrolled.getKey(),enrolled.getValue());
+            try {
+                professorDAOInterface.addGrade(grade,enrolled.getKey(),enrolled.getValue());
+            } catch (GradeNotAddedException e) {
+                throw e;
+            }
         }
     }
 

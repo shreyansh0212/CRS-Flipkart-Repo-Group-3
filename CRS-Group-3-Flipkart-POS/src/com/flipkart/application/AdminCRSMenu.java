@@ -2,10 +2,7 @@ package com.flipkart.application;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
-import com.flipkart.exception.CourseAlreadyPresent;
-import com.flipkart.exception.CourseNotPresentException;
-import com.flipkart.exception.UserAlreadyExist;
-import com.flipkart.exception.UserNotFoundException;
+import com.flipkart.exception.*;
 import com.flipkart.service.AdminImplementation;
 import com.flipkart.service.AdminInterface;
 import com.flipkart.service.NotificationImplementation;
@@ -111,7 +108,7 @@ public class AdminCRSMenu {
 
         try{
             adminImpl.addProfessor(professor);
-        }catch(UserAlreadyExist e){
+        }catch(UserAlreadyExist | ProfessorNotAdded | UserNotAdded | ProfessorAlreadyExistsException e){
             System.out.println(e.getMessage());
         }
     }

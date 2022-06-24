@@ -5,10 +5,7 @@ import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
 import com.flipkart.constants.SQLQueriesConstants;
-import com.flipkart.exception.CourseAlreadyPresent;
-import com.flipkart.exception.CourseNotPresentException;
-import com.flipkart.exception.UserAlreadyExist;
-import com.flipkart.exception.UserNotFoundException;
+import com.flipkart.exception.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -100,7 +97,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
      * @param user
      */
     @Override
-    public void addUser(User user) throws UserAlreadyExist {
+    public void addUser(User user) throws UserAlreadyExist, UserNotAdded {
         try {
             statement = connection.prepareStatement(SQLQueriesConstants.ADD_USER);
             statement.setString(1,user.getUserID());
@@ -108,7 +105,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
             statement.setString(3,user.getRole());
             int row = statement.executeUpdate();
             if(row==0){
-                throw new UserAlreadyExist(user.getUserID());
+                throw new UserNotAdded(user.getUserID());
             }
         } catch (SQLException e) {
             throw new UserAlreadyExist(user.getUserID());
@@ -119,8 +116,14 @@ public class AdminDAOOperation implements AdminDAOInterface{
      * @param professor
      */
     @Override
-    public void addProfessor(Professor professor) throws UserAlreadyExist{
-        this.addUser(professor);
+    public void addProfessor(Professor professor) throws UserAlreadyExist, UserNotAdded, ProfessorNotAdded, ProfessorAlreadyExistsException {
+        try{
+            this.addUser(professor);
+        }catch(UserNotAdded e){
+            throw new ProfessorNotAdded(professor.getUserID());
+        }catch(UserAlreadyExist ee){
+            throw new ProfessorAlreadyExistsException(professor.getUserID());
+        }
         try {
             statement = connection.prepareStatement(SQLQueriesConstants.ADD_PROFESSOR);
             statement.setString(1,professor.getUserID());
@@ -129,9 +132,11 @@ public class AdminDAOOperation implements AdminDAOInterface{
             int row = statement.executeUpdate();
             if(row!=0) {
                 System.out.println("Professor Added!");
+            }else{
+                throw new ProfessorNotAdded(professor.getUserID());
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ProfessorAlreadyExistsException(professor.getUserID());
         }
     }
 

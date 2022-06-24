@@ -4,10 +4,7 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 import com.flipkart.dao.AdminDAOInterface;
 import com.flipkart.dao.AdminDAOOperation;
-import com.flipkart.exception.CourseAlreadyPresent;
-import com.flipkart.exception.CourseNotPresentException;
-import com.flipkart.exception.UserAlreadyExist;
-import com.flipkart.exception.UserNotFoundException;
+import com.flipkart.exception.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -41,10 +38,10 @@ public class AdminImplementation implements AdminInterface{
      *
      */
     @Override
-    public void addProfessor(Professor professor) throws UserAlreadyExist {
+    public void addProfessor(Professor professor) throws UserAlreadyExist, ProfessorNotAdded, UserNotAdded, ProfessorAlreadyExistsException {
        try{
            adminDAOInterface.addProfessor(professor);
-       }catch (UserAlreadyExist e){
+       }catch (UserAlreadyExist | UserNotAdded | ProfessorNotAdded | ProfessorAlreadyExistsException e){
            throw e;
        }
     }

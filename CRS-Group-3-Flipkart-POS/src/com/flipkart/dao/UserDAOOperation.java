@@ -26,7 +26,7 @@ public class UserDAOOperation implements UserDAOInterface{
             if(!resultSet.next()) {
                 throw new UserNotFoundException(userID);
             } else if (password.equals(resultSet.getString("password"))){
-                System.out.println("Successful Login!");
+//                System.out.println("Successful Login!");
                 return true;
             }
         } catch (SQLException e) {

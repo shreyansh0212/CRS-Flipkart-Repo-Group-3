@@ -1,6 +1,7 @@
 package com.flipkart.application;
 
 import com.flipkart.bean.Professor;
+import com.flipkart.exception.GradeNotAddedException;
 import com.flipkart.service.ProfessorImplementation;
 import com.flipkart.service.ProfessorInterface;
 
@@ -59,7 +60,11 @@ public class ProfessorCRSMenu {
 
     public void addGrade(String professorID) {
         System.out.println("------ Add Grades -------");
-        professorImpl.addGrade(professorID);
+        try {
+            professorImpl.addGrade(professorID);
+        } catch (GradeNotAddedException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void viewEnrolledStudents(String professorID) {

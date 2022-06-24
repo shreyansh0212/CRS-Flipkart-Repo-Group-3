@@ -1,9 +1,6 @@
 package com.flipkart.dao;
 
-import com.flipkart.exception.CourseAlreadyRegistered;
-import com.flipkart.exception.CourseNotPresentException;
-import com.flipkart.exception.UserAlreadyExist;
-import com.flipkart.exception.UserNotFoundException;
+import com.flipkart.exception.*;
 import javafx.util.Pair;
 
 import java.sql.SQLException;
@@ -12,8 +9,8 @@ import java.util.List;
 public interface StudentDAOInterface {
     public String getUsername(String userID);
 
-    public void preferenceUpdate(String userID, List<String> preference) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException;
-    public void addCourse(String userID, String courseID) throws CourseAlreadyRegistered, CourseNotPresentException;
+    public void preferenceUpdate(String userID, List<String> preference) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException, CourseLimitExceededException;
+    public void addCourse(String userID, String courseID) throws CourseAlreadyRegistered, CourseNotPresentException, CourseLimitExceededException;
     public void dropCourse(String userID, String courseID);
 
     public List<String> viewEnrolledCourses(String userID);
@@ -25,7 +22,7 @@ public interface StudentDAOInterface {
 
     public void setFeePaymentStatus(String userID, String mode, String refID, int amt);
 
-    void newRegistration(String studentID, String password, String name, String batch, String address) throws UserAlreadyExist;
+    void newRegistration(String studentID, String password, String name, String batch, String address) throws UserAlreadyExist, UserNotAdded;
 
     Boolean checkApprovalStatus(String userID) throws UserNotFoundException;
     public Boolean checkCourseAvailability(String courseID) throws CourseNotPresentException;
