@@ -5,6 +5,7 @@ import com.flipkart.bean.Student;
 import com.flipkart.exception.CourseAlreadyPresent;
 import com.flipkart.exception.CourseAlreadyRegistered;
 import com.flipkart.exception.CourseNotPresentException;
+import com.flipkart.exception.SeatNotAvailableException;
 import com.flipkart.service.StudentImplementation;
 import com.flipkart.service.StudentInterface;
 
@@ -98,7 +99,6 @@ public class StudentCRSMenu {
         System.out.println("4. View Enrolled Courses");
         System.out.println("5. Pay Fees");
         System.out.println("6. View Grade Card");
-        //System.out.println("7. Change Password");
         System.out.println("7. See Course Catalog");
         System.out.println("8. Exit");
         System.out.println("Enter Your Choice: ");
@@ -117,7 +117,7 @@ public class StudentCRSMenu {
     public void registerCourses(String userID) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException {
         try{
             studentImpl.registerCourses(userID);
-        }catch(CourseAlreadyRegistered | CourseNotPresentException e){
+        }catch(CourseAlreadyRegistered | CourseNotPresentException | SeatNotAvailableException e){
             System.out.println(e.getMessage());
         }
     }

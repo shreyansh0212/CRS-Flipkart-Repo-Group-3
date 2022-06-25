@@ -3,6 +3,9 @@ package com.flipkart.constants;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * Used to Connect to Database
+ */
 public class DatabaseUtil {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/CRSDatabase";

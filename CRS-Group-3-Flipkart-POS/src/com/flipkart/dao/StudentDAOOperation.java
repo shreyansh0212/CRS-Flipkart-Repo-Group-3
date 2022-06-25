@@ -40,7 +40,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
      * @param preference
      */
     @Override
-    public void preferenceUpdate(String userID, List<String> preference) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException, CourseLimitExceededException {
+    public void preferenceUpdate(String userID, List<String> preference) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException, CourseLimitExceededException, SeatNotAvailableException {
         try {
             Integer count = this.getNumberOfEnrolledCourses(userID);
             if (count >= 6) {
@@ -81,17 +81,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
      * @param userID
      */
     @Override
-    public void addCourse(String courseID, String userID) throws CourseAlreadyRegistered, CourseNotPresentException, CourseLimitExceededException {
-//        try{
-//            preparedStatement = connection.prepareStatement(SQLQueriesConstants.CHECK_COURSE_AVAILABILITY);
-//            preparedStatement.setString(1,courseID);
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            if(!resultSet.next()) {
-//                throw new CourseNotPresentException(courseID);
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
+    public void addCourse(String courseID, String userID) throws CourseAlreadyRegistered, CourseNotPresentException, CourseLimitExceededException, SeatNotAvailableException {
         try {
             Integer count = this.getNumberOfEnrolledCourses(userID);
             if(count>=6){
@@ -109,7 +99,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
             }
         }
         catch (com.flipkart.exception.SeatNotAvailableException e) {
-            throw new com.flipkart.exception.SeatNotAvailableException(courseID);
+            throw new SeatNotAvailableException(courseID);
         } catch (SQLException ce){
             throw new CourseAlreadyRegistered(courseID,userID);
         }catch (CourseNotPresentException ce){
@@ -212,7 +202,23 @@ public class StudentDAOOperation implements StudentDAOInterface{
         }
     }
 
-    public void setFeePaymentStatus(String userID, String mode, String refID, int amt){
+    public void reportPayment(String userID) throws UserNotFoundException {
+        try {
+            preparedStatement = connection.prepareStatement(SQLQueriesConstants.REPORT_PAYMENT);
+            preparedStatement.setString(1,userID);
+            int row = preparedStatement.executeUpdate();
+            if(row > 0) {
+
+            }
+            else {
+                throw new UserNotFoundException(userID);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setFeePaymentStatus(String userID, String mode, String refID, int amt) throws UserNotFoundException {
         try {
             String sql = ADD_PAYMENT;
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -220,12 +226,15 @@ public class StudentDAOOperation implements StudentDAOInterface{
             stmt.setString(2,userID);
             stmt.setInt(3,amt);
             stmt.setString(4,mode);
-            stmt.executeUpdate();
+            int row = stmt.executeUpdate();
+            if(row > 0) {
+                System.out.println("Reference ID:" + refID + "Fees Paid Successfully for StudentID:" + userID + "using " + mode);
+                this.reportPayment(userID);
 
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        // CALL FOR NOTIFICATION ALSO
     }
 
     /**

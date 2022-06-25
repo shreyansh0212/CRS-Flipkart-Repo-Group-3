@@ -9,8 +9,8 @@ import java.util.List;
 public interface StudentDAOInterface {
     public String getUsername(String userID);
 
-    public void preferenceUpdate(String userID, List<String> preference) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException, com.flipkart.exception.SeatNotAvailableException;
-    public void addCourse(String userID, String courseID) throws CourseAlreadyRegistered, CourseNotPresentException, com.flipkart.exception.SeatNotAvailableException;
+    public void preferenceUpdate(String userID, List<String> preference) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException, com.flipkart.exception.SeatNotAvailableException, CourseLimitExceededException;
+    public void addCourse(String userID, String courseID) throws CourseAlreadyRegistered, CourseNotPresentException, com.flipkart.exception.SeatNotAvailableException, CourseLimitExceededException;
     public void dropCourse(String userID, String courseID);
 
     public List<String> viewEnrolledCourses(String userID);
@@ -20,7 +20,7 @@ public interface StudentDAOInterface {
 
     public boolean isFeePaymentStatus(String userID) throws UserNotFoundException;
 
-    public void setFeePaymentStatus(String userID, String mode, String refID, int amt);
+    public void setFeePaymentStatus(String userID, String mode, String refID, int amt) throws UserNotFoundException;
 
     void newRegistration(String studentID, String password, String name, String batch, String address) throws UserAlreadyExist, UserNotAdded;
 

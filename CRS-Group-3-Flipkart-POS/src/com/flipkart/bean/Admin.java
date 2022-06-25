@@ -2,10 +2,15 @@ package com.flipkart.bean;
 
 import java.util.Date;
 
+/**
+ * Admin Bean Class
+ */
+
 public class Admin extends User{
     private Date dateOfJoining;
 
-    /**
+	/**
+	 * Parameterized Constructor
 	 * @param userID
 	 * @param name
 	 * @param role
@@ -17,10 +22,18 @@ public class Admin extends User{
 		this.dateOfJoining = dateOfJoining;
 	}
 
+	/**
+	 * Get DOJ
+	 * @return
+	 */
 	public Date getDateOfJoining() {
         return dateOfJoining;
     }
 
+	/**
+	 * Set DOJ
+	 * @param dateOfJoining
+	 */
     public void setDateOfJoining(Date dateOfJoining) {
         this.dateOfJoining = dateOfJoining;
     }

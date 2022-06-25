@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.flipkart.application.CRSApplication.connection;
-import static com.flipkart.constants.SQLQueriesConstants.profshow;
+import static com.flipkart.constants.SQLQueriesConstants.SHOW_PROFESSOR;
 
 public class ProfessorDAOOperation implements ProfessorDAOInterface{
 
     public String getUsername(String userID){
         String username = "";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(profshow);
+            PreparedStatement preparedStatement = connection.prepareStatement(SHOW_PROFESSOR);
             preparedStatement.setString(1,userID);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){

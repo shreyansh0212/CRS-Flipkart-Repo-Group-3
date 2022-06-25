@@ -17,12 +17,4 @@ public class NotificationImplementation implements NotificationInterface{
     public void sendNotification(String senderID, String receiverID, String message) {
 
     }
-
-    public void sendNotifCourseReg(String adminID, String studentId){
-        String text = "Your course registration has been approved by " + adminID;
-        LocalDateTime localDateTime = LocalDateTime.now();
-        String notificationID = adminID + studentId + localDateTime;
-        NotificationDAOInterface notificationDAOInterface = new NotificationDAOOperation();
-        notificationDAOInterface.sendNotification(notificationID,adminID,studentId,text);
-    }
 }

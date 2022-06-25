@@ -29,6 +29,7 @@ import javafx.util.Pair;
  *
  * This Class is used as main entry point of the application
  * IN Main menu Login,Register,Update password are Displayed
+ *
  */
 
 public class CRSApplication {

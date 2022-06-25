@@ -4,6 +4,9 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 import com.flipkart.exception.*;
 
+/**
+ * Service Interface for Admin
+ */
 public interface AdminInterface {
     public void loginMsg(String userID);
 

@@ -2,7 +2,6 @@ package com.flipkart.dao;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
-import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
 import com.flipkart.constants.SQLQueriesConstants;
 import com.flipkart.exception.*;
@@ -31,7 +30,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
     public String getUsername(String userID){
         String username = "";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(adminshow);
+            PreparedStatement preparedStatement = connection.prepareStatement(SHOW_ADMIN);
             preparedStatement.setString(1,userID);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){

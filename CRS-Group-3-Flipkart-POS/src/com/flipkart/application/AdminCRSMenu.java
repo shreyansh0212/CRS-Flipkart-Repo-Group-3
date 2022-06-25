@@ -202,6 +202,11 @@ public class AdminCRSMenu {
         }
     }
 
+    /**
+     *
+     * Used to Approve Student Registration
+     *
+     */
 
     public void approveStudent() {
         System.out.println("-------------- Approve Student -------------");
@@ -212,14 +217,17 @@ public class AdminCRSMenu {
         adminImpl.approveStudent(studentId);
     }
 
+    /**
+     * Used to Approve Student Course Registration
+     * @param adminID
+     * @throws UserNotFoundException
+     */
     public void approveCourseRegistration(String adminID) throws UserNotFoundException {
         System.out.println("-------------- Approve Course Registration for Students -------------");
         System.out.println("Enter Student Id:");
         String studentId = scanner.next();
         adminImpl.viewCourseRegistration(studentId);
         adminImpl.approveCourseRegistration(studentId);
-        NotificationInterface notificationImplementation = new NotificationImplementation();
-        notificationImplementation.sendNotifCourseReg(adminID,studentId);
     }
 
     /**

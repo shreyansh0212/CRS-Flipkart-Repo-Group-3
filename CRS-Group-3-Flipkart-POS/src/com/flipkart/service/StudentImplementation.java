@@ -13,6 +13,8 @@ import java.util.Scanner;
 
 public class StudentImplementation implements StudentInterface{
 
+
+
     StudentDAOInterface studentDAOInterface = new StudentDAOOperation();
 
     public void loginMsg(String userID){
@@ -25,7 +27,7 @@ public class StudentImplementation implements StudentInterface{
      * @param userID
      */
     @Override
-    public void registerCourses(String userID) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException {
+    public void registerCourses(String userID) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException, SeatNotAvailableException {
         List<String> preference = new ArrayList<>();
 
         AdminDAOInterface adminDAOInterface = new AdminDAOOperation();
@@ -61,7 +63,8 @@ public class StudentImplementation implements StudentInterface{
         try{
             studentDAOInterface.addCourse(courseID,userID);
             System.out.println("Course Added with CourseID: " + courseID);
-        }catch(CourseAlreadyRegistered | CourseNotPresentException | CourseLimitExceededException e){
+        }catch(CourseAlreadyRegistered | CourseNotPresentException | SeatNotAvailableException |
+               CourseLimitExceededException e){
             System.out.println(e.getMessage());
         }
 
@@ -76,12 +79,6 @@ public class StudentImplementation implements StudentInterface{
         System.out.println("Enter CourseID to drop Course: ");
         Scanner in = new Scanner(System.in);
         String courseID = in.next();
-/*
-        boolean ifprsnt = studentDAOInterface.chkRegistration(userID,courseID);
-        if(!ifprsnt){
-            throw new CourseNotPresentException();
-        }
-*/
         studentDAOInterface.dropCourse(userID,courseID);
     }
 
@@ -90,12 +87,7 @@ public class StudentImplementation implements StudentInterface{
      */
     @Override
     public void viewEnrolledCourses(String userID) {
-//        if(!studentDAOInterface.isRegistered(userID)){
-//            System.out.println("Registration has not been completed yet.");
-//            return;
-//        }
         studentDAOInterface.viewEnrolledCourses(userID);
-
     }
 
     /**
@@ -119,17 +111,14 @@ public class StudentImplementation implements StudentInterface{
             switch (input) {
                 case 1:
                     studentDAOInterface.setFeePaymentStatus(userID,"Credit Card",userID,100);
-                    System.out.println("Used Credit Card");
                     break;
 
                 case 2:
                     studentDAOInterface.setFeePaymentStatus(userID,"Debit Card",userID,100);
-                    System.out.println("Used Debit Card");
                     break;
 
                 case 3:
                     studentDAOInterface.setFeePaymentStatus(userID,"Net Banking",userID,100);
-                    System.out.println("Used Net Banking");
                     break;
 
                 default:

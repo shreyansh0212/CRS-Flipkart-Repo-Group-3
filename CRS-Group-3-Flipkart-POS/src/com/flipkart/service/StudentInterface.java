@@ -6,9 +6,12 @@ import com.flipkart.exception.*;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Service Interface for Student
+ */
 public interface StudentInterface {
     public void loginMsg(String userID);
-    public void registerCourses(String userID) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException;
+    public void registerCourses(String userID) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException, SeatNotAvailableException;
     public void addCourse(String userID) throws CourseAlreadyRegistered, CourseNotPresentException;
     public void dropCourse(String userID) throws CourseNotPresentException;
     public void viewEnrolledCourses(String userID);

@@ -1,5 +1,9 @@
 package com.flipkart.bean;
 
+/**
+ * Notification Bean Class
+ */
+
 public class Notification {
     private String message;
     private String notificationID;

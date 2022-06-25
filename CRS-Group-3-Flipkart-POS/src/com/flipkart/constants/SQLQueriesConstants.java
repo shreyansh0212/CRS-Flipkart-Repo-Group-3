@@ -1,13 +1,16 @@
 package com.flipkart.constants;
 
+/**
+ * SQL Queries Used
+ */
 public class SQLQueriesConstants {
     public static final String NEW_REGISTER_STUDENT = "INSERT INTO student (studentid,studentname,studentbatch,address) VALUES (?,?,?,?)";
     public static final String REGISTER_USER = "INSERT INTO user VALUES (?,?,?)";
     public static final String UPDATE_PREFERENCE = "UPDATE student SET preference1 = ?, preference2 = ?, preference3 = ?, " +
             "preference4 = ?, preference5 = ?, preference6 = ? WHERE studentid = ?";
     public static final String SHOW_STUDENT = "SELECT * FROM student where studentid = ?";
-    public static final String adminshow = "SELECT * FROM admin WHERE adminid = ?";
-    public static final String profshow = "SELECT * FROM professor WHERE professorid = ?";
+    public static final String SHOW_ADMIN = "SELECT * FROM admin WHERE adminid = ?";
+    public static final String SHOW_PROFESSOR = "SELECT * FROM professor WHERE professorid = ?";
     public static final String ADD_TO_REGISTER = "INSERT INTO registeredcourses (courseid,studentid) VALUES (?,?)";
     public static final String INCREMENT_COURSE_STRENGTH ="UPDATE course SET coursestrength=coursestrength+1 WHERE courseid =? ";
     public static final String DECREMENT_COURSE_STRENGTH ="UPDATE course SET coursestrength=coursestrength-1 WHERE courseid =? ";
@@ -43,4 +46,5 @@ public class SQLQueriesConstants {
     public static final String GET_APPROVAL_STATUS = "select isapproved from student where studentid=?";
     public static final String GET_FEES_STATUS = "select feesPaymentStatus from student where studentid = ?";
     public static final String GET_NUMBER_OF_ENROLLED_COURSES = "select count(*) from registeredcourses where studentid=?";
+    public static final String REPORT_PAYMENT = "update student set feesPaymentStatus = 1 where studentid = ?";
 }
