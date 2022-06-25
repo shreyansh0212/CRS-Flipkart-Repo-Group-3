@@ -107,7 +107,10 @@ public class StudentDAOOperation implements StudentDAOInterface{
                 incrementCourseStrength(courseID);
 
             }
-        } catch (SQLException e) {
+        }
+        catch (com.flipkart.exception.SeatNotAvailableException e) {
+            throw new com.flipkart.exception.SeatNotAvailableException(courseID);
+        } catch (SQLException ce){
             throw new CourseAlreadyRegistered(courseID,userID);
         }catch (CourseNotPresentException ce){
             throw ce;
@@ -153,7 +156,6 @@ public class StudentDAOOperation implements StudentDAOInterface{
             PreparedStatement stm = connection.prepareStatement(DECREMENT_COURSE_STRENGTH);
             stm.setString(1,courseID);
             stm.executeUpdate();
-            System.out.println("its happening");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -298,18 +300,43 @@ public class StudentDAOOperation implements StudentDAOInterface{
         }
         return grd;
     }
-    public Boolean checkCourseAvailability(String courseID) throws CourseNotPresentException{
+    public Boolean checkCourseAvailability(String courseID) throws CourseNotPresentException, com.flipkart.exception.SeatNotAvailableException {
         try{
             preparedStatement = connection.prepareStatement(SQLQueriesConstants.CHECK_COURSE_AVAILABILITY);
             preparedStatement.setString(1,courseID);
             ResultSet resultSet = preparedStatement.executeQuery();
+            int seats=0;
+            seats=seatsavaliable(courseID);
             if(!resultSet.next()) {
                 throw new CourseNotPresentException(courseID);
+            }
+            else if(seats>10){
+                throw new com.flipkart.exception.SeatNotAvailableException(courseID);
             }
             return true;
         } catch (SQLException | CourseNotPresentException e) {
             throw new CourseNotPresentException(courseID);
         }
+        catch (com.flipkart.exception.SeatNotAvailableException ce){
+            throw new com.flipkart.exception.SeatNotAvailableException(courseID);
+        }
+    }
+
+    private int seatsavaliable(String courseID) {
+        try {
+            preparedStatement = connection.prepareStatement(CHECK_COURSE_AVAILABILITY);
+            int ans=0;
+        preparedStatement.setString(1,courseID);
+        ResultSet rs = preparedStatement.executeQuery();
+        while(rs.next()){
+            ans = Integer.parseInt(rs.getString("coursestrength"));
+        }
+
+        return ans;
+    } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public Integer getNumberOfEnrolledCourses(String studentID){

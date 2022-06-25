@@ -25,6 +25,12 @@ import com.flipkart.service.UserInterface;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.util.Pair;
 
+/**
+ *
+ * This Class is used as main entry point of the application
+ * IN Main menu Login,Register,Update password are Displayed
+ */
+
 public class CRSApplication {
 
     public static Connection connection;
@@ -33,6 +39,10 @@ public class CRSApplication {
 
     public static UserInterface userInterface = new UserImplementation();
 
+    /**
+     *  Main class for application
+     * @param args
+     */
     public static void main(String[] args) {
 
         connection = DatabaseUtil.getConn();

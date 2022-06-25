@@ -10,13 +10,29 @@ import com.flipkart.service.NotificationInterface;
 
 import java.util.Scanner;
 
+/**
+ *
+ *  Class to show interface for Admin
+ *
+ */
 public class AdminCRSMenu {
     AdminInterface adminImpl;
     Scanner scanner;
+
+    /**
+     *
+     * Default Constructor
+     *
+     */
     public AdminCRSMenu() {
         scanner = new Scanner(System.in);
         adminImpl = new AdminImplementation();
     }
+
+    /**
+     *  Parameterized Constructor
+     * @param userID
+     */
     public void showMenu(String userID) {
         try{
             adminImpl.loginMsg(userID);
@@ -67,6 +83,12 @@ public class AdminCRSMenu {
 
     }
 
+    /**
+     *
+     * Method to create Admin Menu
+     *
+     */
+
     public void createMenu() {
         System.out.println("---------- Welcome Admin ----------");
         System.out.println("Please select your function:");
@@ -81,10 +103,19 @@ public class AdminCRSMenu {
         System.out.println("Enter Your Choice: ");
     }
 
+    /**
+     *  Method to ADD a new professor
+     * @throws UserAlreadyExist
+     */
+
     public void addProfessor() throws UserAlreadyExist {
 
         System.out.println("-------------- Add Professor -------------");
 
+    /**
+     *
+     * Method to approve a new student
+     */
 
         Professor professor = new Professor();
 
@@ -113,10 +144,20 @@ public class AdminCRSMenu {
         }
     }
 
+    /**
+     * Method to get the courses list
+     */
+
     public void showCourseCatalog() {
         System.out.println("-------------- Show Courses -------------");
         adminImpl.showCourses();
     }
+
+    /**
+     *
+     * Method to ADD a new course
+     * @throws CourseAlreadyPresent
+     */
 
     public void addCourseToCatalog() throws CourseAlreadyPresent {
         Course course = new Course();
@@ -142,6 +183,10 @@ public class AdminCRSMenu {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Method to delete a course
+     */
 
     public void deleteCourseFromCatalog() {
         showCourseCatalog();
