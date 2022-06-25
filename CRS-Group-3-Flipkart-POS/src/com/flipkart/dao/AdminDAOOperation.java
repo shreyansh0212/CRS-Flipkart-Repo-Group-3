@@ -22,7 +22,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
     String adminID = "Admin";
     String message;
     /**
-     * getting username from
+     * get username
      * @param userID
      *
      */
