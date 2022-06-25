@@ -8,8 +8,10 @@ public class UserImplementation implements UserInterface{
     UserDAOInterface userDAOInterface = new UserDAOOperation();
 
     /**
+     * Update password
      * @param userID
      * @param password
+     * @throws UserNotFoundException
      */
     @Override
     public void updatePassword(String userID, String password) throws UserNotFoundException{
@@ -17,6 +19,7 @@ public class UserImplementation implements UserInterface{
     }
 
     /**
+     * Get Role
      * @param userID
      * @return
      */
@@ -26,9 +29,11 @@ public class UserImplementation implements UserInterface{
     }
 
     /**
+     * Verify Credentials
      * @param userID
      * @param password
      * @return
+     * @throws UserNotFoundException
      */
     @Override
     public boolean verifyCredentials(String userID, String password) throws UserNotFoundException {

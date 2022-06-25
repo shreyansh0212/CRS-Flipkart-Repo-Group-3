@@ -12,30 +12,54 @@ import java.util.List;
 
 public class AdminImplementation implements AdminInterface{
     AdminDAOInterface adminDAOInterface = new AdminDAOOperation();
+
     /**
-     *
+     * Print login Message
+     * @param userID
      */
+    @Override
     public void loginMsg(String userID){
         String username = adminDAOInterface.getUsername(userID);
         LocalDateTime localDateTime = LocalDateTime.now();
         System.out.println("Admin - " + username + "(" + userID + ") has logged in at time " + localDateTime);
     }
 
+    /**
+     * View Course Registration
+     * @param studentId
+     */
+    @Override
     public void viewCourseRegistration(String studentId){
         List<String> regcourses = adminDAOInterface.getCourses(studentId);
         regcourses.forEach(System.out::println);
     }
 
+    /**
+     * Approve Course Registration
+     * @param studentId
+     * @throws UserNotFoundException
+     */
+    @Override
     public void approveCourseRegistration(String studentId) throws UserNotFoundException {
         adminDAOInterface.approveCourseRegistration(studentId);
     }
+
+    /**
+     * Approve Admission Registration
+     * @param studentid
+     */
     @Override
     public void approveStudent(String studentid) {
         adminDAOInterface.approveStudent(studentid);
     }
 
     /**
-     *
+     * Add New Professor
+     * @param professor
+     * @throws UserAlreadyExist
+     * @throws ProfessorNotAdded
+     * @throws UserNotAdded
+     * @throws ProfessorAlreadyExistsException
      */
     @Override
     public void addProfessor(Professor professor) throws UserAlreadyExist, ProfessorNotAdded, UserNotAdded, ProfessorAlreadyExistsException {
@@ -47,15 +71,9 @@ public class AdminImplementation implements AdminInterface{
     }
 
     /**
-     *
-     */
-    @Override
-    public void generateReport() {
-        // done in student implementation
-    }
-
-    /**
-     *
+     * Add Course to Catalog
+     * @param course
+     * @throws CourseAlreadyPresent
      */
     @Override
     public void addCourse(Course course) throws CourseAlreadyPresent {
@@ -66,6 +84,11 @@ public class AdminImplementation implements AdminInterface{
         }
     }
 
+    /**
+     * Delete course from Catalog
+     * @param courseID
+     * @throws CourseNotPresentException
+     */
     @Override
     public void dropCourse(String courseID) throws CourseNotPresentException {
         try{
@@ -75,13 +98,23 @@ public class AdminImplementation implements AdminInterface{
         }
     }
 
+    /**
+     * Show Course Catalog
+     */
     @Override
     public void showCourses() {
         adminDAOInterface.showCourses();
     }
 
+    /**
+     * Show Pending Requests
+     */
     @Override
     public void PendingRequests() {adminDAOInterface.viewPendingRequests();}
+
+    /**
+     * Show Non Registered Students
+     */
     @Override
     public void NonRegisteredstudentlist(){adminDAOInterface.viewNotRegisteredStudents();}
 

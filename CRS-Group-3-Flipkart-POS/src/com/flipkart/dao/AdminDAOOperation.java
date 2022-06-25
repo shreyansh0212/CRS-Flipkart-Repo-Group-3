@@ -23,7 +23,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
     String message;
     /**
      * getting username from
-     *@aram userid
+     * @param userID
      *
      */
 
@@ -247,7 +247,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
 
     /**
      * view list of not registered student
-     * @return
+     *
      */
     public void viewNotRegisteredStudents(){
         try {

@@ -4,6 +4,8 @@ package com.flipkart.service;
  * Service Interface for Payment
  */
 public interface PaymentInterface {
-    public void sendPaymentNotification();
+    /**
+     * Choose Payment Method
+     */
     public void choosePaymentMethod();
 }

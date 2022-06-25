@@ -9,16 +9,25 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class ProfessorImplementation implements ProfessorInterface{
-    /**
-     *
-     */
+
     ProfessorDAOInterface professorDAOInterface = new ProfessorDAOOperation();
 
+    /**
+     * Print Login Message
+     * @param userID
+     */
+    @Override
     public void loginMsg(String userID){
         String username = professorDAOInterface.getUsername(userID);
         LocalDateTime localDateTime = LocalDateTime.now();
         System.out.println("Professor - " + username + "(" + userID + ") has logged in at time " + localDateTime);
     }
+
+    /**
+     * Add Grade by Professor
+     * @param professorID
+     * @throws GradeNotAddedException
+     */
     @Override
     public void addGrade(String professorID) throws GradeNotAddedException {
         List< Pair<String,String>> enrolledStudents = viewEnrolledStudents(professorID);
@@ -35,7 +44,9 @@ public class ProfessorImplementation implements ProfessorInterface{
     }
 
     /**
-     *
+     * View Enrolled Students in Courses taught by Professor
+     * @param professorID
+     * @return
      */
     @Override
     public List<Pair<String, String>> viewEnrolledStudents(String professorID) {
@@ -43,7 +54,9 @@ public class ProfessorImplementation implements ProfessorInterface{
     }
 
     /**
-     *
+     * Show Courses taught by Professor
+     * @param professorID
+     * @return
      */
     @Override
     public List<String> getCourses(String professorID) {

@@ -13,10 +13,13 @@ import java.util.Scanner;
 
 public class StudentImplementation implements StudentInterface{
 
-
-
     StudentDAOInterface studentDAOInterface = new StudentDAOOperation();
 
+    /**
+     * Print Login Message
+     * @param userID
+     */
+    @Override
     public void loginMsg(String userID){
         String username = studentDAOInterface.getUsername(userID);
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -24,7 +27,12 @@ public class StudentImplementation implements StudentInterface{
     }
 
     /**
+     * Student Course Registration
      * @param userID
+     * @throws SQLException
+     * @throws CourseAlreadyRegistered
+     * @throws CourseNotPresentException
+     * @throws SeatNotAvailableException
      */
     @Override
     public void registerCourses(String userID) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException, SeatNotAvailableException {
@@ -52,7 +60,10 @@ public class StudentImplementation implements StudentInterface{
     }
 
     /**
+     * Add Course by Student
      * @param userID
+     * @throws CourseAlreadyRegistered
+     * @throws CourseNotPresentException
      */
     @Override
     public void addCourse(String userID) throws CourseAlreadyRegistered,CourseNotPresentException {
@@ -71,7 +82,9 @@ public class StudentImplementation implements StudentInterface{
     }
 
     /**
+     * Drop Course by Student
      * @param userID
+     * @throws CourseNotPresentException
      */
     @Override
     public void dropCourse(String userID) throws CourseNotPresentException {
@@ -83,6 +96,7 @@ public class StudentImplementation implements StudentInterface{
     }
 
     /**
+     * View Student Enrolled Courses
      * @param userID
      */
     @Override
@@ -91,6 +105,7 @@ public class StudentImplementation implements StudentInterface{
     }
 
     /**
+     * Pay Fees
      * @param userID
      */
     @Override
@@ -131,6 +146,7 @@ public class StudentImplementation implements StudentInterface{
     }
 
     /**
+     * View Grade Card
      * @param userID
      */
     @Override
@@ -144,10 +160,14 @@ public class StudentImplementation implements StudentInterface{
     }
 
     /**
+     * New Registration
      * @param studentID
+     * @param password
      * @param name
      * @param batch
      * @param address
+     * @throws UserAlreadyExist
+     * @throws UserNotAdded
      */
     @Override
     public void newRegistration(String studentID, String password, String name, String batch, String address) throws UserAlreadyExist, UserNotAdded {
@@ -159,7 +179,7 @@ public class StudentImplementation implements StudentInterface{
     }
 
     /**
-     *
+     * Show Course Catalog
      */
     @Override
     public void showCourses() {
@@ -168,8 +188,11 @@ public class StudentImplementation implements StudentInterface{
     }
 
     /**
+     * Check Student Approval Status
      * @param userID
      * @return
+     * @throws UserNotFoundException
+     * @throws StudentNotApproved
      */
     @Override
     public Boolean checkApprovalStatus(String userID) throws UserNotFoundException, StudentNotApproved {

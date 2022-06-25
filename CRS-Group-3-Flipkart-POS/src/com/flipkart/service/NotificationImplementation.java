@@ -8,7 +8,9 @@ import java.time.LocalDateTime;
 public class NotificationImplementation implements NotificationInterface{
 
     NotificationDAOInterface notificationDAOInterface = new NotificationDAOOperation();
+
     /**
+     * Send Notification
      * @param senderID
      * @param receiverID
      * @param message
