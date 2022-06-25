@@ -15,6 +15,11 @@ public class DatabaseUtil {
     static final String PASS = "Blue_176454";
     static Connection conn = null;
 
+    /**
+     * Get  Connection  Sql Database Object
+     * Throws Exception if  Not connected to SQL Database
+     * @return
+     */
     public static Connection getConn() {
         try {
             Class.forName(JDBC_DRIVER);

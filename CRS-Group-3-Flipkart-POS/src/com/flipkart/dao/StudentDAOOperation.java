@@ -21,13 +21,18 @@ public class StudentDAOOperation implements StudentDAOInterface{
 
     PreparedStatement preparedStatement;
 
-    public String getUsername(String userID){
+    /**
+     * get the username
+     * @param userID
+     * @return
+     */
+    public String getUsername(String userID) {
         String username = "";
         try {
             preparedStatement = connection.prepareStatement(SHOW_STUDENT);
-            preparedStatement.setString(1,userID);
+            preparedStatement.setString(1, userID);
             ResultSet rs = preparedStatement.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 username = rs.getString("studentname");
             }
         } catch (SQLException e) {
@@ -35,9 +40,16 @@ public class StudentDAOOperation implements StudentDAOInterface{
         }
         return username;
     }
+
     /**
+     * update the preference of the courses
      * @param userID
      * @param preference
+     * @throws SQLException
+     * @throws CourseAlreadyRegistered
+     * @throws CourseNotPresentException
+     * @throws CourseLimitExceededException
+     * @throws SeatNotAvailableException
      */
     @Override
     public void preferenceUpdate(String userID, List<String> preference) throws SQLException, CourseAlreadyRegistered, CourseNotPresentException, CourseLimitExceededException, SeatNotAvailableException {
@@ -78,6 +90,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
     }
 
     /**
+     * add course to registered
      * @param userID
      */
     @Override
@@ -109,6 +122,10 @@ public class StudentDAOOperation implements StudentDAOInterface{
         }
     }
 
+    /**
+     * increment course strength
+     * @param courseID
+     */
     private void incrementCourseStrength(String courseID) {
         try {
             PreparedStatement stm = connection.prepareStatement(SQLQueriesConstants.INCREMENT_COURSE_STRENGTH);
@@ -121,6 +138,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
     }
 
     /**
+     * drop the course
      * @param userID
      */
     @Override
@@ -141,6 +159,10 @@ public class StudentDAOOperation implements StudentDAOInterface{
         }
     }
 
+    /**
+     * decrement course strength
+     * @param courseID
+     */
     private void decrementCourseStrength(String courseID) {
         try {
             PreparedStatement stm = connection.prepareStatement(DECREMENT_COURSE_STRENGTH);
@@ -153,6 +175,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
     }
 
     /**
+     * view list of Enrolled courses
      * @param userID
      * @return
      */
@@ -175,6 +198,12 @@ public class StudentDAOOperation implements StudentDAOInterface{
         return enrolledCourses;
     }
 
+    /**
+     * to check whether course is registered
+     * @param userID
+     * @return
+     */
+
     public boolean isRegistered(String userID){
         try {
             PreparedStatement stmt = connection.prepareStatement(SHOW_STUDENT);
@@ -186,6 +215,12 @@ public class StudentDAOOperation implements StudentDAOInterface{
         }
     }
 
+    /**
+     * to check Fee payment status
+     * @param userID
+     * @return
+     * @throws UserNotFoundException
+     */
     public boolean isFeePaymentStatus(String userID) throws UserNotFoundException {
         try {
             PreparedStatement stmt = connection.prepareStatement(GET_FEES_STATUS);
@@ -202,6 +237,11 @@ public class StudentDAOOperation implements StudentDAOInterface{
         }
     }
 
+    /**
+     * Report Payment
+     * @param userID
+     * @throws UserNotFoundException
+     */
     public void reportPayment(String userID) throws UserNotFoundException {
         try {
             preparedStatement = connection.prepareStatement(SQLQueriesConstants.REPORT_PAYMENT);
@@ -218,6 +258,14 @@ public class StudentDAOOperation implements StudentDAOInterface{
         }
     }
 
+    /**
+     * set the fee payment status
+     * @param userID
+     * @param mode
+     * @param refID
+     * @param amt
+     * @throws UserNotFoundException
+     */
     public void setFeePaymentStatus(String userID, String mode, String refID, int amt) throws UserNotFoundException {
         try {
             String sql = ADD_PAYMENT;
@@ -238,6 +286,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
     }
 
     /**
+     * To register the new student
      * @param studentID
      * @param password
      * @param name
@@ -267,6 +316,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
     }
 
     /**
+     * to check Approval status
      * @param userID
      * @return
      */
@@ -288,6 +338,7 @@ public class StudentDAOOperation implements StudentDAOInterface{
     }
 
     /**
+     * to view grades
      * @param userID
      * @return
      */
@@ -309,6 +360,14 @@ public class StudentDAOOperation implements StudentDAOInterface{
         }
         return grd;
     }
+
+    /**
+     * to check course Availability
+     * @param courseID
+     * @return
+     * @throws CourseNotPresentException
+     * @throws com.flipkart.exception.SeatNotAvailableException
+     */
     public Boolean checkCourseAvailability(String courseID) throws CourseNotPresentException, com.flipkart.exception.SeatNotAvailableException {
         try{
             preparedStatement = connection.prepareStatement(SQLQueriesConstants.CHECK_COURSE_AVAILABILITY);
@@ -331,6 +390,12 @@ public class StudentDAOOperation implements StudentDAOInterface{
         }
     }
 
+    /**
+     * to check seat availiblity
+     * @param courseID
+     * @return
+     */
+
     private int seatsavaliable(String courseID) {
         try {
             preparedStatement = connection.prepareStatement(CHECK_COURSE_AVAILABILITY);
@@ -347,6 +412,12 @@ public class StudentDAOOperation implements StudentDAOInterface{
         }
 
     }
+
+    /**
+     * get Number of Enrolled courses
+     * @param studentID
+     * @return
+     */
 
     public Integer getNumberOfEnrolledCourses(String studentID){
         try{

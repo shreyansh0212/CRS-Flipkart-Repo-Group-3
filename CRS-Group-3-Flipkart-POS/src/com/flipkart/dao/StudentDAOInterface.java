@@ -6,6 +6,9 @@ import javafx.util.Pair;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * operations for the student dao interface
+ */
 public interface StudentDAOInterface {
     public String getUsername(String userID);
 

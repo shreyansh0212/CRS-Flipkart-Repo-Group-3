@@ -1,5 +1,9 @@
 package com.flipkart.exception;
 
+
+/**
+ * Exception where grade is not added
+ */
 public class GradeNotAddedException extends Exception{
     private String studentID;
     private String courseID;

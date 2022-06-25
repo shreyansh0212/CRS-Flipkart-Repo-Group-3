@@ -10,7 +10,7 @@ import static com.flipkart.application.CRSApplication.connection;
 
 public class NotificationDAOOperation implements NotificationDAOInterface{
     /**
-     *
+     * Sends Notification from one user to another one
      * @param notificationID
      * @param senderID
      * @param receiverID
@@ -32,6 +32,13 @@ public class NotificationDAOOperation implements NotificationDAOInterface{
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * returns the notification id  using sender and receiver id
+     * @param senderID
+     * @param receiverID
+     * @return
+     */
     @Override
     public String getNotificationID(String senderID, String receiverID) {
         return senderID + receiverID + LocalDateTime.now();

@@ -42,6 +42,11 @@ public class AdminDAOOperation implements AdminDAOInterface{
         return username;
     }
 
+    /**
+     * approved the student registration for the course
+     * @param studentId
+     * @throws UserNotFoundException
+     */
     public void approveCourseRegistration(String studentId) throws UserNotFoundException{
         try {
             statement = connection.prepareStatement(APPROVE_REGISTRATION);
@@ -59,6 +64,11 @@ public class AdminDAOOperation implements AdminDAOInterface{
         }
     }
 
+    /**
+     * Returns the list of enrolled courses
+     * @param studentID
+     * @return
+     */
     public List<String> getCourses(String studentID){
         List<String> enrolledCourses = new ArrayList<>();
         try {
@@ -76,6 +86,11 @@ public class AdminDAOOperation implements AdminDAOInterface{
         }
         return enrolledCourses;
     }
+
+    /**
+     * Approves the student
+     * @param studentID
+     */
     @Override
     public void approveStudent(String studentID) {
         try {
@@ -93,7 +108,10 @@ public class AdminDAOOperation implements AdminDAOInterface{
     }
 
     /**
+     * add the user to the database
      * @param user
+     * @throws UserAlreadyExist
+     * @throws UserNotAdded
      */
     @Override
     public void addUser(User user) throws UserAlreadyExist, UserNotAdded {
@@ -112,7 +130,12 @@ public class AdminDAOOperation implements AdminDAOInterface{
     }
 
     /**
+     * Add Professor to the database
      * @param professor
+     * @throws UserAlreadyExist
+     * @throws UserNotAdded
+     * @throws ProfessorNotAdded
+     * @throws ProfessorAlreadyExistsException
      */
     @Override
     public void addProfessor(Professor professor) throws UserAlreadyExist, UserNotAdded, ProfessorNotAdded, ProfessorAlreadyExistsException {
@@ -140,7 +163,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
     }
 
     /**
-     *
+     * to generate Report
      */
     @Override
     public void generateReport() {
@@ -148,7 +171,9 @@ public class AdminDAOOperation implements AdminDAOInterface{
     }
 
     /**
+     * Add course to the database
      * @param course
+     * @throws CourseAlreadyPresent
      */
     @Override
     public void addCourse(Course course) throws CourseAlreadyPresent {
@@ -168,6 +193,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
     }
 
     /**
+     * drop course from database
      * @param courseID
      */
     @Override
@@ -188,7 +214,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
     }
 
     /**
-     *
+     * show list of all the courses
      */
     @Override
     public void showCourses() {
@@ -203,6 +229,9 @@ public class AdminDAOOperation implements AdminDAOInterface{
         }
     }
 
+    /**
+     * view pending Requests
+     */
     @Override
     public void viewPendingRequests(){
         try {
@@ -217,6 +246,7 @@ public class AdminDAOOperation implements AdminDAOInterface{
     }
 
     /**
+     * view list of not registered student
      * @return
      */
     public void viewNotRegisteredStudents(){

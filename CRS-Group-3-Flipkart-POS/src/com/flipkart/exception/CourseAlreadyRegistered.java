@@ -1,5 +1,8 @@
 package com.flipkart.exception;
 
+/**
+ * Exception to check whether course is already registered
+ */
 public class CourseAlreadyRegistered extends Exception{
     private String  courseID;
     private String studentID;

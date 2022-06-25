@@ -1,5 +1,9 @@
 package com.flipkart.exception;
 
+/**
+ * exception if Student Not registered
+ */
+
 public class StudentNotRegistered extends Exception{
     private String userID;
 

@@ -13,6 +13,7 @@ import static com.flipkart.application.CRSApplication.connection;
 public class UserDAOOperation implements UserDAOInterface{
 
     /**
+     * to verify the user credentials
      * @param userID
      * @param password
      * @return
@@ -36,6 +37,7 @@ public class UserDAOOperation implements UserDAOInterface{
     }
 
     /**
+     * to update the present password
      * @param userID
      * @return
      */
@@ -64,6 +66,7 @@ public class UserDAOOperation implements UserDAOInterface{
     }
 
     /**
+     * returns the role of the user
      * @param userID
      * @return
      */

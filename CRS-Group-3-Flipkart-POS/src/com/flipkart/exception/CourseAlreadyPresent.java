@@ -1,5 +1,8 @@
 package com.flipkart.exception;
 
+/**
+ * Exception to check if course is already present
+ */
 public class CourseAlreadyPresent extends Exception{
     private String  courseID;
     public CourseAlreadyPresent(String courseID){

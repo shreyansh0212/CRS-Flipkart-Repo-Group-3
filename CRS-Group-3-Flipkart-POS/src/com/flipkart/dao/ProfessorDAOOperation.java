@@ -14,7 +14,11 @@ import static com.flipkart.application.CRSApplication.connection;
 import static com.flipkart.constants.SQLQueriesConstants.SHOW_PROFESSOR;
 
 public class ProfessorDAOOperation implements ProfessorDAOInterface{
-
+    /**
+     * get username
+     * @param userID
+     * @return
+     */
     public String getUsername(String userID){
         String username = "";
         try {
@@ -31,6 +35,7 @@ public class ProfessorDAOOperation implements ProfessorDAOInterface{
     }
     //PreparedStatement preparedStatement;
     /**
+     * add grade for the given course and student
      * @param courseID
      * @param studentID
      * @param grade
@@ -55,6 +60,7 @@ public class ProfessorDAOOperation implements ProfessorDAOInterface{
     }
 
     /**
+     * view list of the enrolled student along with the course
      * @param professorID
      * @return
      */
