@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="08399902-6081-43cd-843a-2bfe2fc53586" name="Changes" comment="added documentation">
+      <change beforePath="$PROJECT_DIR$/../CRS-Group-3-Flipkart-DropWizard/target/CRSDropWizard-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../CRS-Group-3-Flipkart-DropWizard/target/CRSDropWizard-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CRS-Group-3-Flipkart-DropWizard/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../CRS-Group-3-Flipkart-DropWizard/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CRS-Group-3-Flipkart-DropWizard/target/original-CRSDropWizard-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../CRS-Group-3-Flipkart-DropWizard/target/original-CRSDropWizard-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CRS-Group-3-Flipkart-DropWizard/target/surefire-reports/TEST-com.flipkart.AppTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CRS-Group-3-Flipkart-DropWizard/target/surefire-reports/TEST-com.flipkart.AppTest.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" show_ignored="true" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/Rajat" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="c2b34738-2899-48bf-8614-5a36fc3f4f1d" />
+        <option name="url" value="https://github.com/shreyansh0212/CRS-Flipkart-Repo-Group-3" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2ApN5nJUloS4Z4f3zBRUwwNdxXK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/shreyansh.soni/g3/CRS-Group-3-Flipkart-POS&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.customizations&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.flipkart.exception" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.flipkart.exception" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="CRSApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.flipkart.application.CRSApplication" />
+      <module name="CRS-Group-3-Flipkart-POS" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.flipkart.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.CRSApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="08399902-6081-43cd-843a-2bfe2fc53586" name="Changes" comment="" />
+      <created>1655702386293</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1655702386293</updated>
+      <workItem from="1655702388299" duration="4609000" />
+      <workItem from="1655707325461" duration="150000" />
+      <workItem from="1655707480998" duration="3118000" />
+      <workItem from="1655711041285" duration="6024000" />
+      <workItem from="1655755255365" duration="716000" />
+      <workItem from="1655755978326" duration="78000" />
+      <workItem from="1655756061380" duration="645000" />
+      <workItem from="1655757091387" duration="86593000" />
+      <workItem from="1656006280910" duration="49000" />
+      <workItem from="1656006336099" duration="51820000" />
+      <workItem from="1656092356820" duration="3671000" />
+      <workItem from="1656096758547" duration="21232000" />
+      <workItem from="1656136686322" duration="1313000" />
+      <workItem from="1656154606343" duration="4534000" />
+      <workItem from="1656181320693" duration="2000" />
+      <workItem from="1656182074697" duration="66000" />
+      <workItem from="1656182244916" duration="205000" />
+      <workItem from="1656322534966" duration="1554000" />
+    </task>
+    <task id="LOCAL-00001" summary="Resolved Conflicts">
+      <created>1656008708660</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1656008708660</updated>
+    </task>
+    <task id="LOCAL-00002" summary="DAO Updated">
+      <created>1656034528182</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1656034528182</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Exceptions Added">
+      <created>1656064476593</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1656064476594</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added pending requests for registration">
+      <created>1656094256519</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1656094256520</updated>
+    </task>
+    <task id="LOCAL-00005" summary="payment DAO incomplete">
+      <created>1656097879812</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1656097879813</updated>
+    </task>
+    <task id="LOCAL-00006" summary="payment DAO incomplete">
+      <created>1656097936231</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1656097936231</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Registration Approval List + Notification">
+      <created>1656100471770</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1656100471770</updated>
+    </task>
+    <task id="LOCAL-00008" summary="notification DAO added + changes">
+      <created>1656112949814</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1656112949815</updated>
+    </task>
+    <task id="LOCAL-00009" summary="databaseutil">
+      <created>1656113776310</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1656113776310</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Payment DAO + Added Documentation">
+      <created>1656120532733</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1656120532734</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added documentation">
+      <created>1656157390994</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1656157390995</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/Pritesh" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Resolved Conflicts" />
+    <MESSAGE value="DAO Updated" />
+    <MESSAGE value="Exceptions Added" />
+    <MESSAGE value="added pending requests for registration" />
+    <MESSAGE value="payment DAO incomplete" />
+    <MESSAGE value="Registration Approval List + Notification" />
+    <MESSAGE value="notification DAO added + changes" />
+    <MESSAGE value="databaseutil" />
+    <MESSAGE value="Payment DAO + Added Documentation" />
+    <MESSAGE value="added documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="added documentation" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
